@@ -1,0 +1,64 @@
+# backend/routes/auth.py
+import random
+
+from captcha.image import ImageCaptcha
+from flask import Blueprint, request, jsonify, session, send_file, make_response
+from backend.app.services.auth_handler import register_user, verify_user
+
+auth_bp = Blueprint('auth', __name__, url_prefix='/api')
+
+
+@auth_bp.route("/login", methods=["POST"])
+def login():
+    data = request.json
+    email = data.get("email")
+    password = data.get("password")
+    code = data.get("code")
+
+    if not email or not password or not code:
+        return jsonify({"success": False, "message": "Incomplete information"}), 400
+
+    if code != session.get("captcha_code"):
+        return jsonify({"success": False, "message": "Incorrect captcha"}), 403
+    session.pop("captcha_code", None)
+
+    result = verify_user(email, password)
+    if result["success"]:
+        user = result["user"]
+        response = make_response(jsonify({"success": True}))
+        response.set_cookie("user_email", user.email, httponly=False, samesite="Lax")
+        response.set_cookie("user_role", user.role.value, httponly=False, samesite="Lax")
+        return response
+    else:
+        return jsonify(result), 401
+
+
+# Captcha generation endpoint
+@auth_bp.route("/captcha", methods=["GET"])
+def get_captcha():
+    image = ImageCaptcha()
+    code = str(random.randint(1000, 9999))
+    session["captcha_code"] = code
+
+    image_data = image.generate(code)
+    return send_file(image_data, mimetype="image/png")
+
+
+# Registration endpoint
+@auth_bp.route("/register", methods=["POST"])
+def register():
+    data = request.json
+    email = data.get("email")
+    password = data.get("password")
+    code = data.get("code")
+
+    if not email or not password or not code:
+        return jsonify({"success": False, "message": "Incomplete information"}), 400
+
+    if code != session.get("captcha_code"):
+        return jsonify({"success": False, "message": "Incorrect captcha"}), 403
+    session.pop("captcha_code", None)
+
+    result = register_user(email, password)
+
+    return jsonify(result), 200 if result["success"] else 409
