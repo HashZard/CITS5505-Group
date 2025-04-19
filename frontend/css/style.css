@@ -3,7 +3,6 @@
     background-color: white;/* white background */
   }
   
-
 /* style of the elements on nav */
 .nav-link {
     /* text-sm */
@@ -17,4 +16,7 @@
   .nav-link:hover {
     color: #111827;
   }
+  
+
+
   
