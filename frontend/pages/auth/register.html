@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Register Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+<div class="w-full max-w-md mx-auto mt-20 p-6 bg-white rounded-xl shadow space-y-6">
+    <h2 class="text-xl font-bold text-center">Register</h2>
+    <form id="registerForm" class="space-y-4">
+        <input type="email" name="email" placeholder="Enter your email" required class="ea-input w-full"/>
+        <input type="password" name="password" placeholder="Enter your password" required class="ea-input w-full"/>
+        <input type="password" name="confirm_password" placeholder="Confirm your password" required class="ea-input w-full"/>
+
+        <div class="flex items-center gap-4">
+            <input type="text" name="code" placeholder="Captcha code" required class="ea-input w-1/2"/>
+            <img id="captchaImg" src="/api/captcha" class="h-12 cursor-pointer border rounded" title="Click to refresh"/>
+        </div>
+
+        <button type="submit" class="ea-button w-full">Register</button>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById("registerForm");
+    const captchaImg = document.getElementById("captchaImg");
+
+    captchaImg.addEventListener("click", () => {
+        captchaImg.src = "/api/captcha?reload=" + Date.now();
+    });
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        if (!formData.get("password") || !formData.get("confirm_password")) {
+            alert("❗ Password cannot be empty!");
+            return;
+        }
+        if (formData.get("password") !== formData.get("confirm_password")) {
+            alert("❌ Passwords do not match");
+            return;
+        }
+
+        const data = Object.fromEntries(formData.entries());
+        const res = await fetch("/api/register", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+        if (result.success) {
+            alert("✅ Registration successful");
+            window.location.href = "/login.html";
+        } else {
+            alert("❌ " + result.message);
+            captchaImg.click(); // Auto refresh captcha
+        }
+    });
+</script>
+</body>
+</html>
