@@ -14,8 +14,47 @@
   }
   
   .nav-link:hover {
-    color: #111827;
+    color:rgb(33, 20, 121) ;
   }
+
+  
+  /* style of large heading */
+  .custom-heading {
+    margin-bottom: 2rem;
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1.25;
+    color:rgb(33, 20, 121);
+  }
+  /* for large screen */
+  @media (min-width: 1024px) {
+    .custom-heading {
+      font-size: 3.75rem;
+    }
+  }
+  
+  /* style of middle heading */
+  .middle-heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color:rgb(33, 20, 121);
+  }
+
+  /* style of the main text content */
+  .typography-default {
+    font-style:italic;
+    font-size: 1rem;             
+    font-weight: 400;           
+    line-height: 1.75rem;        
+    color: #111827;             
+  }
+
+  
+  
+  
+
+
   
 
 
