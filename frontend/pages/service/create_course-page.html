@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- Notice ： All of these modules must import <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css" rel="stylesheet">in your header label for using. -->
-    <header class="relative flex  items-center justify-between w-full bg-white group px-4 shrink-0 shadow-lg">
+    <header class="header-style">
         <div>
             <img class="w-50 h-20 cursor-pointer" src="/frontend/assets/images/logo.png" id="logoImage">
         </div>
@@ -28,9 +28,8 @@
                     </svg>
                 </button>
             </div>
-            <button class="nav-link" href="javascript:void(0)">Login in</button>
-            <button class="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">
-                Sign Up
+            <button class="custom-small-btn" href="javascript:void(0)">Login in</button>
+            <button class="custom-small-btn" href="javascript:void(0)">Sign Up</button>
             </button>
         </div>
         <!-- Under the small screen device, the page will render a "hamburger" button. -->
@@ -52,9 +51,8 @@
         </div>   
         <a class="nav-link" href="javascript:void(0)">My profile</a>
             <a class="nav-link" href="javascript:void(0)">Create a new course</a>
-            <button class="nav-link" href="javascript:void(0)">Login in</button>
-            <button class="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 
-            text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">Sign Up</button>
+            <button class="custom-small-btn" href="javascript:void(0)">Login in</button>
+            <button class="custom-small-btn" href="javascript:void(0)">Sign Up</button>
         </nav>
     </header>
 
@@ -64,29 +62,29 @@
             <h1 class="custom-heading text-center mb-8">Create New Course</h1>
             
             <!-- Course Creation Form -->
-            <div class="bg-white rounded-xl shadow-lg p-8">
+            <div class="card card-hover">
                 <form id="createCourseForm" class="space-y-6">
                     <!-- Course Basic Information -->
                     <div>
                         <label class="small-heading mb-2">Course Name</label>
-                        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300" required>
+                        <input type="text" class="custom-input" required>
                     </div>
                     
                     <div>
                         <label class="small-heading mb-2">Course Code</label>
-                        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300" required>
+                        <input type="text" class="custom-input" required>
                     </div>
 
                     <div>
                         <label class="small-heading mb-2">Course Description</label>
-                        <textarea class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300" rows="4" required></textarea>
+                        <textarea class="custom-input" rows="4" required></textarea>
                     </div>
 
                     <!-- Case Submission Section -->
                    
 
                     <!-- File Upload Section -->
-                    <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center">
+                    <div class="custom-box-dashed">
                         <label class="small-heading mb-4 block">Upload Course Materials</label>
                         <div class="flex flex-col items-center space-y-4">
                             <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,9 +92,12 @@
                             </svg>
                             <span class="typography-default text-gray-500">Drag and drop files here or click to upload</span>
                             <input type="file" class="hidden" id="fileUpload" multiple>
-                            <button type="button" onclick="document.getElementById('fileUpload').click()" class="px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">
+                            
+                            <!-- choose files button -->
+                            <button type="button" onclick="document.getElementById('fileUpload').click()" class="custom-small-btn">
                                 Choose Files
                             </button>
+                            
                             <div id="fileList" class="w-full text-left text-sm text-gray-600"></div>
                         </div>
                     </div>
@@ -105,17 +106,17 @@
                     <div class="bg-gray-50 rounded-xl p-6">
                         <div class="flex items-center justify-between mb-4">
                             <span class="small-heading">Current Votes</span>
-                            <span class="text-2xl font-bold text-purple-blue-600">0</span>
+                            <span class="middle-heading">0</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-purple-blue-600 h-2 rounded-full" style="width: 0%"></div>
+                            <div class="custom-bar" style="width: 0%"></div>
                         </div>
-                        <p class="typography-default text-gray-500 mt-2 text-sm">Sufficient votes are required to create the course</p>
+                        <p class="typography-default  mt-2 text-sm">Sufficient votes are required to create the course</p>
                     </div>
 
                     <!-- Submit Button -->
                     <div class="flex justify-center gap-4">
-                        <button class="w-full px-6 py-3 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition duration-300">
+                        <button class="custom-big-btn">
                             Submit 
                         </button> 
                     </div>
@@ -125,7 +126,7 @@
     </main>
 
     <!-- Footer section will be kept unchanged -->
-    <footer class="fixed bottom-0 footer-center w-full p-2 bg-grey-300 text-gray-800">
+    <footer class="custom-footer">
         <div class="text-center text-sm">
             <p>
                 Copyright © 2025 -
@@ -135,10 +136,6 @@
     </footer>
 
     <script src="/frontend/js/components/file_upload.js"></script>
-    <script>
-        document.getElementById('logoImage').addEventListener('click', function() {
-            window.location.href = '/frontend/index.html';
-        });
-    </script>
+    <script src="/frontend/js/components/click_to_jump.js"></script>
 </body>
 </html>

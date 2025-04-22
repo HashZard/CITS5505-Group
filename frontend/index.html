@@ -10,11 +10,11 @@
         <link rel="stylesheet" href="/frontend/css/style.css">
     </head>
     <body>           
-        <header class="relative flex  items-center justify-between w-full bg-white group px-4 shrink-0 shadow-lg">
+        <header class="header-style">
             <div>
                 <img class=" w-50 h-20"  src="/frontend/assets/images/logo.png">
             </div>
-            <nav class="items-center justify-between hidden gap-12 text-black  lg:flex">
+            <nav class="items-center justify-between hidden gap-12 text-black lg:flex">
                 <a class="nav-link" href="javascript:void(0)">My profile</a>
                 <a class="nav-link" href="/frontend/pages/service/create_course-page.html">Create a new course</a>
         
@@ -30,10 +30,8 @@
                         </svg>
                     </button>
                 </div>
-                <button class="nav-link" href="javascript:void(0)">Login in</button>
-                <button class="flex items-center px-4 py-2 text-sm font-bold rounded-xl 
-                bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">
-                    Sign Up
+                <button class="custom-small-btn" href="javascript:void(0)">Login in</button>
+                <button class="custom-small-btn" href="javascript:void(0)">Sign Up</button>
                 </button>
             </div>
             <!-- Under the small screen device, the page will render a "hamburger" button. -->
@@ -55,9 +53,8 @@
             </div>   
             <a class="nav-link" href="javascript:void(0)">My profile</a>
                 <a class="nav-link" href="/frontend/pages/service/create_course-page.html">Create a new course</a>
-                <button class="nav-link" href="javascript:void(0)">Login in</button>
-                <button class="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 
-                text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">Sign Up</button>
+                <button class="custom-small-btn" href="javascript:void(0)">Login in</button>
+                <button class="custom-small-btn" href="javascript:void(0)">Sign Up</button>
             </nav>
         </header>
         
@@ -86,12 +83,10 @@
                     
                     <div class="flex flex-col items-center gap-4 lg:flex-row">
                         <!-- Call-to-action buttons -->
-                        <button class="flex items-center py-4 text-sm font-bold text-white px-7 bg-purple-blue-500 
-                        hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 transition duration-300 rounded-xl">Create a course now</button>
+                        <button class="custom-big-btn">Create a course now</button>
                     
                         <!-- Icon inside button -->    
-                        <button class="flex items-center py-4 text-sm font-medium px-7 text-dark-grey-700 hover:text-dark-grey-900 
-                        transition duration-300 rounded-2xl">
+                        <button class="custom-small-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
                                 <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clip-rule="evenodd"></path>
                             </svg>
@@ -107,7 +102,7 @@
             </div>
         </div>
         
-        <footer class="fixed bottom-0  footer-center w-full p-2 bg-grey-300 text-gray-800 ">
+        <footer class="custom-footer">
             <div class="text-center text-sm ">
             <p>
                 Copyright © 2025 -
@@ -115,6 +110,6 @@
             </p>
             </div>
         </footer>
-        
+        <script src="/frontend/js/components/click_to_jump.js"></script>
     </body>
 <html>

@@ -18,6 +18,35 @@
   }
 
   
+  /* style of the header */
+  .header-style {
+    /* relative */
+    position: relative;
+  
+    /* flex items-center justify-between */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    /* w-full */
+    width: 100%;
+  
+    /* bg-white */
+    background-color: #ffffff;
+  
+    /* px-4 */
+    padding: 0 1rem;
+  
+    /* shrink-0 */
+    flex-shrink: 0;
+  
+    /* shadow-lg */
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+
   /* style of large heading */
   .custom-heading {
     margin-bottom: 2rem;
@@ -42,7 +71,7 @@
   }
 
   
-
+  /* style of the small heading */
   .small-heading {
     display: block;
   color: #374151;
@@ -51,6 +80,7 @@
   font-weight: 700;
   }
 
+  
   /* style of the main text content */
   .typography-default {
     font-style:normal;
@@ -60,8 +90,23 @@
     color: #111827;             
   }
 
+  
+  /* style of the card */
+  .card {
+    /* bg-white */
+    background-color: #ffffff;
+    /* rounded-2xl */
+    border-radius: 1rem;           /* 16px */
+    /* shadow-soft */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* p-8 */
+    padding: 2rem;                 /* 32px */
+    /* mb-8 */
+    margin-bottom: 2rem;           /* 32px */
+  }
 
-/* many styles for the cards */
+
+    /* many styles for the cards */
   .gradient-bg {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   }
@@ -81,6 +126,215 @@
       transform: translateY(-2px);
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
+
+  
+  /* style of the input */
+  .custom-input {
+    /* width: 100% */
+    width: 100%;
+  
+    /* padding: 0.5rem top/bottom and 1rem left/right */
+    padding: 0.5rem 1rem;
+  
+    /* 1px solid light gray border (#D1D5DB) */
+    border: 1px solid #D1D5DB;
+  
+    /* border-radius: 0.75rem (12px) */
+    border-radius: 0.75rem;
+  
+    /* remove default focus outline */
+    outline: none;
+  }
+  
+  /* focus: apply a 2px ring with purple-blue-300 color */
+  .custom-input:focus {
+    /* box-shadow simulates ring-2 and ring-purple-blue-300 */
+    box-shadow: 0 0 0 2px #C4B5FD;
+  
+    /* change border to match ring color */
+    border-color: #C4B5FD;
+  }
+
+  
+  /* style of the dashed box */
+  .custom-box-dashed {
+    /* border-2: 2px border width */
+    border-width: 2px;
+    /* border-dashed: dashed border style */
+    border-style: dashed;
+    /* border-gray-300: light gray border color */
+    border-color: #D1D5DB;
+    /* rounded-xl: 0.75rem (12px) border radius */
+    border-radius: 0.75rem;
+    /* p-6: 1.5rem (24px) padding on all sides */
+    padding: 1.5rem;
+ 
+  }
+  
+
+  /* style of the bar */
+  .custom-bar {
+    /* bg-purple-600: purple background (Tailwind #7C3AED) */
+    background-color: #7C3AED;
+  
+    /* h-3: height of 0.75rem (12px) */
+    height: 0.75rem;
+  
+    /* rounded-full: fully rounded corners */
+    border-radius: 9999px;
+  }
+
+  .custom-textarea {
+    /* w-full: full width */
+    width: 100%;
+  
+    /* px-4 py-3: horizontal padding 1rem, vertical padding 0.75rem */
+    padding: 0.75rem 1rem;
+  
+    /* text-gray-700: dark gray text color */
+    color: #374151;
+  
+    /* border and border color */
+    border: 1px solid #D1D5DB; /* gray-300 */
+  
+    /* rounded-xl: 12px corner radius */
+    border-radius: 0.75rem;
+  
+    /* focus:outline-none: remove default outline */
+    outline: none;
+  
+    /* transition for smooth ring appearance (optional) */
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  
+  .custom-textarea:focus {
+    /* focus:ring-2 and focus:ring-purple-500: 2px ring with purple color */
+    box-shadow: 0 0 0 2px #8B5CF6; /* purple-500 */
+  
+    /* focus:border-transparent: hide visible border color on focus */
+    border-color: transparent;
+  }
+
+
+  .custom-small-btn{
+    /* flex: display elements in a row */
+    display: flex;
+  
+    /* items-center: vertically center items */
+    align-items: center;
+  
+    /* px-4 py-2: horizontal padding 1rem, vertical padding 0.5rem */
+    padding: 0.5rem 1rem;
+  
+    /* text-sm: font size ~14px */
+    font-size: 0.875rem;
+  
+    /* font-bold: bold text */
+    font-weight: 700;
+  
+    /* rounded-xl: border radius 0.75rem (12px) */
+    border-radius: 0.75rem;
+  
+    /* bg-purple-blue-100: light custom background color */
+    background-color: #E0E7FF; /* Replace with your actual value */
+  
+    /* text-purple-blue-600: text color */
+    color: #4338CA; /* Replace with your actual value */
+  
+    /* transition duration-300: smooth 300ms transition */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .custom-small-btn:hover {
+    /* hover:bg-purple-blue-600: change background on hover */
+    background-color: #4338CA; /* Replace with your actual value */
+  
+    /* hover:text-white: change text color on hover */
+    color: #FFFFFF;
+  }
+
+
+  .custom-big-btn {
+    /* w-full: full width */
+    width: 100%;
+  
+    /* px-6 py-3: horizontal padding 1.5rem, vertical padding 0.75rem */
+    padding: 0.75rem 1.5rem;
+  
+    /* bg-purple-600: background color */
+    background-color: #9333EA; /* Tailwind purple-600 */
+  
+    /* text-white: white text */
+    color: #ffffff;
+  
+    /* rounded-full: fully rounded corners */
+    border-radius: 9999px;
+  
+    /* transition duration-300: smooth transitions */
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-big-btn:hover {
+    /* hover:bg-purple-700: darker background on hover */
+    background-color: #7E22CE; /* Tailwind purple-700 */
+  }
+  
+  /* style of the pill */
+  .custom-pill {
+    /* flex: horizontal layout */
+    display: flex;
+  
+    /* items-center: vertical centering */
+    align-items: center;
+  
+    /* px-6 py-3: padding - horizontal 1.5rem, vertical 0.75rem */
+    padding: 0.75rem 1.5rem;
+  
+    /* bg-gray-100: light gray background */
+    background-color: #F3F4F6; /* Tailwind gray-100 */
+  
+    /* rounded-full: fully rounded edges */
+    border-radius: 9999px;
+  
+    /* transition: smooth hover effect */
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-pill:hover {
+    /* hover:bg-gray-200: slightly darker background on hover */
+    background-color: #E5E7EB; /* Tailwind gray-200 */
+  }
+
+  
+  .custom-footer {
+    /* fixed: position the element relative to the viewport */
+    position: fixed;
+  
+    /* bottom-0: stick to the bottom of the screen */
+    bottom: 0;
+    left: 0;
+  
+    /* w-full: full width */
+    width: 100%;
+  
+    /* p-2: padding of 0.5rem on all sides */
+    padding: 0.5rem;
+  
+    /* bg-grey-300: likely a typo, Tailwind uses gray not grey */
+    background-color: #D1D5DB; /* This is Tailwind gray-300 */
+  
+    /* text-gray-800: dark gray text */
+    color: #1F2937;
+  
+    /* optional: center text if mimicking footer-center */
+    text-align: center;
+  }
+  
+  
+  
+  
+ 
+  
 
   
   
