@@ -4,7 +4,8 @@ from backend.app.services.course_service import (
     create_course_rating,
     add_course_comment,
     get_course_files,
-    upload_course_file
+    upload_course_file,
+    get_course_instructors
 )
 from backend.app.utils.auth_utils import login_required
 
@@ -28,7 +29,7 @@ def rate_course_route(course_id, user_id):
     success, message = create_course_rating(user_id, course_id, data)
     if not success:
         return jsonify({"success": False, "message": message}), 400
-    return jsonify({"success": True})
+    return jsonify({"success": True, "message": message})
 
 
 @course_bp.route("/<int:course_id>/comment", methods=["POST"])
@@ -54,3 +55,18 @@ def upload_course_file_route(course_id, user_id):
     if not success:
         return jsonify({"success": False, "message": result}), 400
     return jsonify({"success": True, "file_url": result})
+
+
+@course_bp.route("/<int:course_id>/instructors", methods=["GET"])
+def get_course_instructors_route(course_id):
+    instructors = get_course_instructors(course_id)
+    instructor_data = [
+        {
+            "id": instructor.id,
+            "name": instructor.name,
+            "title": instructor.title,
+            "bio": instructor.bio
+        }
+        for instructor in instructors
+    ]
+    return jsonify({"success": True, "instructors": instructor_data})
