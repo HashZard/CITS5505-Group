@@ -69,6 +69,35 @@ function setup_venv() {
     fi
 }
 
+# === Set up database using Flask-Migrate ===
+function setup_db() {
+    echo "🛠️ Setting up the database..."
+
+    export FLASK_APP=backend/app/app.py
+    export FLASK_ENV=development
+    export PYTHONPATH="$PROJECT_ROOT"
+
+    cd "$PROJECT_ROOT" || exit
+
+    if [ -f "$PROJECT_ROOT/backend/app.db" ]; then
+        echo "📦 Existing database found: app.db"
+    else
+        echo "🆕 Creating new SQLite database..."
+    fi
+
+    if [ ! -d "migrations" ]; then
+        echo "📁 No migrations folder found. Initializing..."
+        flask db init
+        flask db migrate -m "Initial migration"
+    else
+        echo "🔁 Migrations folder found. Auto migrating..."
+        flask db migrate -m "Auto migration"
+    fi
+
+    flask db upgrade
+    echo "✅ Database setup complete."
+}
+
 # === Start Flask server ===
 function start_flask() {
     echo "🚀 Starting Flask server on port 8000..."
@@ -113,6 +142,7 @@ function open_browser() {
 echo "🔧 Initializing local development environment"
 shutdown_services
 setup_venv
+setup_db
 start_flask
 start_nginx
 check_services

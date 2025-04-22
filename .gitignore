@@ -1,5 +1,4 @@
 venv
 temp
 logs
-deploy/local_deploy/setup.sh
 backend/app.db
