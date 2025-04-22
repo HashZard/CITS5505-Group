@@ -57,7 +57,11 @@ function setup_venv() {
         echo "✅ Virtual environment already exists"
     fi
 
-    source "$VENV_PATH/bin/activate"
+    if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" ]]; then
+        source "$VENV_PATH/Scripts/activate"
+    else
+        source "$VENV_PATH/bin/activate"
+    fi
 
     if [ -f "$PROJECT_ROOT/requirements.txt" ]; then
         echo "📦 Installing dependencies..."
