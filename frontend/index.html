@@ -5,65 +5,62 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Homepage</title>
+        <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css" rel="stylesheet">
-        <link rel="stylesheet" href="../frontend/css/style.css">
+        <link rel="stylesheet" href="/frontend/css/style.css">
     </head>
     <body>           
-            <header class="relative flex flex-wrap items-center justify-between w-full bg-white group py-3 px-3 shrink-0">
-                <div>
-                    <img class=" w-50 h-20"  src="../frontend/assets/images/logo.png">
-                </div>
-                <nav class="items-center justify-between hidden gap-12 lg:flex">
-                    <a class="nav-link" href="javascript:void(0)">My profile</a>
-                    <a class="nav-link" href="javascript:void(0)">Create a new course</a>
-
-                </nav>
-                
-                <div class="items-center hidden gap-12  lg:flex">
-                    <div class="relative">
-                        <!-- insert a desktop search bar -->
-                        <input type="text" placeholder="Search a course" class="mr-2 px-4 pr-10 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300 focus:border-purple-blue-500 transition duration-300">
-                        <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            </svg>
-                        </button>
-                    </div>
-                    <button class="nav-link" href="javascript:void(0)">Login in</button>
-                    <button class="flex items-center px-4 py-2 text-sm font-bold rounded-xl 
-                    bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">
-                        Sign Up
-                    </button>
-                </div>
-                <!-- Under the small screen device, the page will render a "hamburger" button. -->
-                <button onclick="(() => { this.closest('.group').classList.toggle('open')})()" class="flex  lg:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M3 8H21C21.2652 8 21.5196 7.89464 21.7071 7.70711C21.8946 7.51957 22 7.26522 22 7C22 6.73478 21.8946 6.48043 21.7071 6.29289C21.5196 6.10536 21.2652 6 21 6H3C2.73478 6 2.48043 6.10536 2.29289 6.29289C2.10536 6.48043 2 6.73478 2 7C2 7.26522 2.10536 7.51957 2.29289 7.70711C2.48043 7.89464 2.73478 8 3 8ZM21 16H3C2.73478 16 2.48043 16.1054 2.29289 16.2929C2.10536 16.4804 2 16.7348 2 17C2 17.2652 2.10536 17.5196 2.29289 17.7071C2.48043 17.8946 2.73478 18 3 18H21C21.2652 18 21.5196 17.8946 21.7071 17.7071C21.8946 17.5196 22 17.2652 22 17C22 16.7348 21.8946 16.4804 21.7071 16.2929C21.5196 16.1054 21.2652 16 21 16ZM21 11H3C2.73478 11 2.48043 11.1054 2.29289 11.2929C2.10536 11.4804 2 11.7348 2 12C2 12.2652 2.10536 12.5196 2.29289 12.7071C2.48043 12.8946 2.73478 13 3 13H21C21.2652 13 21.5196 12.8946 21.7071 12.7071C21.8946 12.5196 22 12.2652 22 12C22 11.7348 21.8946 11.4804 21.7071 11.2929C21.5196 11.1054 21.2652 11 21 11Z" fill="black"></path>
-                    </svg>
-                </button>
-                
-                <nav class="absolute flex  lg:hidden transition-all duration-300 ease-in-out flex-col items-start 
-                shadow-main justify-center w-full gap-3 overflow-hidden bg-white max-h-0 group-[.open]:py-4 px-4 rounded-2xl group-[.open]:max-h-64 top-full">
-                
-                <!-- insert a mobile search bar -->
-                <div class="relative w-full">
-                    <input type="text" placeholder="Search..." class="w-full py-2 px-4 pr-10 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300 focus:border-purple-blue-500 transition duration-300">
+        <header class="relative flex  items-center justify-between w-full bg-white group px-4 shrink-0 shadow-lg">
+            <div>
+                <img class=" w-50 h-20"  src="/frontend/assets/images/logo.png">
+            </div>
+            <nav class="items-center justify-between hidden gap-12 text-black  lg:flex">
+                <a class="nav-link" href="javascript:void(0)">My profile</a>
+                <a class="nav-link" href="/frontend/pages/service/create_course-page.html">Create a new course</a>
+        
+            </nav>
+            
+            <div class="items-center hidden gap-12  lg:flex">
+                <div class="relative">
+                    <input type="text" placeholder="Search a course" class="mr-2 px-4 pr-10 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300 focus:border-purple-blue-500 transition duration-300">
                     <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="8"></circle>
                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         </svg>
                     </button>
-                </div>   
-                
-                <a class="nav-link" href="javascript:void(0)">My profile</a>
-                    <a class="nav-link" href="javascript:void(0)">Create a new course</a>
-                    <button class="nav-link" href="javascript:void(0)">Login in</button>
-                    <button class="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 
-                    text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">Sign Up</button>
-                </nav>
-            </header>
+                </div>
+                <button class="nav-link" href="javascript:void(0)">Login in</button>
+                <button class="flex items-center px-4 py-2 text-sm font-bold rounded-xl 
+                bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">
+                    Sign Up
+                </button>
+            </div>
+            <!-- Under the small screen device, the page will render a "hamburger" button. -->
+            <button onclick="(() => { this.closest('.group').classList.toggle('open')})()" class="flex  lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 8H21C21.2652 8 21.5196 7.89464 21.7071 7.70711C21.8946 7.51957 22 7.26522 22 7C22 6.73478 21.8946 6.48043 21.7071 6.29289C21.5196 6.10536 21.2652 6 21 6H3C2.73478 6 2.48043 6.10536 2.29289 6.29289C2.10536 6.48043 2 6.73478 2 7C2 7.26522 2.10536 7.51957 2.29289 7.70711C2.48043 7.89464 2.73478 8 3 8ZM21 16H3C2.73478 16 2.48043 16.1054 2.29289 16.2929C2.10536 16.4804 2 16.7348 2 17C2 17.2652 2.10536 17.5196 2.29289 17.7071C2.48043 17.8946 2.73478 18 3 18H21C21.2652 18 21.5196 17.8946 21.7071 17.7071C21.8946 17.5196 22 17.2652 22 17C22 16.7348 21.8946 16.4804 21.7071 16.2929C21.5196 16.1054 21.2652 16 21 16ZM21 11H3C2.73478 11 2.48043 11.1054 2.29289 11.2929C2.10536 11.4804 2 11.7348 2 12C2 12.2652 2.10536 12.5196 2.29289 12.7071C2.48043 12.8946 2.73478 13 3 13H21C21.2652 13 21.5196 12.8946 21.7071 12.7071C21.8946 12.5196 22 12.2652 22 12C22 11.7348 21.8946 11.4804 21.7071 11.2929C21.5196 11.1054 21.2652 11 21 11Z" fill="black"></path>
+                </svg>
+            </button>
+            <nav class="absolute flex  lg:hidden transition-all duration-300 ease-in-out flex-col items-start 
+            shadow-main justify-center w-full gap-3 overflow-hidden bg-white max-h-0 group-[.open]:py-4 px-4 rounded-2xl group-[.open]:max-h-64 top-full">
+            <div class="relative w-full">
+                <input type="text" placeholder="Search..." class="w-full py-2 px-4 pr-10 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300 focus:border-purple-blue-500 transition duration-300">
+                <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>   
+            <a class="nav-link" href="javascript:void(0)">My profile</a>
+                <a class="nav-link" href="/frontend/pages/service/create_course-page.html">Create a new course</a>
+                <button class="nav-link" href="javascript:void(0)">Login in</button>
+                <button class="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 
+                text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">Sign Up</button>
+            </nav>
+        </header>
+        
         
         <!-- main content -->
             <div class="container flex flex-col mx-auto ">    
@@ -105,13 +102,12 @@
 
                  <!-- Right column: header image (only shown on medium and larger screens) -->
                 <div class="items-center justify-end hidden col-span-1  md:flex">
-                    <img class="w-4/5 rounded-xl" src="../frontend/assets/images/HomepagePhoto.jpg" >
+                    <img class="w-4/5 rounded-xl" src="/frontend/assets/images/HomepagePhoto.jpg" >
                 </div>
             </div>
         </div>
         
-        
-        <footer class="fixed bottom-0  footer-center w-full p-5 bg-grey-300 text-gray-800 ">
+        <footer class="fixed bottom-0  footer-center w-full p-2 bg-grey-300 text-gray-800 ">
             <div class="text-center text-sm ">
             <p>
                 Copyright © 2025 -
