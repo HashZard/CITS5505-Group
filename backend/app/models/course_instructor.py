@@ -1,6 +1,6 @@
 from datetime import datetime, UTC
 
-from backend.app import db
+from backend.app.models import db
 from backend.app.models.basemodel import BaseModel
 
 

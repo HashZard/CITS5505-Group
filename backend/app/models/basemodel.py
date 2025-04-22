@@ -2,7 +2,7 @@ import logging
 import json
 import datetime
 
-from backend.app import db
+from backend.app.models import db
 
 db_logger = logging.getLogger('db_logger')
 db_logger.propagate = False  # indicate that this logger should not propagate to the root logger

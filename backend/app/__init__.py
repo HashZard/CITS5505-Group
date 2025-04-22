@@ -5,6 +5,8 @@ from flask import Flask, request
 
 from backend.app.models import db, init_db
 
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
 
 def create_app():
     app = Flask(__name__)
@@ -24,7 +26,7 @@ def create_app():
                         + f" with data: {response.get_json(silent=True)}")
         return response
 
-    # 数据库配置
+    # database config
     BACKEND_ROOT = os.path.dirname(os.path.dirname(__file__))
     app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(BACKEND_ROOT, 'app.db')}"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -35,10 +37,12 @@ def create_app():
 
     # register Blueprint
     from backend.app.routes.auth_router import auth_bp
+    from backend.app.routes.course_router import course_bp
 
     app.register_blueprint(auth_bp)
+    app.register_blueprint(course_bp)
 
-    print("✅ 当前所有 app 路由:")
+    print("✅ Current all app routes:")
     for rule in app.url_map.iter_rules():
         print("➡", rule)
 
@@ -51,11 +55,13 @@ def create_app():
 import logging
 from logging.handlers import RotatingFileHandler
 
+log_dir = os.path.join(project_root, "logs")
+
 
 def setup_logger():
     loggers = {
-        'app_logger': create_logger('app_logger', "backend/logs/app.log", logging.DEBUG),
-        'db_logger': create_logger('db_logger', "backend/logs/db.log", logging.INFO)
+        'app_logger': create_logger('app_logger', os.path.join(log_dir, "app.log"), logging.DEBUG),
+        'db_logger': create_logger('db_logger', os.path.join(log_dir, "db.log"), logging.INFO)
     }
 
     return loggers

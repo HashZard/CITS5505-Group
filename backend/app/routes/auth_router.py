@@ -3,7 +3,7 @@ import random
 
 from captcha.image import ImageCaptcha
 from flask import Blueprint, request, jsonify, session, send_file, make_response
-from backend.app.services.auth_handler import register_user, verify_user
+from backend.app.services.auth_service import register_user, verify_user
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/api')
 
