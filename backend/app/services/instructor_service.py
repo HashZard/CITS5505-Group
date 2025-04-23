@@ -49,7 +49,7 @@ def create_instructor_rating(user_id, instructor_id, data):
 
 
 def create_instructor_course_assignment(instructor_id, course_id, data):
-    required_fields = ["start_date"]
+    required_fields = ["start_date", "is_active"]
     if not all(field in data for field in required_fields):
         return False, "Missing course_instructor fields"
 
