@@ -30,7 +30,6 @@ def create_instructor(data):
 
 def create_instructor_rating(user_id, instructor_id, data):
     rating = data.get("rating")
-    comment = data.get("comment", "")
 
     if not rating or not (1 <= rating <= 5):
         return False, "Invalid rating"
@@ -39,7 +38,6 @@ def create_instructor_rating(user_id, instructor_id, data):
         user_id=user_id,
         instructor_id=instructor_id,
         rating=rating,
-        comment=comment,
         created_at=datetime.now(UTC)
     )
     try:
