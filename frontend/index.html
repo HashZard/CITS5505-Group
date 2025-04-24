@@ -1,224 +1,171 @@
 <!-- component -->
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Homepage</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css" rel="stylesheet">
-        <link rel="stylesheet" href="/css/style.css">
-    </head>
-    <body>           
-        <header class="header-style group">
-            <div>
-                <img class=" w-50 h-20"  src="/assets/images/logo.png">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header id="header" class="header-style group"></header>
 
+<!-- main content -->
+<div class="container flex flex-col mx-auto ">
+    <!-- Grid layout: 1 column on mobile, 2 columns on medium and larger screens -->
+    <div class="grid w-full grid-cols-1 my-auto mt-8 mb-8  md:grid-cols-2 xl:gap-1 md:gap-1">
+        <div class="flex flex-col justify-center col-span-1 text-center lg:text-start">
+
+            <!-- Logo and tagline -->
+            <div class="flex items-center justify-center mb-4 lg:justify-normal">
+                <img class="h-5"
+                     src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/logos/logo-1.png"
+                     alt="logo">
+                <h4 class="ml-2 text-sm font-bold tracking-widest text-primary uppercase">UNLOCK THE POWER OF STUDENT
+                    VOICES</h4>
             </div>
-            <nav class="items-center justify-between hidden gap-12 text-black lg:flex">
-                <a class="nav-link" href="/pages/service/profile.html">My profile</a>
-                <a class="nav-link" href="/pages/service/create_course-page.html">Create a new course</a>
-        
-            </nav>
-            
-            <div class="items-center hidden gap-12  lg:flex">
-                <div class="relative">
-                    <input type="text" placeholder="Search a course" class="mr-2 px-4 pr-10 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300 focus:border-purple-blue-500 transition duration-300">
-                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                    </button>
-                </div>
-                <button class="custom-small-btn" onclick="window.location.href='/frontend/pages/auth/login.html'">Log in</button>
-            <button class="custom-small-btn" onclick="window.location.href='/frontend/pages/auth/register.html'">Sign Up</button>
-                </button>
-            </div>
-            <!-- Under the small screen device, the page will render a "hamburger" button. -->
-            <button onclick="(() => { this.closest('.group').classList.toggle('open')})()" class="flex  lg:hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M3 8H21C21.2652 8 21.5196 7.89464 21.7071 7.70711C21.8946 7.51957 22 7.26522 22 7C22 6.73478 21.8946 6.48043 21.7071 6.29289C21.5196 6.10536 21.2652 6 21 6H3C2.73478 6 2.48043 6.10536 2.29289 6.29289C2.10536 6.48043 2 6.73478 2 7C2 7.26522 2.10536 7.51957 2.29289 7.70711C2.48043 7.89464 2.73478 8 3 8ZM21 16H3C2.73478 16 2.48043 16.1054 2.29289 16.2929C2.10536 16.4804 2 16.7348 2 17C2 17.2652 2.10536 17.5196 2.29289 17.7071C2.48043 17.8946 2.73478 18 3 18H21C21.2652 18 21.5196 17.8946 21.7071 17.7071C21.8946 17.5196 22 17.2652 22 17C22 16.7348 21.8946 16.4804 21.7071 16.2929C21.5196 16.1054 21.2652 16 21 16ZM21 11H3C2.73478 11 2.48043 11.1054 2.29289 11.2929C2.10536 11.4804 2 11.7348 2 12C2 12.2652 2.10536 12.5196 2.29289 12.7071C2.48043 12.8946 2.73478 13 3 13H21C21.2652 13 21.5196 12.8946 21.7071 12.7071C21.8946 12.5196 22 12.2652 22 12C22 11.7348 21.8946 11.4804 21.7071 11.2929C21.5196 11.1054 21.2652 11 21 11Z" fill="black"></path>
-                </svg>
-            </button>
-            <nav class="absolute flex  lg:hidden transition-all duration-300 ease-in-out flex-col items-start 
-            shadow-main justify-center w-full gap-3 overflow-hidden bg-white max-h-0 group-[.open]:py-4 px-4 rounded-2xl group-[.open]:max-h-64 top-full">
-            <div class="relative w-full">
-                <input type="text" placeholder="Search..." class="w-full py-2 px-4 pr-10 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300 focus:border-purple-blue-500 transition duration-300">
-                <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+
+            <!-- Main heading -->
+            <h1 class="mb-8 custom-heading">Discover, Rate & Share Your UWA Journey</h1>
+
+            <!-- Supporting paragraph -->
+            <p class="mb-6 typography-default lg:w-3/4 ">
+                Ever wondered which UWA courses truly stand out? Our vibrant student community shares authentic insights
+                and valuable resources to guide your academic choices.
+                Explore course ratings, instructor reviews, and insider tips—all powered by real student experiences.
+            </p>
+
+
+            <div class="flex flex-col items-center gap-4 lg:flex-row">
+                <!-- Call-to-action buttons -->
+                <button class="custom-big-btn">Create a course now</button>
+
+                <!-- Icon inside button -->
+                <button class="custom-pill">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                         class="w-5 h-5 mr-2">
+                        <path fill-rule="evenodd"
+                              d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z"
+                              clip-rule="evenodd"></path>
                     </svg>
+                    Join us now
                 </button>
-            </div>   
+            </div>
+        </div>
 
-            <a class="nav-link" href="/pages/service/profile.html">My profile</a>
-                <a class="nav-link" href="/pages/service/create_course-page.html">Create a new course</a>
-                <button class="custom-small-btn" href="">Login in</button>
-                <button class="custom-small-btn" href="">Sign Up</button>
-
-            </nav>
-        </header>
-        
-        
-        <!-- main content -->
-         <!-- Home Bulletin Board Section -->
-<section class="mt-8">
-    <h2 class="middle-heading">📢 Bulletin Board</h2>
-    <div class="alert-card-yellow">
-      <p class="font-medium">System maintenance will take place this Sunday from 1:00 AM to 3:00 AM. Please save your work accordingly.</p>
-      <p class="text-sm mt-2">Posted: Apr 22, 2025</p>
+        <!-- Right column: header image (only shown on medium and larger screens) -->
+        <div class="items-center justify-end hidden col-span-1  md:flex">
+            <img class="w-4/5  rounded-xl" src="/assets/images/HomepagePhoto.jpg">
+        </div>
     </div>
-  </section>
-        <main class="container flex flex-col mx-auto px-4 mt-8 mb-32">
-            <div class="container flex flex-col mx-auto ">    
-             <!-- Grid layout: 1 column on mobile, 2 columns on medium and larger screens -->
-                <div class="grid w-full grid-cols-1 my-auto mt-8 mb-8  md:grid-cols-2 xl:gap-1 md:gap-1">
-                <div class="flex flex-col justify-center col-span-1 text-center lg:text-start">
-                    
-                    <!-- Logo and tagline -->
-                    <div class="flex items-center justify-center mb-4 lg:justify-normal">
-                        <img class="h-5" src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/logos/logo-1.png" alt="logo">
-                        <h4 class="ml-2 text-sm font-bold tracking-widest text-primary uppercase">UNLOCK THE POWER OF STUDENT VOICES</h4>
-                    </div>
-                    
-                    <!-- Main heading -->
-                    <h1 class="mb-8 custom-heading">Discover, Rate & Share Your UWA Journey</h1>
-                    
-                     <!-- Supporting paragraph -->
-                    <p class="mb-6 typography-default lg:w-3/4 ">
-                        Ever wondered which UWA courses truly stand out? Our vibrant student community shares authentic insights and valuable resources to guide your academic choices. 
-                        Explore course ratings, instructor reviews, and insider tips—all powered by real student experiences.   
-                    </p>                    
-                    
-                    
-                    <div class="flex flex-col items-center gap-4 lg:flex-row">
-                        <!-- Call-to-action buttons -->
-                        <button class="custom-big-btn">Create a course now</button>
-                    
-                        <!-- Icon inside button -->    
-                        <button class="custom-pill">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clip-rule="evenodd"></path>
-                            </svg>
-                            Join us now
-                        </button>
-                    </div>
-                </div>
 
-                 <!-- Right column: header image (only shown on medium and larger screens) -->
-                <div class="items-center justify-end hidden col-span-1  md:flex">
-                    <img class="w-4/5  rounded-xl" src="/assets/images/HomepagePhoto.jpg" >
+    <!-- Course Cards Section -->
+    <section class="mt-16">
+        <h2 class="middle-heading">Featured Courses</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Course Card 1 -->
+            <div class="card card-hover hover-scale">
+                <img src="/frontend/assets/images/course-placeholder.jpg" alt="Software Engineering"
+                     class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="middle-heading mb-2">Software Engineering</h3>
+                    <div class="flex items-center mb-2 text-yellow-400">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <span class="ml-1">4.9</span>
+                        <span class="typography-default px-2">(120 reviews)</span>
+                    </div>
+                    <button class="custom-small-btn btn-full-width">View Details</button>
                 </div>
             </div>
 
-            <!-- Course Cards Section -->
-            <section class="mt-16">
-                <h2 class="middle-heading">Featured Courses</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  <!-- Course Card 1 -->
-                  <div class="card card-hover hover-scale">
-                    <img src="/frontend/assets/images/course-placeholder.jpg" alt="Software Engineering" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                      <h3 class="middle-heading mb-2">Software Engineering</h3>
-                      <div class="flex items-center mb-2 text-yellow-400">
-                          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <!-- Course Card 2 -->
+            <div class="card card-hover hover-scale">
+                <img src="/frontend/assets/images/course-placeholder.jpg" alt="Data Structures & Algorithms"
+                     class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="middle-heading mb-2">Data Structures & Algorithms</h3>
+                    <div class="flex items-center mb-2 text-yellow-400">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                          </svg>
-                          <span class="ml-1">4.9</span>
-                        <span class="typography-default px-2">(120 reviews)</span>
-                      </div>
-                      <button class="custom-small-btn btn-full-width">View Details</button>
-                    </div>
-                  </div>
-              
-                  <!-- Course Card 2 -->
-                  <div class="card card-hover hover-scale">
-                    <img src="/frontend/assets/images/course-placeholder.jpg" alt="Data Structures & Algorithms" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                      <h3 class="middle-heading mb-2">Data Structures & Algorithms</h3>
-                      <div class="flex items-center mb-2 text-yellow-400">
-                          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                          </svg>
-                          <span class="ml-1">4.9</span>
+                        </svg>
+                        <span class="ml-1">4.9</span>
                         <span class="typography-default px-2">(89 reviews)</span>
-                      </div>
-                      <button class="custom-small-btn btn-full-width">View Details</button>
                     </div>
-                  </div>
-              
-                  <!-- Course Card 3 -->
-                  <div class="card card-hover hover-scale">
-                    <img src="/frontend/assets/images/course-placeholder.jpg" alt="Artificial Intelligence" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                      <h3 class="middle-heading mb-2">Artificial Intelligence</h3>
-                      <div class="flex items-center mb-2 text-yellow-400">
-                          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <button class="custom-small-btn btn-full-width">View Details</button>
+                </div>
+            </div>
+
+            <!-- Course Card 3 -->
+            <div class="card card-hover hover-scale">
+                <img src="/frontend/assets/images/course-placeholder.jpg" alt="Artificial Intelligence"
+                     class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="middle-heading mb-2">Artificial Intelligence</h3>
+                    <div class="flex items-center mb-2 text-yellow-400">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                          </svg>
+                        </svg>
                         <span class="ml-1">4.9</span>
                         <span class="typography-default px-2">(92 reviews)</span>
-                      </div>
-                      <button class="custom-small-btn btn-full-width">View Details</button>
                     </div>
-                  </div>
+                    <button class="custom-small-btn btn-full-width">View Details</button>
                 </div>
-              </section>
-              <!-- Popular Course Rankings Section -->
-              <section class="mt-16">
-                <h2 class="middle-heading">Top Ranked Courses</h2>
-                <div class="card">
-                  <ol class="space-y-4">
-                    <li class="flex items-center justify-between">
-                      <div>
+            </div>
+        </div>
+    </section>
+    <!-- Popular Course Rankings Section -->
+    <section class="mt-16">
+        <h2 class="middle-heading">Top Ranked Courses</h2>
+        <div class="card">
+            <ol class="space-y-4">
+                <li class="flex items-center justify-between">
+                    <div>
                         <span class="text-medium">1. Data Structures & Algorithms</span>
                         <span class="heat-indicator">🔥🔥🔥🔥🔥</span>
-                      </div>
-                      <span class="rating-stars">
+                    </div>
+                    <span class="rating-stars">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                         </svg>
                       <span class="ml-1">4.9</span>
                       </span>
-                    </li>
-                    <li class="flex items-center justify-between">
-                      <div>
+                </li>
+                <li class="flex items-center justify-between">
+                    <div>
                         <span class="text-medium">2. Software Engineering</span>
                         <span class="heat-indicator">🔥🔥🔥🔥</span>
-                      </div>
-                      <span class="rating-stars">
+                    </div>
+                    <span class="rating-stars">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                         </svg>
                       <span class="ml-1">4.9</span>
-                    </li>
-                    <li class="flex items-center justify-between">
-                      <div>
+                </li>
+                <li class="flex items-center justify-between">
+                    <div>
                         <span class="text-medium">3. Artificial Intelligence</span>
                         <span class="heat-indicator">🔥🔥🔥</span>
-                      </div>
-                      <span class="rating-stars">
+                    </div>
+                    <span class="rating-stars">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                         </svg>
                       <span class="ml-1">4.9</span>
-                    </li>
-                  </ol>
-                </div>
-              
+                </li>
+            </ol>
         </div>
-        </main>
-        
-        <footer class="custom-footer">
-            <div class="text-center text-sm ">
-            <p>
-                Copyright © 2025 -
-                <a class="font-semibold" >UWA Course Evaluation</a>
-            </p>
-            </div>
-        </footer>
-        <script src="/js/components/click_to_jump.js"></script>
-    </body>
+
+</div>
+</main>
+
+<footer id="footer" class="custom-footer"></footer>
+<script src="/js/components/layout.js"></script>
+<script src="/js/components/click_to_jump.js"></script>
+</body>
 <html>
