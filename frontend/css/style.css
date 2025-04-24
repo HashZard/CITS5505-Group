@@ -330,13 +330,6 @@
     text-align: center;
   }
   
-  /* Section Universal style of Title */
-.section-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
 /* Announcement card with a yellow background style */
 .alert-card-yellow {
   background-color: #FEF9C3; /* tailwind yellow-50 */

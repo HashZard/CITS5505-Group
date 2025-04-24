@@ -65,7 +65,7 @@
                             <h1 class="custom-heading mb-2">John Doe</h1>
                             <p class="typography-default">Student ID: ST12345</p>
                         </div>
-                        <button class="custom-small-btn">Edit Profile</button>
+                        <button class="custom-small-btn" id="editProfileBtn">Edit Profile</button>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
@@ -76,6 +76,13 @@
                             <p class="middle-heading">Department</p>
                             <p class="typography-default">Computer Science</p>
                         </div>
+                    </div>
+
+                    <!-- Editable Nickname Section -->
+                    <div id="editNicknameSection" class="mt-4 hidden">
+                        <label class="small-heading mb-2 block">Edit Nickname</label>
+                        <input type="text" id="nicknameInput" class="custom-input" placeholder="Enter new nickname">
+                        <button class="custom-small-btn mt-2" id="saveNickname">Save</button>
                     </div>
                 </div>
             </div>
@@ -170,5 +177,7 @@
         </div>
     </footer>
     <script src="/frontend/js/components/click_to_jump.js"></script>
+    <script src="/frontend/js/components/edit_profile.js"></script>
+    
 </body>
 </html>
