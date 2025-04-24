@@ -7,16 +7,16 @@
         <title>Homepage</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css" rel="stylesheet">
-        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/frontend/css/style.css">
     </head>
     <body>           
         <header class="header-style group">
             <div>
-                <img class=" w-50 h-20" src="/assets/images/logo.png">
+              <img class=" w-50 h-20" src="/assets/images/logo.png">
             </div>
             <nav class="items-center justify-between hidden gap-12 text-black lg:flex">
-                <a class="nav-link" href="/pages/service/profile.html">My profile</a>
-                <a class="nav-link" href="/pages/service/create_course-page.html">Create a new course</a>
+                <a class="nav-link" href="/frontend/pages/service/profile.html">My profile</a>
+                <a class="nav-link" href="/frontend/pages/service/create_course-page.html">Create a new course</a>
         
             </nav>
             
@@ -51,10 +51,11 @@
                     </svg>
                 </button>
             </div>   
-            <a class="nav-link" href="/pages/service/profile.html">My profile</a>
-                <a class="nav-link" href="/pages/service/create_course-page.html">Create a new course</a>
-                <button class="custom-small-btn" href="">Login in</button>
-                <button class="custom-small-btn" href="">Sign Up</button>
+            <a class="nav-link" href="/frontend/pages/service/profile.html">My profile</a>
+            <a class="nav-link" href="/frontend/pages/service/create_course-page.html">Create a new course</a>
+
+            <button class="custom-small-btn" onclick="window.location.href='/frontend/pages/auth/login.html'">Log in</button>
+            <button class="custom-small-btn" onclick="window.location.href='/frontend/pages/auth/register.html'">Sign Up</button>
             </nav>
         </header>
         
@@ -133,7 +134,7 @@
                   <!-- Course Card 2 -->
                   <div class="card card-hover hover-scale">
                     <img src="/frontend/assets/images/course-placeholder.jpg" alt="Data Structures & Algorithms" class="w-full h-48 object-cover">
-                    <div class="p-4">           
+                    <div class="p-4">
                       <h3 class="middle-heading mb-2">Data Structures & Algorithms</h3>
                       <div class="flex items-center mb-2 text-yellow-400">
                           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
