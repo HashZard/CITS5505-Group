@@ -357,8 +357,11 @@
 .btn-full-width {
   width: 100%;
 }
-  
-  
+
+/* equivalent to font-medium */
+.text-medium {
+  font-weight: 500;     
+}
  
   
 
