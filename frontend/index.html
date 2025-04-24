@@ -12,7 +12,7 @@
     <body>           
         <header class="header-style group">
             <div>
-                <img class=" w-50 h-20"  src="/frontend/assets/images/logo.png">
+                <img class=" w-50 h-20 coursor-pointer" id="logoImage"  src="/frontend/assets/images/logo.png">
             </div>
             <nav class="items-center justify-between hidden gap-12 text-black lg:flex">
                 <a class="nav-link" href="/frontend/pages/service/profile.html">My profile</a>
@@ -60,6 +60,15 @@
         
         
         <!-- main content -->
+         <!-- Home Bulletin Board Section -->
+<section class="mt-8">
+    <h2 class="section-title">📢 Bulletin Board</h2>
+    <div class="alert-card-yellow">
+      <p class="font-medium">System maintenance will take place this Sunday from 1:00 AM to 3:00 AM. Please save your work accordingly.</p>
+      <p class="text-sm mt-2">Posted: Apr 22, 2025</p>
+    </div>
+  </section>
+        <main class="container flex flex-col mx-auto px-4 mt-8 mb-32">
             <div class="container flex flex-col mx-auto ">    
              <!-- Grid layout: 1 column on mobile, 2 columns on medium and larger screens -->
                 <div class="grid w-full grid-cols-1 my-auto mt-8 mb-8  md:grid-cols-2 xl:gap-1 md:gap-1">
@@ -97,10 +106,85 @@
 
                  <!-- Right column: header image (only shown on medium and larger screens) -->
                 <div class="items-center justify-end hidden col-span-1  md:flex">
-                    <img class="w-4/5  rounded-xl" src="/frontend/assets/images/HomepagePhoto.jpg" >
+                    <img class="w-4/5  rounded-xl shadow-lg" src="/frontend/assets/images/HomepagePhoto.jpg" alt="Campus" >
                 </div>
             </div>
+
+            <!-- Course Cards Section -->
+            <section class="mt-16">
+                <h2 class="text-2xl font-bold mb-6">Featured Courses</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <!-- Course Card 1 -->
+                  <div class="card card-hover hover-scale">
+                    <img src="/frontend/assets/images/course-placeholder.jpg" alt="Software Engineering" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                      <h3 class="middle-heading mb-2">Software Engineering</h3>
+                      <div class="flex items-center mb-2 text-yellow-400">
+                        ★★★★☆
+                        <span class="typography-default px-2">(120 reviews)</span>
+                      </div>
+                      <button class="custom-small-btn btn-full-width">View Details</button>
+                    </div>
+                  </div>
+              
+                  <!-- Course Card 2 -->
+                  <div class="card card-hover hover-scale">
+                    <img src="/frontend/assets/images/course-placeholder.jpg" alt="Data Structures & Algorithms" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                      <h3 class="middle-heading mb-2">Data Structures & Algorithms</h3>
+                      <div class="flex items-center mb-2 text-yellow-400">
+                        ★★★★★
+                        <span class="typography-default px-2">(89 reviews)</span>
+                      </div>
+                      <button class="custom-small-btn btn-full-width">View Details</button>
+                    </div>
+                  </div>
+              
+                  <!-- Course Card 3 -->
+                  <div class="card card-hover hover-scale">
+                    <img src="/frontend/assets/images/course-placeholder.jpg" alt="Artificial Intelligence" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                      <h3 class="middle-heading mb-2">Artificial Intelligence</h3>
+                      <div class="flex items-center mb-2 text-yellow-400">
+                        ★★★★☆
+                        <span class="typography-default px-2">(92 reviews)</span>
+                      </div>
+                      <button class="custom-small-btn btn-full-width">View Details</button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- Popular Course Rankings Section -->
+              <section class="mt-16">
+                <h2 class="text-2xl font-bold mb-6">Top Ranked Courses</h2>
+                <div class="bg-white shadow-lg rounded-xl p-6">
+                  <ol class="space-y-4">
+                    <li class="flex items-center justify-between">
+                <div>
+                  <span class="font-medium">1. Data Structures & Algorithms</span>
+                  <span class="heat-indicator">🔥🔥🔥🔥🔥</span>
+                </div>
+                <span class="rating-stars">★★★★★</span>
+              </li>
+                    <li class="flex items-center justify-between">
+                <div>
+                  <span class="font-medium">2. Software Engineering</span>
+                  <span class="heat-indicator">🔥🔥🔥🔥</span>
+                </div>
+                <span class="rating-stars">★★★★☆</span>
+              </li>
+                    <li class="flex items-center justify-between">
+                <div>
+                  <span class="font-medium">3. Artificial Intelligence</span>
+                  <span class="heat-indicator">🔥🔥🔥</span>
+                </div>
+                <span class="rating-stars">★★★★☆</span>
+              </li>
+                  </ol>
+                </div>
+              
         </div>
+        </main>
         
         <footer class="custom-footer">
             <div class="text-center text-sm ">
