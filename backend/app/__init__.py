@@ -38,9 +38,11 @@ def create_app():
     # register Blueprint
     from backend.app.routes.auth_router import auth_bp
     from backend.app.routes.course_router import course_bp
+    from backend.app.routes.instructor_router import instructor_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(course_bp)
+    app.register_blueprint(instructor_bp)
 
     print("✅ Current all app routes:")
     for rule in app.url_map.iter_rules():

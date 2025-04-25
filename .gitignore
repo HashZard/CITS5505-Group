@@ -2,3 +2,4 @@ venv
 temp
 logs
 backend/app.db
+migrations

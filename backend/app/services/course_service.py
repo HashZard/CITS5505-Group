@@ -6,7 +6,9 @@ from werkzeug.utils import secure_filename
 
 from backend.app.models import db
 from backend.app.models.course import Course
+from backend.app.models.instructor import Instructor
 from backend.app.models.course_rating import CourseRating
+from backend.app.models.course_instructor import CourseInstructor
 from backend.app.models.comment import Comment
 from backend.app.models.file import File
 from datetime import datetime, UTC
@@ -24,9 +26,12 @@ def create_course(data):
         exam_type=data["exam_type"],
         description=data["description"]
     )
-    db.session.add(course)
-    db.session.commit()
-    return True, course.id
+    try:
+        db.session.add(course)
+        db.session.commit()
+        return True, course.id
+    except:
+        print("Error while trying to insert data in course table")
 
 
 def create_course_rating(user_id, course_id, data):
@@ -43,9 +48,12 @@ def create_course_rating(user_id, course_id, data):
         comment=comment,
         created_at=datetime.now(UTC)
     )
-    db.session.add(course_rating)
-    db.session.commit()
-    return True, "Success"
+    try:
+        db.session.add(course_rating)
+        db.session.commit()
+        return True, "Success"
+    except:
+        print("Error while trying to insert data in course_rating table")
 
 
 def add_course_comment(user_id, course_id, data):
@@ -59,9 +67,12 @@ def add_course_comment(user_id, course_id, data):
         content=content,
         created_at=datetime.now(UTC)
     )
-    db.session.add(comment)
-    db.session.commit()
-    return True, "Success"
+    try:
+        db.session.add(comment)
+        db.session.commit()
+        return True, "Success"
+    except:
+        print("Error while trying to insert data in comment table")
 
 
 def get_course_files(course_id):
@@ -101,9 +112,12 @@ def upload_course_file(course_id, uploaded_file):
         url=url,
         uploaded_at=datetime.now(UTC)
     )
-    db.session.add(file_record)
-    db.session.commit()
-    return True, url
+    try:
+        db.session.add(file_record)
+        db.session.commit()
+        return True, url
+    except:
+        print("Error while trying to insert data in file table")
 
 
 def get_file_hash(file):
@@ -113,3 +127,13 @@ def get_file_hash(file):
         sha256.update(chunk)
     file.seek(0)  # reset file pointer to the beginning
     return sha256.hexdigest()
+
+
+def get_course_instructors(course_id):
+    instructors = (
+        db.session.query(Instructor)
+            .join(CourseInstructor, Instructor.id == CourseInstructor.instructor_id)
+            .filter(CourseInstructor.course_id == course_id)
+            .all()
+    )
+    return instructors
