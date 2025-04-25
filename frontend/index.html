@@ -13,6 +13,7 @@
         <header class="header-style group">
             <div>
                 <img class=" w-50 h-20"  src="/assets/images/logo.png">
+
             </div>
             <nav class="items-center justify-between hidden gap-12 text-black lg:flex">
                 <a class="nav-link" href="/pages/service/profile.html">My profile</a>
@@ -30,8 +31,8 @@
                         </svg>
                     </button>
                 </div>
-                <button class="custom-small-btn" href="">Login in</button>
-                <button class="custom-small-btn" href="">Sign Up</button>
+                <button class="custom-small-btn" onclick="window.location.href='/frontend/pages/auth/login.html'">Log in</button>
+            <button class="custom-small-btn" onclick="window.location.href='/frontend/pages/auth/register.html'">Sign Up</button>
                 </button>
             </div>
             <!-- Under the small screen device, the page will render a "hamburger" button. -->
@@ -51,15 +52,26 @@
                     </svg>
                 </button>
             </div>   
+
             <a class="nav-link" href="/pages/service/profile.html">My profile</a>
                 <a class="nav-link" href="/pages/service/create_course-page.html">Create a new course</a>
                 <button class="custom-small-btn" href="">Login in</button>
                 <button class="custom-small-btn" href="">Sign Up</button>
+
             </nav>
         </header>
         
         
         <!-- main content -->
+         <!-- Home Bulletin Board Section -->
+<section class="mt-8">
+    <h2 class="middle-heading">📢 Bulletin Board</h2>
+    <div class="alert-card-yellow">
+      <p class="font-medium">System maintenance will take place this Sunday from 1:00 AM to 3:00 AM. Please save your work accordingly.</p>
+      <p class="text-sm mt-2">Posted: Apr 22, 2025</p>
+    </div>
+  </section>
+        <main class="container flex flex-col mx-auto px-4 mt-8 mb-32">
             <div class="container flex flex-col mx-auto ">    
              <!-- Grid layout: 1 column on mobile, 2 columns on medium and larger screens -->
                 <div class="grid w-full grid-cols-1 my-auto mt-8 mb-8  md:grid-cols-2 xl:gap-1 md:gap-1">
@@ -100,7 +112,104 @@
                     <img class="w-4/5  rounded-xl" src="/assets/images/HomepagePhoto.jpg" >
                 </div>
             </div>
+
+            <!-- Course Cards Section -->
+            <section class="mt-16">
+                <h2 class="middle-heading">Featured Courses</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <!-- Course Card 1 -->
+                  <div class="card card-hover hover-scale">
+                    <img src="/frontend/assets/images/course-placeholder.jpg" alt="Software Engineering" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                      <h3 class="middle-heading mb-2">Software Engineering</h3>
+                      <div class="flex items-center mb-2 text-yellow-400">
+                          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                          </svg>
+                          <span class="ml-1">4.9</span>
+                        <span class="typography-default px-2">(120 reviews)</span>
+                      </div>
+                      <button class="custom-small-btn btn-full-width">View Details</button>
+                    </div>
+                  </div>
+              
+                  <!-- Course Card 2 -->
+                  <div class="card card-hover hover-scale">
+                    <img src="/frontend/assets/images/course-placeholder.jpg" alt="Data Structures & Algorithms" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                      <h3 class="middle-heading mb-2">Data Structures & Algorithms</h3>
+                      <div class="flex items-center mb-2 text-yellow-400">
+                          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                          </svg>
+                          <span class="ml-1">4.9</span>
+                        <span class="typography-default px-2">(89 reviews)</span>
+                      </div>
+                      <button class="custom-small-btn btn-full-width">View Details</button>
+                    </div>
+                  </div>
+              
+                  <!-- Course Card 3 -->
+                  <div class="card card-hover hover-scale">
+                    <img src="/frontend/assets/images/course-placeholder.jpg" alt="Artificial Intelligence" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                      <h3 class="middle-heading mb-2">Artificial Intelligence</h3>
+                      <div class="flex items-center mb-2 text-yellow-400">
+                          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                          </svg>
+                        <span class="ml-1">4.9</span>
+                        <span class="typography-default px-2">(92 reviews)</span>
+                      </div>
+                      <button class="custom-small-btn btn-full-width">View Details</button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- Popular Course Rankings Section -->
+              <section class="mt-16">
+                <h2 class="middle-heading">Top Ranked Courses</h2>
+                <div class="card">
+                  <ol class="space-y-4">
+                    <li class="flex items-center justify-between">
+                      <div>
+                        <span class="text-medium">1. Data Structures & Algorithms</span>
+                        <span class="heat-indicator">🔥🔥🔥🔥🔥</span>
+                      </div>
+                      <span class="rating-stars">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                      <span class="ml-1">4.9</span>
+                      </span>
+                    </li>
+                    <li class="flex items-center justify-between">
+                      <div>
+                        <span class="text-medium">2. Software Engineering</span>
+                        <span class="heat-indicator">🔥🔥🔥🔥</span>
+                      </div>
+                      <span class="rating-stars">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                      <span class="ml-1">4.9</span>
+                    </li>
+                    <li class="flex items-center justify-between">
+                      <div>
+                        <span class="text-medium">3. Artificial Intelligence</span>
+                        <span class="heat-indicator">🔥🔥🔥</span>
+                      </div>
+                      <span class="rating-stars">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                      <span class="ml-1">4.9</span>
+                    </li>
+                  </ol>
+                </div>
+              
         </div>
+        </main>
         
         <footer class="custom-footer">
             <div class="text-center text-sm ">

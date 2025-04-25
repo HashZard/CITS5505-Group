@@ -330,9 +330,38 @@
     text-align: center;
   }
   
-  
-  
-  
+/* Announcement card with a yellow background style */
+.alert-card-yellow {
+  background-color: #FEF9C3; /* tailwind yellow-50 */
+  border-left: 4px solid #FACC15; /* tailwind yellow-400 */
+  color: #92400E; /* tailwind yellow-700 */
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Star display style */
+.rating-stars {
+  color: #FBBF24; /* yellow-400 */
+  font-weight: 600;
+}
+
+/* Flame heat display style */
+.heat-indicator {
+  color: #EF4444; /* red-500 */
+  font-size: 1.125rem;
+  margin-left: 0.5rem;
+}
+
+/* Full-width button combination usage */
+.btn-full-width {
+  width: 100%;
+}
+
+/* equivalent to font-medium */
+.text-medium {
+  font-weight: 500;     
+}
  
   
 
