@@ -2,16 +2,16 @@
     <img id="logoImage" class="w-50 h-20 cursor-pointer" src="/assets/images/logo.png">
 </div>
 <nav class="items-center justify-between hidden gap-12 text-black lg:flex">
+    <a class="nav-link" href="/index.html">Home</a>
     <a class="nav-link" href="/pages/service/profile.html">My profile</a>
     <a class="nav-link" href="/pages/service/create_course_page.html">Create a new course</a>
-
 </nav>
 
 <div class="items-center hidden gap-12  lg:flex">
     <div class="relative">
-        <input type="text" placeholder="Search a course"
+        <input id="header-search-input" type="text" placeholder="Search a course"
                class="mr-2 px-4 pr-10 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300 focus:border-purple-blue-500 transition duration-300">
-        <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
+        <button id="header-search-btn" type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
@@ -19,7 +19,7 @@
             </svg>
         </button>
     </div>
-    <a class="custom-small-btn" href="/pages/auth/login.html">Login in</a>
+    <a class="custom-small-btn" href="/pages/auth/login.html">Log in</a>
     <a class="custom-small-btn" href="/pages/auth/register.html">Sign Up</a>
     </button>
 </div>
@@ -33,9 +33,9 @@
 <nav class="absolute flex  lg:hidden transition-all duration-300 ease-in-out flex-col items-start
             shadow-main justify-center w-full gap-3 overflow-hidden bg-white max-h-0 group-[.open]:py-4 px-4 rounded-2xl group-[.open]:max-h-64 top-full">
     <div class="relative w-full">
-        <input type="text" placeholder="Search..."
+        <input id="header-search-input-mobile" type="text" placeholder="Search..."
                class="w-full py-2 px-4 pr-10 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300 focus:border-purple-blue-500 transition duration-300">
-        <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
+        <button id="header-search-btn-mobile" type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
@@ -43,6 +43,7 @@
             </svg>
         </button>
     </div>
+    <a class="nav-link" href="/index.html">Home</a>
     <a class="nav-link" href="/pages/service/profile.html">My profile</a>
     <a class="nav-link" href="/pages/service/create_course_page.html">Create a new course</a>
     <button class="custom-small-btn" href="/pages/auth/login">Login in</button>
