@@ -4,31 +4,39 @@
     <meta charset="UTF-8"/>
     <title>Register Account</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css">
 </head>
-<body class="bg-gray-100 text-gray-900 min-h-screen flex items-center justify-center">
+<body class="bg-gray-100 text-gray-900 min-h-screen">
+    <header id="header" class="header-style group"></header>
 
-    <div class="card w-full max-w-md">
-        <div class="text-center mb-6">
-            <img src="/frontend/assets/images/logo.png" class="h-16 mx-auto mb-2" alt="UWA Logo">
-            <h2 class="custom-heading text-2xl">Create Account</h2>
-        </div>
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-center">
+            <div class="card w-full max-w-md">
+                <div class="text-center mb-6">
+                    <img src="/assets/images/logo.png" class="h-16 mx-auto mb-2" alt="UWA Logo">
+                    <h2 class="custom-heading text-2xl">Create Account</h2>
+                </div>
 
-        <form id="registerForm" class="space-y-4">
-            <input type="email" name="email" placeholder="Enter your email" required class="custom-input"/>
-            <input type="password" name="password" placeholder="Enter your password" required class="custom-input"/>
-            <input type="password" name="confirm_password" placeholder="Confirm your password" required class="custom-input"/>
+                <form id="registerForm" class="space-y-4">
+                    <input type="email" name="email" placeholder="Enter your email" required class="custom-input"/>
+                    <input type="password" name="password" placeholder="Enter your password" required class="custom-input"/>
+                    <input type="password" name="confirm_password" placeholder="Confirm your password" required class="custom-input"/>
 
-            <div class="flex items-center gap-4">
-                <input type="text" name="code" placeholder="Captcha code" required class="custom-input w-1/2"/>
-                <img id="captchaImg" src="/api/captcha" class="h-12 cursor-pointer border rounded" title="Click to refresh"/>
+                    <div class="flex items-center gap-4">
+                        <input type="text" name="code" placeholder="Captcha code" required class="custom-input w-1/2"/>
+                        <img id="captchaImg" src="/api/captcha" class="h-12 cursor-pointer border rounded" title="Click to refresh"/>
+                    </div>
+
+                    <button type="submit" class="custom-big-btn">Register</button>
+                </form>
             </div>
-
-            <button type="submit" class="custom-big-btn">Register</button>
-        </form>
+        </div>
     </div>
 
+    <footer id="footer" class="custom-footer"></footer>
+
+    <script src="/js/components/layout.js"></script>
     <script>
         const form = document.getElementById("registerForm");
         const captchaImg = document.getElementById("captchaImg");
@@ -43,7 +51,7 @@
             if (!formData.get("password") || !formData.get("confirm_password")) {
                 alert("❗ Password cannot be empty!");
                 return;
-        }
+            }
             if (formData.get("password") !== formData.get("confirm_password")) {
                 alert("❌ Passwords do not match");
                 return;
@@ -66,6 +74,5 @@
             }
         });
     </script>
-
 </body>
 </html>
