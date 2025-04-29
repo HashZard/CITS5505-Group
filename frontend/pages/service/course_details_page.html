@@ -204,5 +204,44 @@
 <footer id="footer" class="custom-footer"></footer>
 <script src="/js/components/layout.js"></script>
 <script src="/js/components/file_upload.js"></script>
+<script type="module">
+    function getQueryParam(name) {
+        const url = new URL(window.location.href);
+        return url.searchParams.get(name) || '';
+    }
+
+    async function loadCourseDetails() {
+        const code = getQueryParam('code');
+        if (!code) {
+            alert('No course code provided.');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/courses/detail?code=${encodeURIComponent(code)}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch course details');
+            }
+            const result = await response.json();
+
+            if (result.success) {
+                const course = result.data;
+                document.querySelector('h1.custom-heading').textContent = course.name;
+                document.querySelector('p.middle-heading').textContent = course.code;
+                document.querySelector('p.typography-default').textContent = course.description || 'No description available.';
+                // 评分、讲师信息等暂时用静态内容，后续可以一起动态化
+            } else {
+                alert(result.message || 'Failed to load course details');
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert('Error loading course details.');
+        }
+    }
+
+    loadCourseDetails();
+</script>
+
 </body>
 </html>

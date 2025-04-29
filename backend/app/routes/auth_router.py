@@ -25,9 +25,14 @@ def login():
     result = verify_user(email, password)
     if result["success"]:
         user = result["user"]
+        email = user.email
+        student_id = email.split('@')[0]
+
         response = make_response(jsonify({"success": True}))
-        response.set_cookie("user_email", user.email, httponly=False, samesite="Lax")
+        response.set_cookie("user_id", student_id, httponly=False, samesite="Lax")
         response.set_cookie("user_role", user.role.value, httponly=False, samesite="Lax")
+        session['user_role'] = user.role.value
+        session['user_id'] = student_id
         return response
     else:
         return jsonify(result), 401

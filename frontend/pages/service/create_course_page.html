@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Course - UWA Course Evaluation</title>
     <link rel="stylesheet" href="/css/style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="/js/components/common.js"></script>
+
 </head>
 <body>
 <!-- Notice ： All of these modules must import <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css" rel="stylesheet">in your header label for using. -->
@@ -89,5 +91,42 @@
 
 <script src="/js/components/layout.js"></script>
 <script src="/js/components/file_upload.js"></script>
+<script type="module">
+    import {fetchPost} from '/js/components/common.js';
+
+    document.getElementById('createCourseForm').addEventListener('submit', async (e) => {
+        e.preventDefault(); // Prevent default HTML form submit behavior
+
+        const form = e.target;
+
+        // Collect form data
+        const name = form.querySelector('input[type="text"]').value.trim();
+        const code = form.querySelectorAll('input[type="text"]')[1].value.trim();
+        const description = form.querySelector('textarea').value.trim();
+
+        if (!name || !code || !description) {
+            alert('Please complete all fields.');
+            return;
+        }
+
+        try {
+            // Send POST request
+            const response = await fetchPost('/api/courses/create', {
+                name,
+                code,
+                description
+            });
+
+            console.log('Server response:', response);
+            alert('Course created successfully!');
+            // Optional: Redirect or reset form
+            form.reset();
+        } catch (error) {
+            console.error('Failed to create course:', error);
+            alert('Failed to create course.');
+        }
+    });
+</script>
+
 </body>
 </html>

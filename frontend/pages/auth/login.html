@@ -61,7 +61,6 @@
 
             const result = await res.json();
             if (result.success) {
-                alert("✅ Login successful");
                 window.location.href = "/index.html";
             } else {
                 alert("❌ " + result.message);

@@ -36,14 +36,14 @@ function shutdown_services() {
     NGINX_MASTERS=$(ps aux | grep 'nginx: master' | grep "$PROJECT_ROOT" | awk '{print $2}')
     if [ -n "$NGINX_MASTERS" ]; then
         echo "❌ Killing project-specific nginx master(s): $NGINX_MASTERS"
-        echo "$NGINX_MASTERS" | xargs kill -9
+        echo "$NGINX_MASTERS" | xargs sudo kill -9
     else
         echo "✅ No nginx master process found in this project"
     fi
 
     # Fallback: kill all nginx
     echo "🔪 Killing all nginx-related processes..."
-    ps aux | grep '[n]ginx' | awk '{print $2}' | xargs kill -9 2>/dev/null
+    ps aux | grep '[n]ginx' | awk '{print $2}' | xargs sudo kill -9 2>/dev/null
 
     sleep 1
 }

@@ -13,17 +13,18 @@ from backend.app.models.comment import Comment
 from backend.app.models.file import File
 from datetime import datetime, UTC
 
+from backend.app.utils.pagination_util import paginate_query
+
 
 def create_course(data):
-    required_fields = ["code", "name", "semester", "exam_type", "description"]
+    required_fields = ["code", "name", "description"]
     if not all(field in data for field in required_fields):
         return False, "Missing course fields"
 
+    # Only required necessary fields for course creation
     course = Course(
         code=data["code"],
         name=data["name"],
-        semester=data["semester"],
-        exam_type=data["exam_type"],
         description=data["description"]
     )
     try:
@@ -32,6 +33,36 @@ def create_course(data):
         return True, course.id
     except:
         print("Error while trying to insert data in course table")
+
+
+def search_courses(keyword, page=1, per_page=10):
+    if not keyword:
+        return False, "Keyword is required", []
+
+    like_pattern = f"%{keyword}%"
+
+    query = Course.query.filter(
+        (Course.name.ilike(like_pattern)) |
+        (Course.code.ilike(like_pattern)) |
+        (Course.description.ilike(like_pattern))
+    )
+
+    result = paginate_query(query, page, per_page)
+    return True, result
+
+
+def get_course_detail(code):
+    course = Course.query.filter_by(code=code).first()
+    if not course:
+        return False, None
+
+    return True, {
+        "name": course.name,
+        "code": course.code,
+        "description": course.description,
+        "exam_type": course.exam_type,
+        # 其他字段后续可加
+    }
 
 
 def create_course_rating(user_id, course_id, data):
@@ -132,8 +163,8 @@ def get_file_hash(file):
 def get_course_instructors(course_id):
     instructors = (
         db.session.query(Instructor)
-            .join(CourseInstructor, Instructor.id == CourseInstructor.instructor_id)
-            .filter(CourseInstructor.course_id == course_id)
-            .all()
+        .join(CourseInstructor, Instructor.id == CourseInstructor.instructor_id)
+        .filter(CourseInstructor.course_id == course_id)
+        .all()
     )
     return instructors

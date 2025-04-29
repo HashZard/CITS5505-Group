@@ -5,30 +5,90 @@
     <title>Course Search Results</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css">
 </head>
 <body>
 <header id="header" class="header-style group"></header>
 <main class="container mx-auto px-4 py-8">
     <h1 class="custom-heading mb-4">Course Search Results</h1>
+
     <div class="mb-4">
         <span class="middle-heading">Keyword:</span>
         <span id="search-keyword" class="font-bold text-primary"></span>
     </div>
+
     <div id="course-list">
-        <!-- This area will display the matched course list -->
-        <p>(This is the course search result display area. You can connect to backend or render with JS later.)</p>
+        <!-- This area will display matched courses -->
     </div>
+
+    <div id="pagination-controls" class="flex gap-2 mt-4"></div>
 </main>
 <footer id="footer" class="custom-footer"></footer>
 <script src="/js/components/layout.js"></script>
-<script>
-// Get URL parameter and display search keyword
-function getQueryParam(name) {
-    const url = new URL(window.location.href);
-    return url.searchParams.get(name) || '';
-}
-document.getElementById('search-keyword').textContent = getQueryParam('keyword');
+<script type="module">
+    import {fetchWithPagination} from '/js/components/common.js';
+
+    function getQueryParam(name) {
+        const url = new URL(window.location.href);
+        return url.searchParams.get(name) || '';
+    }
+
+    const keyword = getQueryParam('keyword');
+    document.getElementById('search-keyword').textContent = keyword;
+
+    async function loadCourses(page = 1, perPage = 10) {
+        try {
+            const result = await fetchWithPagination('/api/courses/search', {keyword}, page, perPage);
+
+            const courseList = document.getElementById('course-list');
+            courseList.innerHTML = '';
+
+            if (!result.data.length) {
+                courseList.innerHTML = '<p>No matching courses found.</p>';
+                return;
+            }
+
+            result.data.forEach(course => {
+                const card = document.createElement('div');
+                card.className = 'p-4 mb-4 border rounded-lg hover:shadow-md transition';
+                card.innerHTML = `
+                <h3 class="font-semibold text-lg mb-1">${course.name}</h3>
+                <p class="text-sm text-gray-500 mb-2">${course.description || "No description."}</p>
+                <a class="text-blue-600 hover:underline" href="/pages/service/course_details_page.html?code=${course.code}">View Details</a>
+            `;
+                courseList.appendChild(card);
+            });
+
+            renderPagination(result.pagination.page, result.pagination.pages, perPage);
+        } catch (error) {
+            console.error('Error loading courses:', error);
+            document.getElementById('course-list').innerHTML = '<p class="text-red-500">Error loading search results.</p>';
+        }
+    }
+
+    function renderPagination(currentPage, totalPages, perPage) {
+        const pagination = document.getElementById('pagination-controls');
+        pagination.innerHTML = '';
+
+        if (currentPage > 1) {
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = 'Previous';
+            prevBtn.onclick = () => loadCourses(currentPage - 1, perPage);
+            pagination.appendChild(prevBtn);
+        }
+
+        if (currentPage < totalPages) {
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = 'Next';
+            nextBtn.onclick = () => loadCourses(currentPage + 1, perPage);
+            pagination.appendChild(nextBtn);
+        }
+    }
+
+    loadCourses();
 </script>
+
+
 </body>
 </html> 

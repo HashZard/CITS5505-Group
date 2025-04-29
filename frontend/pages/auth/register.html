@@ -67,7 +67,7 @@
             const result = await res.json();
             if (result.success) {
                 alert("✅ Registration successful");
-                window.location.href = "/login.html";
+                window.location.href = "/index.html";
             } else {
                 alert("❌ " + result.message);
                 captchaImg.click();

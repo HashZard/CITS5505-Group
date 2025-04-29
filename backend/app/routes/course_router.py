@@ -5,7 +5,7 @@ from backend.app.services.course_service import (
     add_course_comment,
     get_course_files,
     upload_course_file,
-    get_course_instructors
+    get_course_instructors, search_courses, get_course_detail
 )
 from backend.app.utils.auth_utils import login_required
 
@@ -20,6 +20,32 @@ def create_course_route(user_id):
     if not success:
         return jsonify({"success": False, "message": result}), 400
     return jsonify({"success": True, "course_id": result})
+
+
+@course_bp.route('/search', methods=['GET'])
+def search_courses_route():
+    keyword = request.args.get('keyword', '').strip()
+    page = int(request.args.get('page', 1))
+    per_page = int(request.args.get('per_page', 10))
+
+    success, result = search_courses(keyword, page, per_page)
+    if not success:
+        return jsonify({"success": False, "message": result, "data": []}), 400
+
+    return jsonify({"success": True, **result})
+
+
+@course_bp.route('/detail', methods=['GET'])
+def course_detail_route():
+    code = request.args.get('code')
+    if not code:
+        return jsonify({"success": False, "message": "Missing course code"}), 400
+
+    success, course_data = get_course_detail(code)
+    if not success:
+        return jsonify({"success": False, "message": "Course not found"}), 404
+
+    return jsonify({"success": True, "data": course_data})
 
 
 @course_bp.route("/<int:course_id>/rate", methods=["POST"])

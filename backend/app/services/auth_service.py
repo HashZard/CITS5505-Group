@@ -1,9 +1,9 @@
 from backend.app.models import db
-from backend.app.models.user import User
+from backend.app.models.user import User, UserType
 import bcrypt
 
 
-def register_user(email: str, password: str, role: str = "user") -> dict:
+def register_user(email: str, password: str, role: UserType = UserType.USER) -> dict:
     if User.query.filter_by(email=email).first():
         return {"success": False, "message": "邮箱已注册"}
 
