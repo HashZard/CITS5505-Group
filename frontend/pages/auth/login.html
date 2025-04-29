@@ -5,7 +5,7 @@
     <title>Login Account</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css">
+    
 </head>
 <body class="bg-gray-100 text-gray-900 min-h-screen">
     <header id="header" class="header-style group"></header>
@@ -24,7 +24,7 @@
 
                     <div class="flex items-center gap-4">
                         <input type="text" name="code" placeholder="Captcha code" required class="custom-input w-1/2"/>
-                        <img id="captchaImg" src="/api/captcha" class="h-12 cursor-pointer border rounded" title="Click to refresh"/>
+                        <img id="captchaImg" src="/api/captcha" class="h-12 cursor-pointer border rounded ml-auto" title="Click to refresh"/>
                     </div>
 
                     <button type="submit" class="custom-big-btn">Login</button>
