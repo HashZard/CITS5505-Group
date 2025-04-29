@@ -14,7 +14,7 @@ course_bp = Blueprint('course', __name__, url_prefix='/api/courses')
 
 @course_bp.route("/create", methods=["POST"])
 @login_required
-def create_course_route(user_id):
+def create_course_route():
     data = request.json
     success, result = create_course(data)
     if not success:
