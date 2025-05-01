@@ -53,7 +53,17 @@
                         </div>
                         <span class="text-gray-500">(125 reviews)</span>
                     </div>
-                    <p class="typography-default">Lecturer: Dr. John Smith</p>
+                    <p class="typography-default">
+                        Lecturer:
+                        <a href="/pages/service/instructor.html" id="lecturer-link"
+                            class="custom-small-btn inline-flex items-center">
+                            <span id="lecturer-name">Dr. John Smith</span>
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </p>
                 </div>
                 <button class="custom-small-btn">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -365,7 +375,13 @@
                     document.querySelector('h1.custom-heading').textContent = course.name;
                     document.querySelector('p.middle-heading').textContent = course.code;
                     document.querySelector('p.typography-default').textContent = course.description || 'No description available.';
-                    // 评分、讲师信息等暂时用静态内容，后续可以一起动态化
+
+                    // 更新讲师链接
+                    const lecturerLink = document.getElementById('lecturer-link');
+                    if (course.instructor) {
+                        lecturerLink.setAttribute('data-instructor-id', course.instructor.id);
+                        document.getElementById('lecturer-name').textContent = course.instructor.name;
+                    }
                 } else {
                     alert(result.message || 'Failed to load course details');
                 }
