@@ -1,6 +1,7 @@
 <!-- Notice :Please check if the css file path and assets file path is right ! -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,240 +9,328 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css">
+        href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css">
 
 </head>
+
 <body>
-<!-- Notice ： All of these modules must import <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css" rel="stylesheet">in your header label for using. -->
-<header id="header" class="header-style group"></header>
+    <!-- Notice ： All of these modules must import <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css" rel="stylesheet">in your header label for using. -->
+    <header id="header" class="header-style group"></header>
 
-<!-- Course Details Section -->
-<main class="container mx-auto px-4 py-8">
-    <!-- Course Header Section -->
-    <div class="card card-hover hover-scale">
-        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-            <div class="flex-1">
-                <h1 class="custom-heading mb-2">Software Engineering</h1>
-                <p class="middle-heading mb-4">CITS3403</p>
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="flex items-center">
-                        <span class="text-yellow-400 text-2xl font-bold mr-2">4.5</span>
-                        <div class="flex">
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                            </svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                            </svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                            </svg>
-                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                            </svg>
-                            <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="text-gray-500">(125 reviews)</span>
-                </div>
-                <p class="typography-default">Lecturer: Dr. John Smith</p>
-            </div>
-            <button class="custom-small-btn">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                </svg>
-                Add to Favorites
-            </button>
-        </div>
-    </div>
-
-    <!-- Course Details Grid -->
-    <div class="grid grid-cols-1 gap-8">
-        <!-- Course Description -->
+    <!-- Course Details Section -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Course Header Section -->
         <div class="card card-hover hover-scale">
-            <h2 class="middle-heading mb-6">Course Details</h2>
-            <p class="typography-default mb-8 leading-relaxed">
-                This course covers the fundamental principles of software engineering, including design patterns,
-                testing methodologies, and project management techniques.
-            </p>
-
-            <h3 class="middle-heading mb-4">Assessment Structure</h3>
-            <div class="space-y-6">
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="small-heading">Project Work</span>
-                        <span class="text-gray-600">40%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                        <div class="custom-bar" style="width: 40%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="small-heading">Mid-semester Exam</span>
-                        <span class="text-gray-600">20%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                        <div class="custom-bar" style="width: 20%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="small-heading">Final Exam</span>
-                        <span class="text-gray-600">40%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                        <div class="custom-bar" style="width: 40%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <h3 class="small-heading mt-8 mb-4">Course Materials</h3>
-            <div class="flex flex-wrap gap-4">
-                <a href="#" class="custom-pill">
-                    <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                    </svg>
-                    Course Outline
-                </a>
-                <a href="#" class="custom-pill">
-                    <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                    </svg>
-                    Lecture Recordings
-                </a>
-            </div>
-        </div>
-
-        <!-- Add Review Section -->
-        <div class="card card-hover hover-scale">
-            <h2 class="middle-heading mb-6">Add Your Review</h2>
-            <div class="space-y-6">
-                <div>
-                    <label class="small-heading mb-2">Rating</label>
-                    <div class="flex gap-2">
-
-                        <!-- star icon -->
-                        <button class="text-yellow-400 hover:text-yellow-500 transition duration-300">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                            </svg>
-                        </button>
-                        <!-- Repeat for 5 stars -->
-                    </div>
-                </div>
-                <div>
-                    <label class="small-heading mb-2">Your Review</label>
-                    <textarea class="custom-textarea" rows="4" placeholder="Write your review here..."></textarea>
-                </div>
-                <div class="custom-box-dashed">
-                    <label class="small-heading mb-4 block">Upload Course Materials</label>
-                    <div class="flex flex-col items-center space-y-4">
-                        <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                        </svg>
-                        <span class="typography-default text-gray-500">Drag and drop files here or click to upload</span>
-                        <input type="file" class="hidden" id="fileUpload" multiple>
-                        <button type="button" onclick="document.getElementById('fileUpload').click()"
-                                class="custom-small-btn">
-                            Choose Files
-                        </button>
-                        <div id="fileList" class="w-full text-left text-sm text-gray-600"></div>
-                    </div>
-                </div>
-                <button class="custom-big-btn">
-                    Submit Review
-                </button>
-            </div>
-        </div>
-
-        <!-- Student Reviews Section -->
-        <div class="card card-hover hover-scale">
-            <h2 class="middle-heading mb-6 text-center">Student Reviews</h2>
-            <div class="space-y-6">
-
-                <!-- review -->
-                <div class="custom-box-dashed">
-                    <div class="flex items-center mb-4 border-b border-gray-200 pb-4">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+                <div class="flex-1">
+                    <h1 class="custom-heading mb-2">Software Engineering</h1>
+                    <p class="middle-heading mb-4">CITS3403</p>
+                    <div class="flex items-center gap-4 mb-4">
                         <div class="flex items-center">
-                            <div class="flex items-center">
+                            <span class="text-yellow-400 text-2xl font-bold mr-2">4.5</span>
+                            <div class="flex">
                                 <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                 </svg>
                             </div>
-                            <span class="text-gray-600 ml-2">5.0</span>
                         </div>
-                        <span class="mx-4 ">•</span>
-                        <span class="text-gray-600">Jane Doe</span>
-                        <span class="mx-4 ">•</span>
-                        <span class="text-gray-600">March 15, 2024</span>
+                        <span class="text-gray-500">(125 reviews)</span>
                     </div>
-                    <p class="typography-default leading-relaxed">
-                        Excellent course! The professor was very knowledgeable and the project work really helped me
-                        understand the concepts better. Would highly recommend to anyone interested in software
-                        engineering.
-                    </p>
+                    <p class="typography-default">Lecturer: Dr. John Smith</p>
                 </div>
-            </div>
-
-            <!-- load more reviews button -->
-            <div class="flex justify-center mt-8">
-                <button class="custom-big-btn">
-                    Load More Reviews
+                <button class="custom-small-btn">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                    Add to Favorites
                 </button>
             </div>
         </div>
 
-    </div>
-</main>
+        <!-- Course Details Grid -->
+        <div class="grid grid-cols-1 gap-8">
+            <!-- Course Description -->
+            <div class="card card-hover hover-scale">
+                <h2 class="middle-heading mb-6">Course Details</h2>
+                <p class="typography-default mb-8 leading-relaxed">
+                    This course covers the fundamental principles of software engineering, including design patterns,
+                    testing methodologies, and project management techniques.
+                </p>
 
-<footer id="footer" class="custom-footer"></footer>
-<script src="/js/components/layout.js"></script>
-<script src="/js/components/file_upload.js"></script>
-<script type="module">
-    function getQueryParam(name) {
-        const url = new URL(window.location.href);
-        return url.searchParams.get(name) || '';
-    }
+                <h3 class="middle-heading mb-4">Assessment Structure</h3>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="small-heading">Project Work</span>
+                            <span class="text-gray-600">40%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="custom-bar" style="width: 40%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="small-heading">Mid-semester Exam</span>
+                            <span class="text-gray-600">20%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="custom-bar" style="width: 20%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="small-heading">Final Exam</span>
+                            <span class="text-gray-600">40%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="custom-bar" style="width: 40%"></div>
+                        </div>
+                    </div>
+                </div>
 
-    async function loadCourseDetails() {
-        const code = getQueryParam('code');
-        if (!code) {
-            alert('No course code provided.');
-            return;
+                <h3 class="small-heading mt-8 mb-4">Course Materials</h3>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#" class="custom-pill">
+                        <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                        Course Outline
+                    </a>
+                    <a href="#" class="custom-pill">
+                        <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Lecture Recordings
+                    </a>
+                </div>
+            </div>
+
+            <!-- Course Statistics Card -->
+            <div class="card card-hover hover-scale">
+                <h2 class="middle-heading mb-6">Course Statistics</h2>
+
+                <!-- 难度指示器 -->
+                <div class="mb-8">
+                    <h3 class="small-heading mb-4">Difficulty Level</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="small-heading">Current Difficulty</span>
+                                <span class="text-gray-600">Medium</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="custom-bar" style="width: 70%"></div>
+                            </div>
+                            <div class="flex justify-between mt-2">
+                                <span class="typography-default text-sm">Easy</span>
+                                <span class="typography-default text-sm">Medium</span>
+                                <span class="typography-default text-sm">Hard</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 评分分布 -->
+                <div>
+                    <h3 class="small-heading mb-4">Rating Distribution</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="small-heading">5 Stars</span>
+                                <span class="text-gray-600">45%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="custom-bar" style="width: 45%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="small-heading">4 Stars</span>
+                                <span class="text-gray-600">30%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="custom-bar" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="small-heading">3 Stars</span>
+                                <span class="text-gray-600">15%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="custom-bar" style="width: 15%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="small-heading">2 Stars</span>
+                                <span class="text-gray-600">7%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="custom-bar" style="width: 7%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="small-heading">1 Star</span>
+                                <span class="text-gray-600">3%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="custom-bar" style="width: 3%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Review Section -->
+            <div class="card card-hover hover-scale">
+                <h2 class="middle-heading mb-6">Add Your Review</h2>
+                <div class="space-y-6">
+                    <div>
+                        <label class="small-heading mb-2">Rating</label>
+                        <div class="flex gap-2">
+
+                            <!-- star icon -->
+                            <button class="text-yellow-400 hover:text-yellow-500 transition duration-300">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            </button>
+                            <!-- Repeat for 5 stars -->
+                        </div>
+                    </div>
+                    <div>
+                        <label class="small-heading mb-2">Your Review</label>
+                        <textarea class="custom-textarea" rows="4" placeholder="Write your review here..."></textarea>
+                    </div>
+                    <div class="custom-box-dashed">
+                        <label class="small-heading mb-4 block">Upload Course Materials</label>
+                        <div class="flex flex-col items-center space-y-4">
+                            <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                            <span class="typography-default text-gray-500">Drag and drop files here or click to
+                                upload</span>
+                            <input type="file" class="hidden" id="fileUpload" multiple>
+                            <button type="button" onclick="document.getElementById('fileUpload').click()"
+                                class="custom-small-btn">
+                                Choose Files
+                            </button>
+                            <div id="fileList" class="w-full text-left text-sm text-gray-600"></div>
+                        </div>
+                    </div>
+                    <button class="custom-big-btn">
+                        Submit Review
+                    </button>
+                </div>
+            </div>
+
+            <!-- Student Reviews Section -->
+            <div class="card card-hover hover-scale">
+                <h2 class="middle-heading mb-6 text-center">Student Reviews</h2>
+                <div class="space-y-6">
+
+                    <!-- review -->
+                    <div class="custom-box-dashed">
+                        <div class="flex items-center mb-4 border-b border-gray-200 pb-4">
+                            <div class="flex items-center">
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                </div>
+                                <span class="text-gray-600 ml-2">5.0</span>
+                            </div>
+                            <span class="mx-4 ">•</span>
+                            <span class="text-gray-600">Jane Doe</span>
+                            <span class="mx-4 ">•</span>
+                            <span class="text-gray-600">March 15, 2024</span>
+                        </div>
+                        <p class="typography-default leading-relaxed">
+                            Excellent course! The professor was very knowledgeable and the project work really helped me
+                            understand the concepts better. Would highly recommend to anyone interested in software
+                            engineering.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- load more reviews button -->
+                <div class="flex justify-center mt-8">
+                    <button class="custom-big-btn">
+                        Load More Reviews
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer id="footer" class="custom-footer"></footer>
+    <script src="/js/components/layout.js"></script>
+    <script src="/js/components/file_upload.js"></script>
+    <script type="module">
+        function getQueryParam(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name) || '';
         }
 
-        try {
-            const response = await fetch(`/api/courses/detail?code=${encodeURIComponent(code)}`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch course details');
-            }
-            const result = await response.json();
-
-            if (result.success) {
-                const course = result.data;
-                document.querySelector('h1.custom-heading').textContent = course.name;
-                document.querySelector('p.middle-heading').textContent = course.code;
-                document.querySelector('p.typography-default').textContent = course.description || 'No description available.';
-                // 评分、讲师信息等暂时用静态内容，后续可以一起动态化
-            } else {
-                alert(result.message || 'Failed to load course details');
+        async function loadCourseDetails() {
+            const code = getQueryParam('code');
+            if (!code) {
+                alert('No course code provided.');
+                return;
             }
 
-        } catch (error) {
-            console.error(error);
-            alert('Error loading course details.');
+            try {
+                const response = await fetch(`/api/courses/detail?code=${encodeURIComponent(code)}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch course details');
+                }
+                const result = await response.json();
+
+                if (result.success) {
+                    const course = result.data;
+                    document.querySelector('h1.custom-heading').textContent = course.name;
+                    document.querySelector('p.middle-heading').textContent = course.code;
+                    document.querySelector('p.typography-default').textContent = course.description || 'No description available.';
+                    // 评分、讲师信息等暂时用静态内容，后续可以一起动态化
+                } else {
+                    alert(result.message || 'Failed to load course details');
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert('Error loading course details.');
+            }
         }
-    }
 
-    loadCourseDetails();
-</script>
+        loadCourseDetails();
+    </script>
 
 </body>
+
 </html>
