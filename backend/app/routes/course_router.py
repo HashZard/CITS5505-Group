@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 from backend.app.services.course_service import (
     create_course,
     create_course_rating,
@@ -50,7 +50,8 @@ def course_detail_route():
 
 @course_bp.route("/<int:course_id>/rate", methods=["POST"])
 @login_required
-def rate_course_route(course_id, user_id):
+def rate_course_route(course_id):
+    user_id = session.get("user_id")
     data = request.json
     success, message = create_course_rating(user_id, course_id, data)
     if not success:
@@ -60,7 +61,8 @@ def rate_course_route(course_id, user_id):
 
 @course_bp.route("/<int:course_id>/comment", methods=["POST"])
 @login_required
-def comment_course_route(course_id, user_id):
+def comment_course_route(course_id):
+    user_id = session.get("user_id")
     data = request.json
     success, message = add_course_comment(user_id, course_id, data)
     if not success:
@@ -75,7 +77,7 @@ def get_course_files_route(course_id):
 
 @course_bp.route("/<int:course_id>/files/upload", methods=["POST"])
 @login_required
-def upload_course_file_route(course_id, user_id):
+def upload_course_file_route(course_id):
     uploaded_file = request.files.get("file")
     success, result = upload_course_file(course_id, uploaded_file)
     if not success:
