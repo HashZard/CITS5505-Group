@@ -41,8 +41,8 @@ class CourseApiTest(unittest.TestCase):
         # Step 2: Create course
         response = self.client.post("/api/courses/create", json=payload)
         self.assertEqual(response.status_code, 200)
-        self.assertIn("course_id", response.json)
-        course_id = response.json["course_id"]
+        self.assertIn("course_code", response.json)
+        course_code = response.json["course_code"]
 
         # Step 3: Submit rating
         rate_payload = {
@@ -53,7 +53,7 @@ class CourseApiTest(unittest.TestCase):
                 "Challenging but rewarding!"
             ])
         }
-        rate_response = self.client.post(f"/api/courses/{course_id}/rate", json=rate_payload)
+        rate_response = self.client.post(f"/api/courses/{course_code}/rate", json=rate_payload)
         self.assertEqual(rate_response.status_code, 200)
         self.assertTrue(rate_response.json.get("success"))
 
@@ -65,13 +65,13 @@ class CourseApiTest(unittest.TestCase):
                 "Very collaborative environment."
             ])
         }
-        comment_response = self.client.post(f"/api/courses/{course_id}/comment", json=comment_payload)
+        comment_response = self.client.post(f"/api/courses/{course_code}/comment", json=comment_payload)
         self.assertEqual(comment_response.status_code, 200)
         self.assertTrue(comment_response.json.get("success"))
 
         # Step 5: Verify the course in DB
         with self.app.app_context():
-            course = Course.query.get(course_id)
+            course = Course.query.get(course_code)
             self.assertIsNotNone(course)
             self.assertEqual(course.code, unique_code)
             self.assertEqual(course.name, name)

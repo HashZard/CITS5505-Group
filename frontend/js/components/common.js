@@ -7,7 +7,7 @@
  * @returns {Promise<object>} - 返回服务器返回的JSON数据
  */
 export async function fetchWithPagination(baseUrl, extraParams = {}, page = 1, perPage = 10) {
-    const params = new URLSearchParams({ ...extraParams, page, per_page: perPage }).toString();
+    const params = new URLSearchParams({...extraParams, page, per_page: perPage}).toString();
     const response = await fetch(`${baseUrl}?${params}`, {
         method: 'GET', // ✅ GET 请求
     });
@@ -28,6 +28,15 @@ export async function fetchPost(url, data = {}) {
     }
     return await response.json();
 }
+
+export async function fetchGet(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Request failed: ${response.status}`);
+    }
+    return await response.json();
+}
+
 
 /**
  * 统一分页控件渲染

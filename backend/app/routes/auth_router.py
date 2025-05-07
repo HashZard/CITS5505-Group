@@ -29,10 +29,12 @@ def login():
         student_id = email.split('@')[0]
 
         response = make_response(jsonify({"success": True}))
-        response.set_cookie("user_id", student_id, httponly=False, samesite="Lax")
+        response.set_cookie("user_id", str(user.id), httponly=False, samesite="Lax")
+        response.set_cookie("student_number", student_id, httponly=False, samesite="Lax")
         response.set_cookie("user_role", user.role.value, httponly=False, samesite="Lax")
         session['user_role'] = user.role.value
-        session['user_id'] = student_id
+        session['user_id'] = user.id
+        session['student_number'] = student_id
         return response
     else:
         return jsonify(result), 401

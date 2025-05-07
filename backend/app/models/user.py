@@ -1,4 +1,5 @@
 from enum import Enum
+
 from sqlalchemy import Enum as SqlEnum
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -21,8 +22,9 @@ class User(BaseModel):
     field = db.Column(db.String(255), nullable=True)
     favourite_courses = db.relationship(
         'Course',
-        secondary=FavouriteCourses,  # used to get list of courses liked by user
-        # backref='liked_by_users'  # used to get list of users that like a course
+        secondary=FavouriteCourses,  # ← 这里用变量，不是字符串
+        backref=db.backref('followers', lazy='dynamic'),
+        lazy='dynamic'
     )
 
     @property

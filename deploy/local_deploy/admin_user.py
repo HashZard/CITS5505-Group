@@ -16,8 +16,7 @@ def main():
             print(f"⚠️ Admin account {email} already exists")
             return
 
-        hashed_pw = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
-        admin = User(email=email, password=hashed_pw, role=UserType.ADMIN)
+        admin = User(email=email, password=password, role=UserType.ADMIN)
 
         db.session.add(admin)
         db.session.commit()

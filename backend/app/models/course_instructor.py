@@ -7,7 +7,7 @@ from backend.app.models.basemodel import BaseModel
 class CourseInstructor(BaseModel):  # ✅ ✅ 继承 BaseModel
     __tablename__ = 'course_instructor'
 
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
+    course_code = db.Column(db.String(64), db.ForeignKey('course.code'), nullable=False)
     instructor_id = db.Column(db.Integer, db.ForeignKey('instructor.id'), nullable=False)
 
     start_date = db.Column(db.DateTime, nullable=False, default=datetime.now(UTC))

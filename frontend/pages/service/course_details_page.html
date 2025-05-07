@@ -9,542 +9,263 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css">
+          href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <script src="/js/components/layout.js"></script>
+    <script src="/js/components/file_upload.js"></script>
 </head>
 
 <body>
-    <!-- Notice ： All of these modules must import <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css" rel="stylesheet">in your header label for using. -->
-    <header id="header" class="header-style group"></header>
+<!-- Notice ： All of these modules must import <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css" rel="stylesheet">in your header label for using. -->
+<header id="header" class="header-style group"></header>
 
-    <!-- Course Details Section -->
-    <main class="container mx-auto px-4 py-8">
-        <!-- Course Header Section -->
-        <div class="card card-hover hover-scale">
-            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-                <div class="flex-1">
-                    <h1 class="custom-heading mb-2">Software Engineering</h1>
-                    <p class="middle-heading mb-4">CITS3403</p>
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="flex items-center">
-                            <span class="text-yellow-400 text-2xl font-bold mr-2">4.5</span>
-                            <div class="flex">
-                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <span class="text-gray-500">(125 reviews)</span>
-                    </div>
-                    <p class="typography-default">
-                        Lecturer:
-                        <a href="/pages/service/instructor.html" id="lecturer-link"
-                            class="custom-small-btn inline-flex items-center">
-                            <span id="lecturer-name">Dr. John Smith</span>
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
+<!-- Course Details Section -->
+<main class="container mx-auto px-4 py-8">
+    <!-- Course Header Section -->
+    <div class="card card-hover hover-scale">
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+            <div class="flex-1">
+                <h1 class="custom-heading mb-2">Software Engineering</h1>
+                <p class="middle-heading mb-4">CITS3403</p>
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="flex items-center">
+                        <span class="text-yellow-400 text-2xl font-bold mr-2">4.5</span>
+                        <div class="flex">
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                             </svg>
-                        </a>
-                    </p>
-                </div>
-                <button class="custom-small-btn">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                    Add to Favorites
-                </button>
-            </div>
-        </div>
-
-        <!-- Course Materials Section -->
-        <div class="card card-hover hover-scale">
-            <details class="group">
-                <summary class="flex items-center justify-between cursor-pointer">
-                    <h2 class="middle-heading">Course Materials</h2>
-                    <svg class="w-6 h-6 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </summary>
-                <div class="mt-4 space-y-4">
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#" class="custom-pill">
-                            <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                             </svg>
-                            Course Outline
-                        </a>
-                        <a href="#" class="custom-pill">
-                            <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                             </svg>
-                            Lecture Recordings
-                        </a>
-                    </div>
-                </div>
-            </details>
-        </div>
-
-        <!-- Course Details Grid -->
-        <div class="grid grid-cols-1 gap-8">
-            <!-- Course Description -->
-            <div class="card card-hover hover-scale">
-                <h2 class="middle-heading mb-6">Course Details</h2>
-                <p class="typography-default mb-8 leading-relaxed">
-                    This course covers the fundamental principles of software engineering, including design patterns,
-                    testing methodologies, and project management techniques.
-                </p>
-
-                <h3 class="middle-heading mb-4">Assessment Structure</h3>
-                <div class="flex items-center justify-center">
-                    <div class="w-64 h-64">
-                        <canvas id="assessmentChart"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Course Statistics Card -->
-            <div class="card card-hover hover-scale">
-                <h2 class="middle-heading mb-6">Course Statistics</h2>
-
-                <!-- Course Popularity Trend -->
-                <div class="mb-8">
-                    <h3 class="small-heading mb-4">Course Popularity Trend</h3>
-                    <div class="h-64">
-                        <canvas id="popularityChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Difficulty Distribution Chart -->
-                <div class="mb-8">
-                    <h3 class="small-heading mb-4">Difficulty Distribution</h3>
-                    <div class="flex items-center justify-between">
-                        <div class="w-64 h-64">
-                            <canvas id="difficultyDonutChart"></canvas>
-                        </div>
-                        <div class="flex-1 ml-8">
-                            <div class="h-48">
-                                <canvas id="difficultyBarChart"></canvas>
-                            </div>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                            <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
                         </div>
                     </div>
+                    <span class="text-gray-500">(125 reviews)</span>
                 </div>
-
-                <!-- Rating Distribution Chart -->
-                <div>
-                    <h3 class="small-heading mb-6">Rating Distribution</h3>
-                    <div class="h-64">
-                        <canvas id="ratingChart"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Course Rating Card -->
-            <div class="card card-hover hover-scale">
-                <h2 class="middle-heading mb-6">Course Rating</h2>
-                <div class="space-y-8">
-                    <!-- Rate Course Difficulty -->
-                    <div>
-                        <h3 class="small-heading mb-4">Rate Course Difficulty</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between">
-                                <span class="middle-heading">How difficult is this course?</span>
-                                <div class="flex gap-4">
-                                    <input type="text" class="custom-input" placeholder="from 1 to 10">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Rate Course Experience -->
-                    <div>
-                        <h3 class="small-heading mb-4">Rate Course Experience</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between">
-                                <span class="middle-heading">How would you rate this course?</span>
-                                <div class="flex gap-2">
-                                    <input type="text" class="custom-input" placeholder="from 1 to 5">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="alert-card-yellow mt-4">
-                        <p class="text-sm">Note: You can only rate once for each category. Your rating cannot be changed
-                            after submission.</p>
-                    </div>
-
-                    <button class="custom-big-btn">Submit Ratings</button>
-                </div>
-            </div>
-
-            <!-- Course Review Card -->
-            <div class="card card-hover hover-scale">
-                <h2 class="middle-heading mb-6">Write a Review</h2>
-                <div class="space-y-6">
-                    <div>
-                        <label class="small-heading mb-2">Your Review</label>
-                        <textarea class="custom-textarea" rows="4"
-                            placeholder="Share your experience with this course..."></textarea>
-                    </div>
-                    <button class="custom-big-btn">
-                        Submit Review
-                    </button>
-                </div>
-            </div>
-
-            <!-- Course Materials Upload Card -->
-            <div class="card card-hover hover-scale">
-                <h2 class="middle-heading mb-6">Share Course Materials</h2>
-                <div class="custom-box-dashed">
-                    <label class="small-heading mb-4 block">Upload Course Materials</label>
-                    <div class="flex flex-col items-center space-y-4">
-                        <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <p class="typography-default">
+                    Lecturer:
+                    <a href="/pages/service/instructor.html" id="lecturer-link"
+                       class="custom-small-btn inline-flex items-center">
+                        <span id="lecturer-name">Dr. John Smith</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                  d="M9 5l7 7-7 7"/>
                         </svg>
-                        <span class="typography-default text-gray-500">Drag and drop files here or click to
-                            upload</span>
-                        <input type="file" class="hidden" id="fileUpload" multiple>
-                        <button type="button" onclick="document.getElementById('fileUpload').click()"
-                            class="custom-small-btn">
-                            Choose Files
-                        </button>
-                        <div id="fileList" class="w-full text-left text-sm text-gray-600"></div>
+                    </a>
+                </p>
+            </div>
+            <button id="favoriteBtn" type="button" class="custom-small-btn">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+                Add to Favorites
+            </button>
+        </div>
+    </div>
+
+    <!-- Course Materials Section -->
+    <div class="card card-hover hover-scale">
+        <details class="group">
+            <summary class="flex items-center justify-between cursor-pointer">
+                <h2 class="middle-heading">Course Materials</h2>
+                <svg class="w-6 h-6 transform group-open:rotate-180 transition-transform duration-200" fill="none"
+                     stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </summary>
+            <div class="mt-4 space-y-4">
+                <div class="flex flex-wrap gap-4">
+                    <a href="#" class="custom-pill">
+                        <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                        Course Outline
+                    </a>
+                    <a href="#" class="custom-pill">
+                        <svg class="w-5 h-5 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                        Lecture Recordings
+                    </a>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- Course Details Grid -->
+    <div class="grid grid-cols-1 gap-8">
+        <!-- Course Description -->
+        <div class="card card-hover hover-scale">
+            <h2 class="middle-heading mb-6">Course Details</h2>
+            <p class="typography-default mb-8 leading-relaxed">
+                This course covers the fundamental principles of software engineering, including design patterns,
+                testing methodologies, and project management techniques.
+            </p>
+
+            <h3 class="middle-heading mb-4">Assessment Structure</h3>
+            <div class="flex items-center justify-center">
+                <div class="w-64 h-64">
+                    <canvas id="assessmentChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Statistics Card -->
+        <div class="card card-hover hover-scale">
+            <h2 class="middle-heading mb-6">Course Statistics</h2>
+
+            <!-- Course Popularity Trend -->
+            <div class="mb-8">
+                <h3 class="small-heading mb-4">Course Popularity Trend</h3>
+                <div class="h-64">
+                    <canvas id="popularityChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Difficulty Distribution Chart -->
+            <!--<div class="mb-8">
+                <h3 class="small-heading mb-4">Difficulty Distribution</h3>
+                <div class="flex items-center justify-between">
+                    <div class="w-64 h-64">
+                        <canvas id="difficultyDonutChart"></canvas>
+                    </div>
+                    <div class="flex-1 ml-8">
+                        <div class="h-48">
+                            <canvas id="difficultyBarChart"></canvas>
+                        </div>
                     </div>
                 </div>
-                <div class="mt-4">
-                    <label class="small-heading mb-2">Description (Optional)</label>
-                    <textarea class="custom-textarea" rows="2"
-                        placeholder="Add a description for your uploaded materials..."></textarea>
+            </div>-->
+
+            <!-- Rating Distribution Chart -->
+            <div>
+                <h3 class="small-heading mb-6">Rating Distribution</h3>
+                <div class="h-64">
+                    <canvas id="ratingChart"></canvas>
                 </div>
-                <button class="custom-big-btn mt-4">
-                    Upload Materials
+            </div>
+        </div>
+
+        <!-- Course Rating Card -->
+        <div class="card card-hover hover-scale">
+            <h2 class="middle-heading mb-6">Course Rating</h2>
+            <div class="space-y-8">
+                <!-- Rate Course Difficulty 暂时去掉 -->
+                <!--<div>
+                    <h3 class="small-heading mb-4">Rate Course Difficulty</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="middle-heading">How difficult is this course?</span>
+                            <div class="flex gap-4">
+                                <input type="text" class="custom-input" placeholder="from 1 to 10">
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+                <!-- Rate Course Experience -->
+                <div>
+                    <h3 class="small-heading mb-4">Rate Course Experience</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="middle-heading">How would you rate this course?</span>
+                            <div class="flex gap-2">
+                                <input id="ratingInput" type="text" class="custom-input" placeholder="from 1 to 5">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert-card-yellow mt-4">
+                    <p class="text-sm">Note: You can only rate once for each category. Your rating cannot be changed
+                        after submission.</p>
+                </div>
+
+                <button id="submitRatingBtn" class="custom-big-btn">Submit Ratings</button>
+            </div>
+        </div>
+
+        <!-- Course Review Card -->
+        <div class="card card-hover hover-scale">
+            <h2 class="middle-heading mb-6">Write a Review</h2>
+            <div class="space-y-6">
+                <div>
+                    <label class="small-heading mb-2">Your Review</label>
+                    <textarea id="reviewContent" class="custom-textarea" rows="4"
+                              placeholder="Share your experience with this course..."></textarea>
+                </div>
+                <button id="submitReviewBtn" class="custom-big-btn">
+                    Submit Review
                 </button>
             </div>
+        </div>
 
-            <!-- Student Reviews Section -->
-            <div class="card card-hover hover-scale">
-                <h2 class="middle-heading mb-6 text-center">Student Reviews</h2>
-                <div class="space-y-6">
-
-                    <!-- review -->
-                    <div class="custom-box-dashed">
-                        <div class="flex items-center mb-4 border-b border-gray-200 pb-4">
-                            <span class="text-gray-600">Jane Doe</span>
-                            <span class="mx-4 ">•</span>
-                            <span class="text-gray-600">March 15, 2024</span>
-                        </div>
-                        <p class="typography-default leading-relaxed">
-                            Excellent course! The professor was very knowledgeable and the project work really helped me
-                            understand the concepts better. Would highly recommend to anyone interested in software
-                            engineering.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- load more reviews button -->
-                <div class="flex justify-center mt-8">
-                    <button class="custom-big-btn">
-                        Load More Reviews
+        <!-- Course Materials Upload Card -->
+        <div class="card card-hover hover-scale">
+            <h2 class="middle-heading mb-6">Share Course Materials</h2>
+            <div class="custom-box-dashed">
+                <label class="small-heading mb-4 block">Upload Course Materials</label>
+                <div class="flex flex-col items-center space-y-4">
+                    <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                    </svg>
+                    <span class="typography-default text-gray-500">Drag and drop files here or click to
+                            upload</span>
+                    <input type="file" class="hidden" id="fileUpload" multiple>
+                    <button type="button" onclick="document.getElementById('fileUpload').click()"
+                            class="custom-small-btn">
+                        Choose Files
                     </button>
+                    <div id="fileList" class="w-full text-left text-sm text-gray-600"></div>
                 </div>
             </div>
-
-            
-
+            <div class="mt-4">
+                <label class="small-heading mb-2">Description (Optional)</label>
+                <textarea class="custom-textarea" rows="2"
+                          placeholder="Add a description for your uploaded materials..."></textarea>
+            </div>
+            <button class="custom-big-btn mt-4">
+                Upload Materials
+            </button>
         </div>
-    </main>
 
-    <footer id="footer" class="custom-footer"></footer>
-    <script src="/js/components/layout.js"></script>
-    <script src="/js/components/file_upload.js"></script>
-    <script type="module">
-        function getQueryParam(name) {
-            const url = new URL(window.location.href);
-            return url.searchParams.get(name) || '';
-        }
+        <!-- Student Reviews Section -->
+        <div class="card card-hover hover-scale">
+            <h2 class="middle-heading mb-6 text-center">Student Reviews</h2>
+            <div id="reviewSection" class="space-y-6"></div>
+            <div class="flex justify-center mt-8">
+                <button id="loadMoreBtn" class="custom-big-btn">Load More Reviews</button>
+            </div>
+        </div>
 
-        
-        // chart.js 
-        // Initialize popularity trend chart
-        const popularityCtx = document.getElementById('popularityChart').getContext('2d');
-        const popularityChart = new Chart(popularityCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Monthly Reviews',
-                    data: [15, 25, 30, 35, 45, 40, 50, 45, 40, 35, 30, 25],
-                    borderColor: 'rgb(59, 130, 246)',  // blue-500
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: 'rgb(59, 130, 246)',
-                    pointRadius: 4,
-                    pointHoverRadius: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                        callbacks: {
-                            label: function(context) {
-                                return 'Reviews: ' + context.raw;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Number of Reviews'
-                        },
-                        ticks: {
-                            stepSize: 10
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        title: {
-                            display: true,
-                            text: 'Month'
-                        }
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
-                }
-            }
-        });
+    </div>
+</main>
 
-        // Initialize difficulty donut chart
-        const difficultyDonutCtx = document.getElementById('difficultyDonutChart').getContext('2d');
-        const difficultyDonutChart = new Chart(difficultyDonutCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Easy (1-3)', 'Medium (4-7)', 'Hard (8-10)'],
-                datasets: [{
-                    data: [15, 60, 25],
-                    backgroundColor: [
-                        'rgb(34, 197, 94)',  // green-500
-                        'rgb(234, 179, 8)',  // yellow-500
-                        'rgb(239, 68, 68)'   // red-500
-                    ],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                cutout: '70%'
-            }
-        });
+<footer id="footer" class="custom-footer"></footer>
+<script type="module">
+    import {renderCourseCharts} from '/js/services/course_charts.js';
+    import {initCourseDetailPage} from '/js/services/course_detail.js';
 
-        // Initialize difficulty bar chart
-        const difficultyBarCtx = document.getElementById('difficultyBarChart').getContext('2d');
-        const difficultyBarChart = new Chart(difficultyBarCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Easy (1-3)', 'Medium (4-7)', 'Hard (8-10)'],
-                datasets: [{
-                    data: [15, 60, 25],
-                    backgroundColor: [
-                        'rgb(34, 197, 94)',  // green-500
-                        'rgb(234, 179, 8)',  // yellow-500
-                        'rgb(239, 68, 68)'   // red-500
-                    ],
-                    borderRadius: 5
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.raw + '%';
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: {
-                            callback: function(value) {
-                                return value + '%';
-                            }
-                        }
-                    },
-                    y: {
-                        grid: {
-                            display: false
-                        }
-                    }
-                },
-                barPercentage: 0.6,
-                categoryPercentage: 0.8
-            }
-        });
-
-        // initialize rating chart
-        const ratingCtx = document.getElementById('ratingChart').getContext('2d');
-        const ratingChart = new Chart(ratingCtx, {
-            type: 'bar',
-            data: {
-                labels: ['5 ★', '4 ★', '3 ★', '2 ★', '1 ★'],
-                datasets: [{
-                    data: [45, 30, 15, 7, 3],
-                    backgroundColor: 'rgb(234, 179, 8)',  // yellow-500
-                    borderRadius: 5
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 50,
-                        ticks: {
-                            callback: function(value) {
-                                return value + '%';
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        // initialize assessment chart
-        const assessmentCtx = document.getElementById('assessmentChart').getContext('2d');
-        const assessmentChart = new Chart(assessmentCtx, {
-            type: 'pie',
-            data: {
-                labels: ['Project Work', 'Mid-semester Exam', 'Final Exam'],
-                datasets: [{
-                    data: [40, 20, 40],
-                    backgroundColor: [
-                        'rgb(59, 130, 246)',  // blue-500
-                        'rgb(234, 179, 8)',   // yellow-500
-                        'rgb(239, 68, 68)'    // red-500
-                    ],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            usePointStyle: true,
-                            pointStyle: 'circle'
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.label + ': ' + context.raw + '%';
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        async function loadCourseDetails() {
-            const code = getQueryParam('code');
-            if (!code) {
-                alert('No course code provided.');
-                return;
-            }
-
-            try {
-                const response = await fetch(`/api/courses/detail?code=${encodeURIComponent(code)}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch course details');
-                }
-                const result = await response.json();
-
-                if (result.success) {
-                    const course = result.data;
-                    document.querySelector('h1.custom-heading').textContent = course.name;
-                    document.querySelector('p.middle-heading').textContent = course.code;
-                    document.querySelector('p.typography-default').textContent = course.description || 'No description available.';
-
-                    // update lecturer link
-                    const lecturerLink = document.getElementById('lecturer-link');
-                    if (course.instructor) {
-                        lecturerLink.setAttribute('data-instructor-id', course.instructor.id);
-                        document.getElementById('lecturer-name').textContent = course.instructor.name;
-                    }
-                } else {
-                    alert(result.message || 'Failed to load course details');
-                }
-
-            } catch (error) {
-                console.error(error);
-                alert('Error loading course details.');
-            }
-        }
-
-        loadCourseDetails();
-    </script>
-
+    renderCourseCharts();
+    initCourseDetailPage();
+</script>
 </body>
 
 </html>

@@ -2,7 +2,9 @@
 import hashlib
 import os
 
+from sqlalchemy.exc import SQLAlchemyError
 from werkzeug.utils import secure_filename
+from sqlalchemy import func
 
 from backend.app.models import db
 from backend.app.models.course import Course
@@ -13,6 +15,7 @@ from backend.app.models.comment import Comment
 from backend.app.models.file import File
 from datetime import datetime, UTC
 
+from backend.app.models.user import User
 from backend.app.utils.pagination_util import paginate_query
 
 
@@ -30,7 +33,8 @@ def create_course(data):
     try:
         db.session.add(course)
         db.session.commit()
-        return True, course.id
+        return True, course.code
+
     except:
         print("Error while trying to insert data in course table")
 
@@ -65,7 +69,7 @@ def get_course_detail(code):
     }
 
 
-def create_course_rating(user_id, course_id, data):
+def create_course_rating(user_id, course_code, data):
     rating = data.get("rating")
     comment = data.get("comment", "")
 
@@ -73,27 +77,38 @@ def create_course_rating(user_id, course_id, data):
         return False, "Invalid rating"
 
     course_rating = CourseRating(
-        course_id=course_id,
+        course_code=course_code,
         user_id=user_id,
         rating=rating,
         comment=comment,
-        created_at=datetime.now(UTC)
     )
     try:
         db.session.add(course_rating)
         db.session.commit()
         return True, "Success"
-    except:
-        print("Error while trying to insert data in course_rating table")
+    except Exception as e:
+        print(f"Error while inserting into course_rating: {e}")
+        db.session.rollback()  # rollback the session in case of error
+        return False, "Database error"
 
 
-def add_course_comment(user_id, course_id, data):
+def get_rating_distribution(course_code):
+    result = db.session.query(
+        CourseRating.rating,
+        func.count().label("count")
+    ).filter_by(course_code=course_code).group_by(CourseRating.rating).all()
+
+    # return a dictionary with rating as key and count as value
+    return {rating: count for rating, count in result}
+
+
+def add_course_comment(user_id, course_code, data):
     content = data.get("content")
     if not content:
         return False, "Comment cannot be empty"
 
     comment = Comment(
-        course_id=course_id,
+        course_code=course_code,
         user_id=user_id,
         content=content,
         created_at=datetime.now(UTC)
@@ -102,12 +117,19 @@ def add_course_comment(user_id, course_id, data):
         db.session.add(comment)
         db.session.commit()
         return True, "Success"
-    except:
-        print("Error while trying to insert data in comment table")
+    except SQLAlchemyError as e:
+        db.session.rollback()
+        print(f"Database error: {str(e)}")
+        return False, "Database error"
 
 
-def get_course_files(course_id):
-    files = File.query.filter_by(course_id=course_id).all()
+def get_course_comments(course_code, page=1, per_page=5):
+    query = Comment.query.filter_by(course_code=course_code).order_by(Comment.created_at.desc())
+    return paginate_query(query, page, per_page)
+
+
+def get_course_files(course_code):
+    files = File.query.filter_by(course_code=course_code).all()
     return [
         {"name": f.name, "url": f.url, "uploaded_at": f.uploaded_at.isoformat()}
         for f in files
@@ -117,7 +139,7 @@ def get_course_files(course_id):
 UPLOAD_FOLDER = "backend/uploads"
 
 
-def upload_course_file(course_id, uploaded_file):
+def upload_course_file(course_code, uploaded_file):
     if not uploaded_file:
         return False, "No file provided"
 
@@ -126,8 +148,7 @@ def upload_course_file(course_id, uploaded_file):
     file_hash = get_file_hash(uploaded_file)
 
     # check for duplicate file content
-    from backend.app.models import File
-    existing = File.query.filter_by(course_id=course_id, hash=file_hash).first()
+    existing = File.query.filter_by(course_code=course_code, hash=file_hash).first()
     if existing:
         return False, "Duplicate file content detected"
 
@@ -137,7 +158,7 @@ def upload_course_file(course_id, uploaded_file):
     url = f"/uploads/{filename}"
 
     file_record = File(
-        course_id=course_id,
+        course_code=course_code,
         hash=file_hash,
         name=uploaded_file.filename,
         url=url,
@@ -160,11 +181,25 @@ def get_file_hash(file):
     return sha256.hexdigest()
 
 
-def get_course_instructors(course_id):
+def get_course_instructors(course_code):
     instructors = (
         db.session.query(Instructor)
         .join(CourseInstructor, Instructor.id == CourseInstructor.instructor_id)
-        .filter(CourseInstructor.course_id == course_id)
+        .filter(CourseInstructor.course_code == course_code)
         .all()
     )
     return instructors
+
+
+def add_course_to_favorites(user_id, course_code):
+    user = User.query.get(user_id)
+    course = Course.query.filter_by(code=course_code).first()
+    if not course:
+        return False, "Course not found"
+
+    if user.favourite_courses.filter_by(id=course.code).first():
+        return False, "Already added"
+
+    user.favourite_courses.append(course)
+    db.session.commit()
+    return True, "Course added to favorites"
