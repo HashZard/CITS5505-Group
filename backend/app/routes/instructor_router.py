@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 from backend.app.services.instructor_service import (
     create_instructor,
     create_instructor_rating,
@@ -12,7 +12,7 @@ instructor_bp = Blueprint('instructor', __name__, url_prefix='/api/instructors')
 
 @instructor_bp.route("/create", methods=["POST"])
 @login_required
-def create_instructor_route(user_id):
+def create_instructor_route():
     data = request.json
     success, result = create_instructor(data)
     if not success:
@@ -22,7 +22,8 @@ def create_instructor_route(user_id):
 
 @instructor_bp.route("/<int:instructor_id>/rate", methods=["POST"])
 @login_required
-def rate_instructor_route(instructor_id, user_id):
+def rate_instructor_route(instructor_id):
+    user_id = session.get("user_id")
     data = request.json
     success, message = create_instructor_rating(user_id, instructor_id, data)
     if not success:
@@ -32,7 +33,7 @@ def rate_instructor_route(instructor_id, user_id):
 
 @instructor_bp.route("/<int:instructor_id>/course/<int:course_id>/assign", methods=["POST"])
 @login_required
-def assign_instructor_to_course_route(instructor_id, course_id, user_id):
+def assign_instructor_to_course_route(instructor_id, course_id):
     data = request.json
     success, message = create_instructor_course_assignment(instructor_id, course_id, data)
     if not success:
