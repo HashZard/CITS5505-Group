@@ -6,7 +6,7 @@
     <title>User Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css">
+    
 </head>
 <body>
 <header id="header" class="header-style group"></header>
@@ -18,7 +18,7 @@
                 <div class="flex-grow">
                     <div class="flex justify-between items-center mb-4">
                         <div>
-                            <h1 class="custom-heading mb-2">John Doe</h1>
+                            <h1 id="userName" class="custom-heading mb-2">John Doe</h1>
                             <p class="typography-default">Student ID: ST12345</p>
                         </div>
                         <div class="flex gap-2">
@@ -38,7 +38,7 @@
                         </div>
                         <div>
                             <p class="middle-heading">Department</p>
-                            <p class="typography-default">Computer Science</p>
+                            <p id="userDepartment" class="typography-default">Computer Science</p>
                         </div>
                     </div>
 
@@ -132,6 +132,47 @@
     </div>
 </div>
 
+<!-- Edit Profile Modal -->
+<div id="editProfileModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="middle-heading">Edit Profile</h3>
+            <button id="closeEditBtn" class="text-gray-500 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <form id="editProfileForm" class="space-y-4">
+            <div>
+                <label for="nameInput" class="small-heading mb-2 block">Name</label>
+                <input type="text" id="nameInput" class="custom-input hover-up w-full" placeholder="Enter your name">
+            </div>
+            
+            <div>
+                <label for="departmentInput" class="small-heading mb-2 block">Department</label>
+                <input type="text" id="departmentInput" class="custom-input hover-up w-full" placeholder="Enter your department">
+            </div>
+            
+            <div class="flex justify-end gap-3 mt-6">
+                <button type="button" id="cancelEditBtn" class="custom-small-btn hover-up">Cancel</button>
+                <button type="submit" class="custom-small-btn hover-up ">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Success Toast -->
+<div id="successToast" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-3 px-6 rounded-lg shadow-lg hidden z-50">
+    <div class="flex items-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <p>Profile updated successfully!</p>
+    </div>
+</div>
+
 <!-- Logout Confirmation Modal -->
 <div id="logoutModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
     <div class="bg-white rounded-lg p-6 max-w-sm w-full">
@@ -150,9 +191,11 @@
 <script src="/js/services/profile.js"></script>
 <script type="module">
     import { initLogoutFeature } from '/js/services/log_out.js';
+    import { initEditProfileFeature } from '/js/services/edit_profile.js';
     
     document.addEventListener('DOMContentLoaded', function() {
         initLogoutFeature();
+        initEditProfileFeature();
     });
 </script>
 </body>
