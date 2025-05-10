@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
     await loadUserProfile();
+    await loadMessages();
+    initMessagesSidebar();
 });
 
 async function loadUserProfile() {
@@ -47,5 +49,168 @@ async function loadUserProfile() {
     } catch (error) {
         console.error("Error loading profile:", error);
         alert("Error loading profile.");
+    }
+}
+
+async function loadMessages() {
+    const messagesContainer = document.getElementById('messagesContainer');
+    if (!messagesContainer) {
+        console.error('Messages container not found');
+        return;
+    }
+
+    try {
+        // This should call the backend API to get the message list
+        // Using mock data for now
+        const mockMessages = [
+            {
+                id: 1,
+                sender: 'alice.smith@student.uwa.edu.au',
+                content: 'Hi! I saw your experience sharing in the CITS5505 course review. I have some questions about project development. How did your team handle requirement changes?',
+                timestamp: '2024-03-15T14:30:00Z',
+                isRead: false
+            },
+            {
+                id: 2,
+                sender: 'prof.david@uwa.edu.au',
+                content: 'Thank you for your course feedback. We are adjusting the course content based on student suggestions, and your input is valuable. If you have any specific suggestions, feel free to continue the discussion.',
+                timestamp: '2024-03-14T09:15:00Z',
+                isRead: true
+            },
+            {
+                id: 3,
+                sender: 'john.doe@student.uwa.edu.au',
+                content: 'Hey! I noticed you\'re also taking CITS5502. Would you like to team up for the final project? I\'m familiar with frontend development and looking for a backend developer.',
+                timestamp: '2024-03-13T16:45:00Z',
+                isRead: false
+            },
+            {
+                id: 4,
+                sender: 'study.group@uwa.edu.au',
+                content: 'Reminder: CITS5505 study group discussion this Saturday at 2 PM in Library 3rd floor. Topic: "Software Testing Strategies". All are welcome!',
+                timestamp: '2024-03-12T11:20:00Z',
+                isRead: true
+            },
+            {
+                id: 5,
+                sender: 'course.admin@uwa.edu.au',
+                content: 'Your course review has been approved by the administrator. Thank you for your detailed feedback, it\'s very helpful for other students.',
+                timestamp: '2024-03-11T10:05:00Z',
+                isRead: true
+            },
+            {
+                id: 6,
+                sender: 'sarah.wilson@student.uwa.edu.au',
+                content: 'Hi! I saw your course notes, they\'re very detailed. May I reference your project report? I\'ll make sure to cite the source.',
+                timestamp: '2024-03-10T15:30:00Z',
+                isRead: false
+            }
+        ];
+
+        // Clear existing content
+        messagesContainer.innerHTML = '';
+        
+        // Add messages
+        mockMessages.forEach((message, index) => {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `custom-box-dashed hover:bg-gray-50 transition-colors duration-200 p-3 cursor-pointer ${!message.isRead ? 'bg-blue-50' : ''}`;
+            messageDiv.innerHTML = `
+                <div class="flex flex-col mb-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600 font-medium truncate">${message.sender}</span>
+                        ${!message.isRead ? '<span class="w-2 h-2 bg-blue-500 rounded-full"></span>' : ''}
+                    </div>
+                    <span class="text-gray-500 text-sm">${new Date(message.timestamp).toLocaleDateString()}</span>
+                </div>
+                <div class="message-content hidden">
+                    <p class="typography-default text-sm text-gray-600 mb-3">${message.content}</p>
+                    <div class="reply-section hidden">
+                        <textarea class="w-full p-2 border border-gray-300 rounded-lg text-sm mb-2" placeholder="Enter your reply..."></textarea>
+                        <div class="flex justify-end gap-2">
+                            <button class="custom-small-btn cancel-reply">Cancel</button>
+                            <button class="custom-small-btn send-reply">Send</button>
+                        </div>
+                    </div>
+                    <button class="text-blue-500 text-sm hover:text-blue-600 reply-btn">Reply</button>
+                </div>
+            `;
+
+            // Add click event
+            messageDiv.addEventListener('click', (e) => {
+                // If clicking reply button or reply area, don't trigger message expansion
+                if (e.target.closest('.reply-section') || e.target.closest('.reply-btn')) {
+                    return;
+                }
+                
+                const contentDiv = messageDiv.querySelector('.message-content');
+                contentDiv.classList.toggle('hidden');
+                
+                // Mark as read
+                if (!message.isRead) {
+                    message.isRead = true;
+                    messageDiv.classList.remove('bg-blue-50');
+                    messageDiv.querySelector('.bg-blue-500').remove();
+                }
+            });
+
+            // Add reply button events
+            const replyBtn = messageDiv.querySelector('.reply-btn');
+            const replySection = messageDiv.querySelector('.reply-section');
+            const cancelBtn = messageDiv.querySelector('.cancel-reply');
+            const sendBtn = messageDiv.querySelector('.send-reply');
+
+            replyBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                replySection.classList.remove('hidden');
+                replyBtn.classList.add('hidden');
+            });
+
+            cancelBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                replySection.classList.add('hidden');
+                replyBtn.classList.remove('hidden');
+            });
+
+            sendBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const replyContent = messageDiv.querySelector('textarea').value;
+                if (replyContent.trim()) {
+                    // This should call the backend API to send the reply
+                    console.log('Sending reply:', replyContent);
+                    // Clear input and hide reply section
+                    messageDiv.querySelector('textarea').value = '';
+                    replySection.classList.add('hidden');
+                    replyBtn.classList.remove('hidden');
+                }
+            });
+
+            messagesContainer.appendChild(messageDiv);
+        });
+
+        // If no messages, show prompt
+        if (mockMessages.length === 0) {
+            messagesContainer.innerHTML = '<p class="text-gray-500 text-center py-4">No messages</p>';
+        }
+    } catch (error) {
+        console.error('Error loading messages:', error);
+        messagesContainer.innerHTML = '<p class="text-gray-500 text-center py-4">Failed to load messages. Please try again later.</p>';
+    }
+}
+
+// Initialize private message sidebar functionality
+function initMessagesSidebar() {
+    const toggleBtn = document.getElementById('toggleMessagesBtn');
+    const messagesContainer = document.getElementById('messagesContainer');
+    let isExpanded = true;
+
+    if (toggleBtn && messagesContainer) {
+        // Ensure initial state is expanded
+        messagesContainer.style.display = 'block';
+        
+        toggleBtn.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            messagesContainer.style.display = isExpanded ? 'block' : 'none';
+            toggleBtn.querySelector('svg').style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
     }
 }
