@@ -70,6 +70,12 @@ body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+@media screen and (max-width: 768px) {
+  .header-style {
+    height: 20px;
+  }
+}
+
 /* Large Heading Styles */
 .custom-heading {
   margin-bottom: 2rem;
@@ -333,15 +339,25 @@ body {
 /* Footer Styles */
 .custom-footer {
   position: fixed;
+  height: 15px;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 0.75rem;
   background-color: var(--text-dark);
   color: var(--text-white);
   text-align: center;
+  font-size: 10px;
   box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.2);
   z-index: 10;
+}
+
+/* Small Screen Footer */
+@media screen and (max-width: 768px) {
+  .custom-footer {
+    height: 5px;
+    font-size: 3px;
+    padding: 0;
+  }
 }
 
 /* Yellow Alert Card Styles */
