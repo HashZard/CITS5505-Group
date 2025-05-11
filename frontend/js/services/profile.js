@@ -54,6 +54,7 @@ async function loadUserProfile() {
 
 async function loadMessages() {
     const messagesContainer = document.getElementById('messagesContainer');
+    const messageBtn = document.getElementById('messageBtn');
     if (!messagesContainer) {
         console.error('Messages container not found');
         return;
@@ -107,11 +108,18 @@ async function loadMessages() {
             }
         ];
 
+        // Update unread indicator
+        const hasUnreadMessages = mockMessages.some(message => !message.isRead);
+        const unreadDot = messageBtn.querySelector('.bg-red-500');
+        if (unreadDot) {
+            unreadDot.style.display = hasUnreadMessages ? 'block' : 'none';
+        }
+
         // Clear existing content
         messagesContainer.innerHTML = '';
         
         // Add messages
-        mockMessages.forEach((message, index) => {
+        mockMessages.forEach(message => {
             const messageDiv = document.createElement('div');
             messageDiv.className = `custom-box-dashed hover:bg-gray-50 transition-colors duration-200 p-3 cursor-pointer ${!message.isRead ? 'bg-blue-50' : ''}`;
             messageDiv.innerHTML = `
@@ -149,7 +157,17 @@ async function loadMessages() {
                 if (!message.isRead) {
                     message.isRead = true;
                     messageDiv.classList.remove('bg-blue-50');
-                    messageDiv.querySelector('.bg-blue-500').remove();
+                    const unreadDot = messageDiv.querySelector('.bg-blue-500');
+                    if (unreadDot) {
+                        unreadDot.remove();
+                    }
+                    
+                    // Update button unread indicator
+                    const hasRemainingUnread = mockMessages.some(m => !m.isRead);
+                    const buttonUnreadDot = messageBtn.querySelector('.bg-red-500');
+                    if (buttonUnreadDot) {
+                        buttonUnreadDot.style.display = hasRemainingUnread ? 'block' : 'none';
+                    }
                 }
             });
 
@@ -199,18 +217,37 @@ async function loadMessages() {
 
 // Initialize private message sidebar functionality
 function initMessagesSidebar() {
-    const toggleBtn = document.getElementById('toggleMessagesBtn');
-    const messagesContainer = document.getElementById('messagesContainer');
-    let isExpanded = true;
+    const messageBtn = document.getElementById('messageBtn');
+    const messageContainer = document.getElementById('messageContainer');
+    const closeMessageBtn = document.getElementById('closeMessageBtn');
 
-    if (toggleBtn && messagesContainer) {
-        // Ensure initial state is expanded
-        messagesContainer.style.display = 'block';
-        
-        toggleBtn.addEventListener('click', () => {
-            isExpanded = !isExpanded;
-            messagesContainer.style.display = isExpanded ? 'block' : 'none';
-            toggleBtn.querySelector('svg').style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+    if (messageBtn && messageContainer && closeMessageBtn) {
+        // Open message panel
+        messageBtn.addEventListener('click', () => {
+            messageContainer.classList.remove('hidden');
+            // Add animation effect
+            const messagePanel = messageContainer.querySelector('div');
+            messagePanel.style.transform = 'translateY(0)';
+            messagePanel.style.opacity = '1';
+        });
+
+        // Close message panel
+        const closePanel = () => {
+            const messagePanel = messageContainer.querySelector('div');
+            messagePanel.style.transform = 'translateY(20px)';
+            messagePanel.style.opacity = '0';
+            setTimeout(() => {
+                messageContainer.classList.add('hidden');
+            }, 300);
+        };
+
+        closeMessageBtn.addEventListener('click', closePanel);
+
+        // Close panel when clicking background
+        messageContainer.addEventListener('click', (e) => {
+            if (e.target === messageContainer) {
+                closePanel();
+            }
         });
     }
 }

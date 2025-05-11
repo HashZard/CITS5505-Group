@@ -106,19 +106,31 @@
             </div>
         </div>
 
-        <!-- Private Messages List - Moved to the right side -->
-        <div class="fixed right-8 top-32 w-96">
-            <div class="card glass-card card-hover hover-scale mb-8 fade-in">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="middle-heading">My Messages</h2>
-                    <button id="toggleMessagesBtn" class="custom-small-btn hover-up">
-                        <svg class="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                </div>
-                <div id="messagesContainer" class="space-y-2 max-h-[600px] overflow-y-auto p-4">
-                    <!-- Messages will be loaded dynamically via JavaScript -->
+        <!-- Private Messages List -->
+        <div class="fixed right-8 bottom-24 z-40">
+            <button id="messageBtn" class="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full p-4 shadow-lg hover:from-blue-700 hover:to-blue-600 transition-all duration-200 opacity-95 hover:opacity-100 hover:scale-110 relative">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                </svg>
+                <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white"></span>
+            </button>
+        </div>
+        
+        <!-- Message Container -->
+        <div id="messageContainer" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+            <div class="absolute right-8 bottom-32 w-96 bg-white rounded-lg shadow-xl transform transition-all duration-300">
+                <div class="p-4 flex flex-col max-h-[500px]">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="middle-heading">My Messages</h2>
+                        <button id="closeMessageBtn" class="text-gray-500 hover:text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="messagesContainer" class="flex-1 overflow-y-auto space-y-2">
+                        <!-- Messages will be loaded dynamically via JavaScript -->
+                    </div>
                 </div>
             </div>
         </div>
