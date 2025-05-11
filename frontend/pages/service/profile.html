@@ -1,136 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>User Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/css/style.css">
-    
+    <link rel="stylesheet" href="/css/style.css"/>
 </head>
-<body>
+<body class="invisible">
 <header id="header" class="header-style group"></header>
 
-    <div class="container mx-auto px-4 py-8">
-        <!-- Personal Information Section -->
-        <div class="card glass-card card-hover hover-scale mb-8 fade-in">
-            <div class="flex items-center space-x-6">
-                <div class="flex-grow">
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <h1 id="userName" class="custom-heading mb-2">John Doe</h1>
-                            <p class="typography-default">Student ID: ST12345</p>
-                        </div>
-                        <div class="flex gap-2">
-                            <button class="custom-small-btn hover-up" id="editProfileBtn">Edit Profile</button>
-                            <button class="custom-small-btn hover-up bg-red-500 text-white" id="logoutBtn">
-                                <svg class="w-4 h-4 mr-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                                </svg>
-                                Log Out
-                            </button>
-                        </div>
+<div class="container mx-auto px-4 py-8">
+    <!-- Personal Information Section -->
+    <div class="card glass-card card-hover hover-scale mb-8 fade-in">
+        <div class="flex items-center space-x-6">
+            <div class="flex-grow">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h1 id="userName" class="custom-heading mb-2"></h1>
+                        <p id="studentId" class="typography-default"></p>
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <p class="middle-heading">Email</p>
-                            <p class="typography-default">john.doe@student.uwa.edu.au</p>
-                        </div>
-                        <div>
-                            <p class="middle-heading">Department</p>
-                            <p id="userDepartment" class="typography-default">Computer Science</p>
-                        </div>
-                    </div>
-
-                    <!-- Editable Nickname Section -->
-                    <div id="editNicknameSection" class="mt-4 hidden">
-                        <label class="small-heading mb-2 block">Edit Nickname</label>
-                        <input type="text" id="nicknameInput" class="custom-input" placeholder="Enter new nickname">
-                        <button class="custom-small-btn mt-2" id="saveNickname">Save</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Favorite Courses Section -->
-        <div class="featured-section">
-            <h2 class="middle-heading mb-6">Favorite Courses</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Favorite Course Card 1 -->
-                <div class="course-card glass-card h-[400px] flex flex-col border border-gray-200 rounded-2xl hover:border-primary-blue hover:shadow-lg transition-all duration-300">
-                    <div class="overflow-hidden rounded-t-2xl">
-                        <img src="/assets/images/course-placeholder.jpg" alt="Course 1" class="w-full h-48 object-cover">
-                    </div>
-                    <div class="course-card-content flex-1 flex flex-col p-4">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="middle-heading line-clamp-2">Data Structures and Algorithms</h3>
-                            <span class="tag ml-2 flex-shrink-0">Popular</span>
-                        </div>
-                        <div class="flex items-center mb-4 rating-stars">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    <div class="flex gap-2">
+                        <button class="custom-small-btn hover-up" id="editProfileBtn">Edit Profile</button>
+                        <button class="custom-small-btn hover-up bg-red-500 text-white" id="logoutBtn">
+                            <svg class="w-4 h-4 mr-2 inline-block" fill="none" stroke="currentColor"
+                                 viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
                             </svg>
-                            <span class="ml-1">4.9</span>
-                            <span class="typography-default px-2 text-gray-600">(89 reviews)</span>
-                        </div>
-                        <a class="custom-small-btn btn-full-width hover-up mt-auto"
-                           href="/pages/service/course_details_page.html?code=CITS5501">
-                            View Details
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Favorite Course Card 2 -->
-                <div class="course-card glass-card h-[400px] flex flex-col border border-gray-200 rounded-2xl hover:border-primary-blue hover:shadow-lg transition-all duration-300">
-                    <div class="overflow-hidden rounded-t-2xl">
-                        <img src="/assets/images/course-placeholder.jpg" alt="Course 2" class="w-full h-48 object-cover">
-                    </div>
-                    <div class="course-card-content flex-1 flex flex-col p-4">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="middle-heading line-clamp-2">Web Development Fundamentals</h3>
-                            <span class="tag ml-2 flex-shrink-0">New</span>
-                        </div>
-                        <div class="flex items-center mb-4 rating-stars">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <span class="ml-1">4.7</span>
-                            <span class="typography-default px-2 text-gray-600">(76 reviews)</span>
-                        </div>
-                        <a class="custom-small-btn btn-full-width hover-up mt-auto"
-                           href="/pages/service/course_details_page.html?code=CITS5502">
-                            View Details
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Private Messages List -->
-        <div class="fixed right-8 bottom-24 z-40">
-            <button id="messageBtn" class="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full p-4 shadow-lg hover:from-blue-700 hover:to-blue-600 transition-all duration-200 opacity-95 hover:opacity-100 hover:scale-110 relative">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
-                </svg>
-                <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white"></span>
-            </button>
-        </div>
-        
-        <!-- Message Container -->
-        <div id="messageContainer" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
-            <div class="absolute right-8 bottom-32 w-96 bg-white rounded-lg shadow-xl transform transition-all duration-300">
-                <div class="p-4 flex flex-col max-h-[500px]">
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="middle-heading">My Messages</h2>
-                        <button id="closeMessageBtn" class="text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
+                            Log Out
                         </button>
                     </div>
-                    <div id="messagesContainer" class="flex-1 overflow-y-auto space-y-2">
-                        <!-- Messages will be loaded dynamically via JavaScript -->
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="middle-heading">Email</p>
+                        <p id="userEmail" class="typography-default"></p>
                     </div>
+                    <div>
+                        <p class="middle-heading">Department</p>
+                        <p id="userDepartment" class="typography-default"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorite Courses Section -->
+    <div class="featured-section">
+        <h2 class="middle-heading mb-6">Favorite Courses</h2>
+        <div id="favCoursesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Cards will be rendered by JS -->
+        </div>
+    </div>
+
+    <!-- Messages Trigger -->
+    <div class="fixed right-8 bottom-24 z-40">
+        <button id="messageBtn"
+                class="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full p-4 shadow-lg hover:from-blue-700 hover:to-blue-600 transition-all duration-200 opacity-95 hover:opacity-100 hover:scale-110 relative">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                      d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+            </svg>
+            <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white"></span>
+        </button>
+    </div>
+
+    <!-- Message Container -->
+    <div id="messageContainer" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="absolute right-8 bottom-32 w-96 bg-white rounded-lg shadow-xl transform transition-all duration-300">
+            <div class="p-4 flex flex-col max-h-[500px]">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="middle-heading">My Messages</h2>
+                    <button id="closeMessageBtn" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <div id="messagesContainer" class="flex-1 overflow-y-auto space-y-2">
+                    <!-- messages rendered by JS -->
                 </div>
             </div>
         </div>
@@ -144,41 +94,40 @@
             <h3 class="middle-heading">Edit Profile</h3>
             <button id="closeEditBtn" class="text-gray-500 hover:text-gray-700">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
             </button>
         </div>
-        
         <form id="editProfileForm" class="space-y-4">
             <div>
                 <label for="nameInput" class="small-heading mb-2 block">Name</label>
-                <input type="text" id="nameInput" class="custom-input hover-up w-full" placeholder="Enter your name">
+                <input type="text" id="nameInput" class="custom-input hover-up w-full" placeholder="Enter your name"/>
             </div>
-            
             <div>
                 <label for="departmentInput" class="small-heading mb-2 block">Department</label>
-                <input type="text" id="departmentInput" class="custom-input hover-up w-full" placeholder="Enter your department">
+                <input type="text" id="departmentInput" class="custom-input hover-up w-full"
+                       placeholder="Enter your department"/>
             </div>
-            
             <div class="flex justify-end gap-3 mt-6">
                 <button type="button" id="cancelEditBtn" class="custom-small-btn hover-up">Cancel</button>
-                <button type="submit" class="custom-small-btn hover-up ">Save Changes</button>
+                <button type="submit" class="custom-small-btn hover-up">Save Changes</button>
             </div>
         </form>
     </div>
 </div>
 
 <!-- Success Toast -->
-<div id="successToast" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-3 px-6 rounded-lg shadow-lg hidden z-50">
+<div id="successToast"
+     class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-3 px-6 rounded-lg shadow-lg hidden z-50">
     <div class="flex items-center">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
         </svg>
         <p>Profile updated successfully!</p>
     </div>
 </div>
 
-<!-- Logout Confirmation Modal -->
+<!-- Logout Modal -->
 <div id="logoutModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
     <div class="bg-white rounded-lg p-6 max-w-sm w-full">
         <h3 class="middle-heading mb-4">Confirm Logout</h3>
@@ -192,16 +141,13 @@
 
 <footer id="footer" class="custom-footer"></footer>
 
-<script src="/js/components/layout.js"></script>
-<script src="/js/services/profile.js"></script>
+<script type="module" src="/js/app_entry.js"></script>
 <script type="module">
-    import { initLogoutFeature } from '/js/services/log_out.js';
-    import { initEditProfileFeature } from '/js/services/edit_profile.js';
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        initLogoutFeature();
-        initEditProfileFeature();
-    });
+    import {initLogoutFeature} from '/js/services/log_out.js';
+
+    initLogoutFeature();
 </script>
+
+
 </body>
 </html>

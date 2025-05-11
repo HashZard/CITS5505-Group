@@ -126,7 +126,7 @@ def get_course_instructors_route(course_code):
 @login_required
 def favorite_course_route(course_code):
     user_id = session.get("user_id")
-    success, message = add_course_to_favorites(user_id, course_code)
+    success, status = add_course_to_favorites(user_id, course_code)
     if not success:
-        return jsonify({"success": False, "message": message}), 400
-    return jsonify({"success": True, "message": message})
+        return jsonify({"success": False, "message": status}), 400
+    return jsonify({"success": True, "status": status})

@@ -16,6 +16,8 @@ class UserType(Enum):
 class User(BaseModel):
     __tablename__ = 'user'
 
+    name = db.Column(db.String(255), nullable=True)
+    department = db.Column(db.String(255), nullable=True)
     email = db.Column(db.String(128), unique=True, nullable=False)
     _password = db.Column("password", db.String(255), nullable=False)
     role = db.Column(SqlEnum(UserType), default=UserType.USER, nullable=False)
@@ -44,3 +46,10 @@ class User(BaseModel):
 
     def check_password(self, plaintext):
         return check_password_hash(self._password, plaintext)
+
+
+def get_user_by_id(user_id):
+    return db.session.query(User).filter_by(id=user_id).first()
+
+def save_user(user):
+    db.session.commit()

@@ -197,9 +197,11 @@ def add_course_to_favorites(user_id, course_code):
     if not course:
         return False, "Course not found"
 
-    if user.favourite_courses.filter_by(id=course.code).first():
-        return False, "Already added"
+    if course in user.favourite_courses:
+        user.favourite_courses.remove(course)
+        db.session.commit()
+        return True, "removed"
 
     user.favourite_courses.append(course)
     db.session.commit()
-    return True, "Course added to favorites"
+    return True, "added"

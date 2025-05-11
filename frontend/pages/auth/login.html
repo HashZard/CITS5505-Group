@@ -5,68 +5,75 @@
     <title>Login Account</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/style.css">
-    
+
 </head>
 <body class="bg-gray-100 text-gray-900 min-h-screen">
-    <header id="header" class="header-style group"></header>
+<header id="header" class="header-style group"></header>
 
-    <div class="container mx-auto px-4 py-8">
-        <div class="flex justify-center">
-            <div class="card w-full max-w-md">
-                <div class="text-center mb-6">
-                    <img src="/assets/images/logo.png" class="h-16 mx-auto mb-2" alt="UWA Logo">
-                    <h2 class="custom-heading text-2xl">Login</h2>
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-center">
+        <div class="card w-full max-w-md">
+            <div class="text-center mb-6">
+                <img src="/assets/images/logo.png" class="h-16 mx-auto mb-2" alt="UWA Logo">
+                <h2 class="custom-heading text-2xl">Login</h2>
+            </div>
+
+            <form id="loginForm" class="space-y-4">
+                <input type="email" name="email" placeholder="Enter your email" required class="custom-input"/>
+                <input type="password" name="password" placeholder="Enter your password" required class="custom-input"/>
+
+                <div class="flex items-center gap-4">
+                    <input type="text" name="code" placeholder="Captcha code" required class="custom-input w-1/2"/>
+                    <img id="captchaImg" src="/api/captcha" class="h-12 cursor-pointer border rounded ml-auto"
+                         title="Click to refresh"/>
                 </div>
 
-                <form id="loginForm" class="space-y-4">
-                    <input type="email" name="email" placeholder="Enter your email" required class="custom-input"/>
-                    <input type="password" name="password" placeholder="Enter your password" required class="custom-input"/>
-
-                    <div class="flex items-center gap-4">
-                        <input type="text" name="code" placeholder="Captcha code" required class="custom-input w-1/2"/>
-                        <img id="captchaImg" src="/api/captcha" class="h-12 cursor-pointer border rounded ml-auto" title="Click to refresh"/>
-                    </div>
-
-                    <button type="submit" class="custom-big-btn">Login</button>
-                </form>
-            </div>
+                <button type="submit" class="custom-big-btn">Login</button>
+            </form>
         </div>
     </div>
+</div>
 
-    <footer id="footer" class="custom-footer"></footer>
+<footer id="footer" class="custom-footer"></footer>
 
-    <script src="/js/components/layout.js"></script>
-    <script>
-        const form = document.getElementById("loginForm");
-        const captchaImg = document.getElementById("captchaImg");
+<script src="/js/components/layout.js"></script>
+<script>
+    const form = document.getElementById("loginForm");
+    const captchaImg = document.getElementById("captchaImg");
 
-        captchaImg.addEventListener("click", () => {
-            captchaImg.src = "/api/captcha?reload=" + Date.now();
+    captchaImg.addEventListener("click", () => {
+        captchaImg.src = "/api/captcha?reload=" + Date.now();
+    });
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        if (!formData.get("password")) {
+            alert("❗ Password cannot be empty!");
+            return;
+        }
+
+        const data = Object.fromEntries(formData.entries());
+        const res = await fetch("/api/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data)
         });
 
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const formData = new FormData(form);
-            if (!formData.get("password")) {
-                alert("❗ Password cannot be empty!");
-                return;
-            }
-
-            const data = Object.fromEntries(formData.entries());
-            const res = await fetch("/api/login", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(data)
-            });
-
-            const result = await res.json();
-            if (result.success) {
-                window.location.href = "/index.html";
+        const result = await res.json();
+        if (result.success) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const next = urlParams.get('next');
+            if (next) {
+                window.location.href = next;
             } else {
-                alert("❌ " + result.message);
-                captchaImg.click();
+                window.location.href = "/index.html";
             }
-        });
-    </script>
+        } else {
+            alert("❌ " + result.message);
+            captchaImg.click();
+        }
+    });
+</script>
 </body>
 </html>

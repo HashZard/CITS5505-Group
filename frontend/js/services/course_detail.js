@@ -190,20 +190,63 @@ async function submitComment() {
     }
 }
 
-async function addToFavorites() {
+let isFavorited = false;
+
+async function toggleFavorite() {
     const code = getCourseCodeFromURL();
     try {
-        const res = await fetch(`/api/courses/${code}/favorite`, {method: "POST"});
+        const res = await fetch(`/api/courses/${code}/favorite`, {
+            method: "POST"
+        });
         const result = await res.json();
+
         if (result.success) {
-            alert("Added to favorites!");
+            isFavorited = result.status === "added";
+            updateFavoriteButton();
         } else {
-            alert(result.message || "Failed to add to favorites");
+            alert(result.message || "操作失败");
         }
     } catch (err) {
-        console.error("Error adding to favorites:", err);
-        alert("Network error");
+        console.error("Toggle favorite error:", err);
+        alert("网络错误");
     }
+}
+
+function updateFavoriteButton() {
+    const favoriteBtn = document.getElementById("favoriteBtn");
+    if (!favoriteBtn) return;
+
+    if (isFavorited) {
+        favoriteBtn.classList.add("bg-red-500", "text-white");
+        favoriteBtn.innerHTML = `
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
+                    2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 
+                    2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 
+                    22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 
+                    11.54L12 21.35z"/>
+            </svg> Remove from Favorites`;
+    } else {
+        favoriteBtn.classList.remove("bg-red-500", "text-white");
+        favoriteBtn.innerHTML = `
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 
+                    6.364L12 20.364l7.682-7.682a4.5 
+                    4.5 0 00-6.364-6.364L12 
+                    7.636l-1.318-1.318a4.5 4.5 0 
+                    00-6.364 0z"/>
+            </svg> Add to Favorites`;
+    }
+}
+
+async function checkFavoriteStatus() {
+    const code = getCourseCodeFromURL();
+    const res = await fetch('/api/user/profile');
+    const data = await res.json();
+    const favCodes = data.user.favourite_courses.map(c => c.code);
+    isFavorited = favCodes.includes(code);
+    updateFavoriteButton();
 }
 
 
@@ -243,9 +286,9 @@ export async function initCourseDetailPage() {
             await loadReviews(courseCode, currentReviewPage, reviewsPerPage);
         });
     }
-    if (favoriteBtn) favoriteBtn.addEventListener("click", addToFavorites);
+    if (favoriteBtn) favoriteBtn.addEventListener("click", toggleFavorite);
 
-
+    await checkFavoriteStatus();  // 页面加载时检测当前课程是否已收藏
     await loadReviews(courseCode, currentReviewPage, reviewsPerPage);
     await loadRatingChart();
 }
@@ -292,7 +335,7 @@ function initMessageFeature() {
     // Handle form submission
     messageForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const messageContent = document.getElementById('messageInput').value.trim();
         if (!messageContent) {
             alert('Please enter a message');
@@ -322,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Expose openMessageModal function to window object
-window.openMessageModal = function(recipient) {
+window.openMessageModal = function (recipient) {
     currentRecipient = recipient;
     const modal = document.getElementById('messageModal');
     const recipientInput = document.getElementById('recipientInput');

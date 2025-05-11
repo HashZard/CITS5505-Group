@@ -40,6 +40,12 @@ def login():
         return jsonify(result), 401
 
 
+@auth_bp.route('/logout', methods=['POST'])
+def logout():
+    session.clear()
+    return jsonify({"success": True})
+
+
 # Captcha generation endpoint
 @auth_bp.route("/captcha", methods=["GET"])
 def get_captcha():

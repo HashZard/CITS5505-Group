@@ -1,8 +1,9 @@
-document.addEventListener("DOMContentLoaded", async () => {
+(async () => {
     await loadUserProfile();
     await loadMessages();
     initMessagesSidebar();
-});
+    initEditProfileFeature();
+})();
 
 async function loadUserProfile() {
     try {
@@ -15,41 +16,133 @@ async function loadUserProfile() {
         }
 
         const user = result.user;
-        document.querySelector(".custom-heading").textContent = user.nickname || user.email;
-        document.querySelector(".typography-default").textContent = "Student ID: " + (user.student_id || "N/A");
-        document.querySelectorAll(".typography-default")[1].textContent = user.email;
-        document.querySelectorAll(".typography-default")[2].textContent = user.field || "N/A";
+        document.getElementById("userName").textContent = user.name || user.email;
+        document.getElementById("studentId").textContent = "Student ID: " + (user.student_id || "N/A");
+        document.getElementById("userEmail").textContent = user.email;
+        document.getElementById("userDepartment").textContent = user.department || "N/A";
 
-        const favCoursesContainer = document.querySelector(".grid.grid-cols-1");
+        const favCoursesContainer = document.getElementById("favCoursesContainer");
         favCoursesContainer.innerHTML = "";
+
+        if (user.favourite_courses.length === 0) {
+            favCoursesContainer.innerHTML = '<p class="text-gray-500 col-span-3 text-center">No favorite courses yet.</p>';
+            return;
+        }
 
         user.favourite_courses.forEach(course => {
             const div = document.createElement("div");
-            div.className = "card card-hover hover-scale";
+            div.className = "course-card glass-card h-[400px] flex flex-col border border-gray-200 rounded-2xl hover:border-primary-blue hover:shadow-lg transition-all duration-300";
             div.innerHTML = `
-                <img src="/assets/images/course-placeholder.jpg" alt="Course Image" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="middle-heading">${course.name}</h3>
-                    <div class="flex items-center mb-2">
-                        <div class="flex items-center text-yellow-400">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <span class="ml-1">${course.avg_rating || "N/A"}</span>
-                        </div>
-                        <span class="typography-default px-4">(${course.review_count || 0} reviews)</span>
+                <div class="overflow-hidden rounded-t-2xl">
+                    <img src="/assets/images/course-placeholder.jpg" alt="${course.name}" class="w-full h-48 object-cover">
+                </div>
+                <div class="course-card-content flex-1 flex flex-col p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="middle-heading line-clamp-2">${course.name}</h3>
                     </div>
-                    <a class="custom-small-btn w-full block text-center"  href="/pages/service/course_details_page.html?code=${course.code}">
+                    <div class="flex items-center mb-4 rating-stars">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <span class="ml-1">${course.avg_rating || "N/A"}</span>
+                        <span class="typography-default px-2 text-gray-600">(${course.review_count || 0} reviews)</span>
+                    </div>
+                    <a class="custom-small-btn btn-full-width hover-up mt-auto"
+                       href="/pages/service/course_details_page.html?code=${course.code}">
                         View Details
                     </a>
                 </div>
             `;
             favCoursesContainer.appendChild(div);
         });
+
+        // 设置初始值给编辑表单
+        document.getElementById('nameInput').value = user.name || '';
+        document.getElementById('departmentInput').value = user.field || '';
+
     } catch (error) {
         console.error("Error loading profile:", error);
         alert("Error loading profile.");
     }
+}
+
+function initEditProfileFeature() {
+    const editProfileBtn = document.getElementById('editProfileBtn');
+    const editProfileModal = document.getElementById('editProfileModal');
+    const closeEditBtn = document.getElementById('closeEditBtn');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const editProfileForm = document.getElementById('editProfileForm');
+
+    if (!editProfileBtn || !editProfileModal || !closeEditBtn || !cancelEditBtn || !editProfileForm) {
+        console.error('Missing DOM elements for edit profile');
+        return;
+    }
+
+    editProfileBtn.addEventListener('click', () => {
+        editProfileModal.classList.remove('hidden');
+    });
+
+    closeEditBtn.addEventListener('click', () => {
+        editProfileModal.classList.add('hidden');
+    });
+
+    cancelEditBtn.addEventListener('click', () => {
+        editProfileModal.classList.add('hidden');
+    });
+
+    editProfileModal.addEventListener('click', (e) => {
+        if (e.target === editProfileModal) {
+            editProfileModal.classList.add('hidden');
+        }
+    });
+
+    editProfileForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const newName = document.getElementById('nameInput').value.trim();
+        const newDepartment = document.getElementById('departmentInput').value.trim();
+
+        if (!newName || !newDepartment) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/user/profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: newName,
+                    department: newDepartment
+                })
+            });
+
+            const data = await res.json();
+            if (!data.success) {
+                alert("Update failed: " + (data.message || "Unknown error"));
+                return;
+            }
+
+            document.getElementById("userName").textContent = newName;
+            document.getElementById("userDepartment").textContent = newDepartment;
+
+            const toast = document.getElementById("successToast");
+            toast.classList.remove("hidden");
+            toast.style.opacity = "1";
+            setTimeout(() => {
+                toast.classList.add("hidden");
+                toast.style.opacity = "0";
+            }, 3000);
+
+            editProfileModal.classList.add('hidden');
+
+        } catch (err) {
+            console.error("Update error:", err);
+            alert("Server error while updating profile.");
+        }
+    });
 }
 
 async function loadMessages() {
@@ -117,7 +210,7 @@ async function loadMessages() {
 
         // Clear existing content
         messagesContainer.innerHTML = '';
-        
+
         // Add messages
         mockMessages.forEach(message => {
             const messageDiv = document.createElement('div');
@@ -149,10 +242,10 @@ async function loadMessages() {
                 if (e.target.closest('.reply-section') || e.target.closest('.reply-btn')) {
                     return;
                 }
-                
+
                 const contentDiv = messageDiv.querySelector('.message-content');
                 contentDiv.classList.toggle('hidden');
-                
+
                 // Mark as read
                 if (!message.isRead) {
                     message.isRead = true;
@@ -161,7 +254,7 @@ async function loadMessages() {
                     if (unreadDot) {
                         unreadDot.remove();
                     }
-                    
+
                     // Update button unread indicator
                     const hasRemainingUnread = mockMessages.some(m => !m.isRead);
                     const buttonUnreadDot = messageBtn.querySelector('.bg-red-500');
