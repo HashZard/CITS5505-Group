@@ -404,6 +404,37 @@
 
 <footer id="footer" class="custom-footer"></footer>
 
+<!-- Message Modal -->
+<div id="messageModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="middle-heading">Send Message</h3>
+            <button id="closeMessageBtn" class="text-gray-500 hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <form id="messageForm" class="space-y-4">
+            <div>
+                <label class="small-heading mb-2 block">Recipient</label>
+                <input type="text" id="recipientInput" class="custom-input hover-up w-full" readonly>
+            </div>
+            
+            <div>
+                <label for="messageInput" class="small-heading mb-2 block">Message Content</label>
+                <textarea id="messageInput" class="custom-input hover-up w-full h-32" placeholder="Please enter your message..."></textarea>
+            </div>
+            
+            <div class="flex justify-end gap-3 mt-6">
+                <button type="button" id="cancelMessageBtn" class="custom-small-btn hover-up">Cancel</button>
+                <button type="submit" class="custom-small-btn hover-up">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script type="module">
     import { renderCourseCharts } from '/js/services/course_charts.js';
     import { initCourseDetailPage } from '/js/services/course_detail.js';

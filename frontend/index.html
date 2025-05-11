@@ -65,15 +65,15 @@
         <h2 class="middle-heading mb-4">Featured Courses</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Course Card 1 -->
-            <div class="course-card glass-card">
-                <div class="overflow-hidden">
+            <div class="course-card glass-card h-[400px] flex flex-col border border-gray-200 rounded-2xl hover:border-primary-blue hover:shadow-lg transition-all duration-300">
+                <div class="overflow-hidden rounded-t-2xl">
                     <img src="/frontend/assets/images/course-placeholder.jpg" alt="Software Engineering"
                         class="w-full h-48 object-cover">
                 </div>
-                <div class="course-card-content">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="course-card-title">Software Engineering</h3>
-                        <span class="tag">Popular</span>
+                <div class="course-card-content flex-1 flex flex-col p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="middle-heading line-clamp-2">Software Engineering</h3>
+                        <span class="tag ml-2 flex-shrink-0">Popular</span>
                     </div>
                     <div class="flex items-center mb-4 rating-stars">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -82,7 +82,7 @@
                         <span class="ml-1">4.9</span>
                         <span class="typography-default px-2 text-gray-600">(120 reviews)</span>
                     </div>
-                    <a class="custom-small-btn btn-full-width hover-up"
+                    <a class="custom-small-btn btn-full-width hover-up mt-auto"
                        href="/pages/service/course_details_page.html?code=CITS5501">
                         View Details
                     </a>
@@ -90,15 +90,15 @@
             </div>
 
             <!-- Course Card 2 -->
-            <div class="course-card glass-card">
-                <div class="overflow-hidden">
+            <div class="course-card glass-card h-[400px] flex flex-col border border-gray-200 rounded-2xl hover:border-primary-blue hover:shadow-lg transition-all duration-300">
+                <div class="overflow-hidden rounded-t-2xl">
                     <img src="/frontend/assets/images/course-placeholder.jpg" alt="Data Structures & Algorithms"
                         class="w-full h-48 object-cover">
                 </div>
-                <div class="course-card-content">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="course-card-title">Data Structures & Algorithms</h3>
-                        <span class="tag">Recommended</span>
+                <div class="course-card-content flex-1 flex flex-col p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="middle-heading line-clamp-2">Data Structures & Algorithms</h3>
+                        <span class="tag ml-2 flex-shrink-0">Recommended</span>
                     </div>
                     <div class="flex items-center mb-4 rating-stars">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -107,20 +107,23 @@
                         <span class="ml-1">4.9</span>
                         <span class="typography-default px-2 text-gray-600">(89 reviews)</span>
                     </div>
-                    <button class="custom-small-btn btn-full-width hover-up">View Details</button>
+                    <a class="custom-small-btn btn-full-width hover-up mt-auto"
+                       href="/pages/service/course_details_page.html?code=CITS5502">
+                        View Details
+                    </a>
                 </div>
             </div>
 
             <!-- Course Card 3 -->
-            <div class="course-card glass-card">
-                <div class="overflow-hidden">
+            <div class="course-card glass-card h-[400px] flex flex-col border border-gray-200 rounded-2xl hover:border-primary-blue hover:shadow-lg transition-all duration-300">
+                <div class="overflow-hidden rounded-t-2xl">
                     <img src="/frontend/assets/images/course-placeholder.jpg" alt="Artificial Intelligence"
                         class="w-full h-48 object-cover">
                 </div>
-                <div class="course-card-content">
-                    <div class="flex justify-between items-center mb-2">
-                        <h3 class="course-card-title">Artificial Intelligence</h3>
-                        <span class="tag">New</span>
+                <div class="course-card-content flex-1 flex flex-col p-4">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="middle-heading line-clamp-2">Artificial Intelligence</h3>
+                        <span class="tag ml-2 flex-shrink-0">New</span>
                     </div>
                     <div class="flex items-center mb-4 rating-stars">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -129,7 +132,10 @@
                         <span class="ml-1">4.9</span>
                         <span class="typography-default px-2 text-gray-600">(92 reviews)</span>
                     </div>
-                    <button class="custom-small-btn btn-full-width hover-up">View Details</button>
+                    <a class="custom-small-btn btn-full-width hover-up mt-auto"
+                       href="/pages/service/course_details_page.html?code=CITS5503">
+                        View Details
+                    </a>
                 </div>
             </div>
         </div>
@@ -138,52 +144,109 @@
     <!-- Popular Course Rankings Section -->
     <section class="mt-16 mb-16">
         <h2 class="middle-heading mb-4">Top Ranked Courses</h2>
-        <div class="card glass-card">
-            <ul class="ranking-list">
-                <li class="flex items-center justify-between hover-up">
+        <div class="card glass-card shadow-lg border border-gray-100 bg-white/90 backdrop-blur-sm">
+            <ul class="ranking-list divide-y divide-gray-100">
+                <li class="flex items-center justify-between hover-up py-4 px-6">
                     <div class="flex items-center">
                         <span class="text-lg font-bold text-primary-blue mr-3">1</span>
                         <div>
-                            <span class="text-medium">Data Structures & Algorithms</span>
-                            <span class="heat-indicator">🔥🔥🔥🔥🔥</span>
+                            <a href="/pages/service/course_details_page.html?code=CITS5501" 
+                               class="middle-heading hover:text-primary-blue transition-all duration-300 ease-in-out hover:scale-105 inline-block">
+                                Data Structures & Algorithms
+                            </a>
+                            <div class="flex items-center mt-1">
+                                <div class="flex text-yellow-400">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                </div>
+                                <span class="ml-2 text-sm text-gray-600">(4.9)</span>
+                            </div>
                         </div>
                     </div>
-                    <span class="rating-stars">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                        </svg>
-                      <span class="ml-1">4.9</span>
-                    </span>
+                    <div class="flex items-center gap-4">
+                        <span class="text-gray-600">Dr. John Smith</span>
+                    </div>
                 </li>
-                <li class="flex items-center justify-between hover-up">
+                <li class="flex items-center justify-between hover-up py-4 px-6">
                     <div class="flex items-center">
                         <span class="text-lg font-bold text-primary-blue mr-3">2</span>
                         <div>
-                            <span class="text-medium">Software Engineering</span>
-                            <span class="heat-indicator">🔥🔥🔥🔥</span>
+                            <a href="/pages/service/course_details_page.html?code=CITS5502" 
+                               class="middle-heading hover:text-primary-blue transition-all duration-300 ease-in-out hover:scale-105 inline-block">
+                                Software Engineering
+                            </a>
+                            <div class="flex items-center mt-1">
+                                <div class="flex text-yellow-400">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                </div>
+                                <span class="ml-2 text-sm text-gray-600">(4.9)</span>
+                            </div>
                         </div>
                     </div>
-                    <span class="rating-stars">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                        </svg>
-                      <span class="ml-1">4.9</span>
-                    </span>
+                    <div class="flex items-center gap-4">
+                        <span class="text-gray-600">Dr. Sarah Johnson</span>
+                    </div>
                 </li>
-                <li class="flex items-center justify-between hover-up">
+                <li class="flex items-center justify-between hover-up py-4 px-6">
                     <div class="flex items-center">
                         <span class="text-lg font-bold text-primary-blue mr-3">3</span>
                         <div>
-                            <span class="text-medium">Artificial Intelligence</span>
-                            <span class="heat-indicator">🔥🔥🔥</span>
+                            <a href="/pages/service/course_details_page.html?code=CITS5503" 
+                               class="middle-heading hover:text-primary-blue transition-all duration-300 ease-in-out hover:scale-105 inline-block">
+                                Artificial Intelligence
+                            </a>
+                            <div class="flex items-center mt-1">
+                                <div class="flex text-yellow-400">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                </div>
+                                <span class="ml-2 text-sm text-gray-600">(4.9)</span>
+                            </div>
                         </div>
                     </div>
-                    <span class="rating-stars">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                        </svg>
-                      <span class="ml-1">4.9</span>
-                    </span>
+                    <div class="flex items-center gap-4">
+                        <span class="text-gray-600">Dr. Michael Brown</span>
+                    </div>
                 </li>
             </ul>
         </div>

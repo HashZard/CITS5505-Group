@@ -52,80 +52,85 @@
             </div>
         </div>
 
-        <!-- Course Materials Section -->
-        <!--<div class="card card-hover mb-8">
-            <h2 class="middle-heading mb-6">Uploaded Course Materials</h2>
-            <div class="overflow-x-auto">
-                <table class="min-w-full">
-                    <thead>
-                        <tr class="border-b">
-                            <th class="typography-default text-left py-3">Material Name</th>
-                            <th class="typography-default text-left py-3">Course</th>
-                            <th class="typography-default text-left py-3">Upload Date</th>
-                            <th class="typography-default text-left py-3">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="py-3">Week 1 Notes.pdf</td>
-                            <td class="py-3">Data Structures</td>
-                            <td class="py-3">2024-03-15</td>
-                            <td class="py-3">
-                                <button class="custom-small-btn">View</button>
-                                
-                            </td>
-                        </tr>
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="py-3">Assignment 1 Solution.pdf</td>
-                            <td class="py-3">Web Development</td>
-                            <td class="py-3">2024-03-14</td>
-                            <td class="py-3">
-                                <button class="custom-small-btn">View</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>-->
-
         <!-- Favorite Courses Section -->
         <div class="featured-section">
             <h2 class="middle-heading mb-6">Favorite Courses</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Favorite Course Card 1 -->
-                <div class="card glass-card card-hover hover-scale fade-in">
-                    <img src="/assets/images/course-placeholder.jpg" alt="Course 1" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="middle-heading">Data Structures and Algorithms</h3>
-                        <div class="flex items-center mb-2">
-                            <div class="flex items-center rating-stars">
-                                <!--star icon -->
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                </svg>
-                                <span class="ml-1">4.9</span>
-                            </div>
-                            <span class="typography-default px-4">(89 reviews)</span>
+                <div class="course-card glass-card h-[400px] flex flex-col border border-gray-200 rounded-2xl hover:border-primary-blue hover:shadow-lg transition-all duration-300">
+                    <div class="overflow-hidden rounded-t-2xl">
+                        <img src="/assets/images/course-placeholder.jpg" alt="Course 1" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="course-card-content flex-1 flex flex-col p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="middle-heading line-clamp-2">Data Structures and Algorithms</h3>
+                            <span class="tag ml-2 flex-shrink-0">Popular</span>
                         </div>
-                        <button class="custom-small-btn hover-up w-full">View Details</button>
+                        <div class="flex items-center mb-4 rating-stars">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                            </svg>
+                            <span class="ml-1">4.9</span>
+                            <span class="typography-default px-2 text-gray-600">(89 reviews)</span>
+                        </div>
+                        <a class="custom-small-btn btn-full-width hover-up mt-auto"
+                           href="/pages/service/course_details_page.html?code=CITS5501">
+                            View Details
+                        </a>
                     </div>
                 </div>
 
-            <!-- Favorite Course Card 2 -->
-            <div class="card glass-card card-hover hover-scale fade-in">
-                <img src="/assets/images/course-placeholder.jpg" alt="Course 2" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="middle-heading">Web Development Fundamentals</h3>
-                    <div class="flex items-center mb-2">
-                        <div class="flex items-center rating-stars">
+                <!-- Favorite Course Card 2 -->
+                <div class="course-card glass-card h-[400px] flex flex-col border border-gray-200 rounded-2xl hover:border-primary-blue hover:shadow-lg transition-all duration-300">
+                    <div class="overflow-hidden rounded-t-2xl">
+                        <img src="/assets/images/course-placeholder.jpg" alt="Course 2" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="course-card-content flex-1 flex flex-col p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="middle-heading line-clamp-2">Web Development Fundamentals</h3>
+                            <span class="tag ml-2 flex-shrink-0">New</span>
+                        </div>
+                        <div class="flex items-center mb-4 rating-stars">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                             </svg>
                             <span class="ml-1">4.7</span>
+                            <span class="typography-default px-2 text-gray-600">(76 reviews)</span>
                         </div>
-                        <span class="typography-default px-4">(76 reviews)</span>
+                        <a class="custom-small-btn btn-full-width hover-up mt-auto"
+                           href="/pages/service/course_details_page.html?code=CITS5502">
+                            View Details
+                        </a>
                     </div>
-                    <button class="custom-small-btn hover-up w-full">View Details</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Private Messages List -->
+        <div class="fixed right-8 bottom-24 z-40">
+            <button id="messageBtn" class="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full p-4 shadow-lg hover:from-blue-700 hover:to-blue-600 transition-all duration-200 opacity-95 hover:opacity-100 hover:scale-110 relative">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                </svg>
+                <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white"></span>
+            </button>
+        </div>
+        
+        <!-- Message Container -->
+        <div id="messageContainer" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+            <div class="absolute right-8 bottom-32 w-96 bg-white rounded-lg shadow-xl transform transition-all duration-300">
+                <div class="p-4 flex flex-col max-h-[500px]">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="middle-heading">My Messages</h2>
+                        <button id="closeMessageBtn" class="text-gray-500 hover:text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="messagesContainer" class="flex-1 overflow-y-auto space-y-2">
+                        <!-- Messages will be loaded dynamically via JavaScript -->
+                    </div>
                 </div>
             </div>
         </div>
