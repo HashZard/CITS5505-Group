@@ -69,26 +69,39 @@ def get_course_detail(code):
     }
 
 
-def create_course_rating(user_id, course_code, data):
+def upsert_course_rating(user_id, course_code, data):
     rating = data.get("rating")
     comment = data.get("comment", "")
 
     if not rating or not (1 <= rating <= 5):
         return False, "Invalid rating"
 
-    course_rating = CourseRating(
-        course_code=course_code,
-        user_id=user_id,
-        rating=rating,
-        comment=comment,
-    )
     try:
-        db.session.add(course_rating)
+        # check if the user has already rated this course
+        existing = CourseRating.query.filter_by(user_id=user_id, course_code=course_code).first()
+
+        if existing:
+            # update existing rating
+            existing.rating = rating
+            existing.comment = comment
+            message = "Rating updated"
+        else:
+            # create new rating
+            new_rating = CourseRating(
+                course_code=course_code,
+                user_id=user_id,
+                rating=rating,
+                comment=comment
+            )
+            db.session.add(new_rating)
+            message = "Rating created"
+
         db.session.commit()
-        return True, "Success"
+        return True, message
+
     except Exception as e:
-        print(f"Error while inserting into course_rating: {e}")
-        db.session.rollback()  # rollback the session in case of error
+        print(f"Error during upsert course_rating: {e}")
+        db.session.rollback()
         return False, "Database error"
 
 
@@ -139,11 +152,9 @@ def get_course_files(course_code):
 UPLOAD_FOLDER = "backend/uploads"
 
 
-def upload_course_file(course_code, uploaded_file):
+def upload_course_file(user_id, course_code, uploaded_file, descriptions):
     if not uploaded_file:
         return False, "No file provided"
-
-    url = f"/upload/{uploaded_file.filename}"
 
     file_hash = get_file_hash(uploaded_file)
 
@@ -155,21 +166,26 @@ def upload_course_file(course_code, uploaded_file):
     filename = secure_filename(uploaded_file.filename)
     save_path = os.path.join(UPLOAD_FOLDER, filename)
     uploaded_file.save(save_path)
-    url = f"/uploads/{filename}"
 
     file_record = File(
+        uploader_id=user_id,  # Placeholder for uploader ID
         course_code=course_code,
+        filename=filename,
+        description=descriptions,
         hash=file_hash,
-        name=uploaded_file.filename,
-        url=url,
-        uploaded_at=datetime.now(UTC)
+        file_path=save_path,
     )
+
     try:
         db.session.add(file_record)
         db.session.commit()
-        return True, url
+        return True, file_record.to_dict()
     except:
+        import traceback
         print("Error while trying to insert data in file table")
+        traceback.print_exc()  # ✅ 打印堆栈信息
+        db.session.rollback()
+    return False, "Database error"
 
 
 def get_file_hash(file):

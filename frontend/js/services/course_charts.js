@@ -1,3 +1,4 @@
+let ratingChartInstance = null;
 
 /**
  * Render the rating distribution chart with dynamic data.
@@ -7,7 +8,12 @@
 export function renderRatingChart(ctx, ratingData = {}) {
     const orderedRatings = [5, 4, 3, 2, 1].map(star => ratingData[star] || 0);
 
-    new Chart(ctx, {
+    // ✅ 如果已经有旧图表，先销毁
+    if (ratingChartInstance) {
+        ratingChartInstance.destroy();
+    }
+
+    ratingChartInstance = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ['5 ★', '4 ★', '3 ★', '2 ★', '1 ★'],
@@ -21,14 +27,23 @@ export function renderRatingChart(ctx, ratingData = {}) {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { display: false }
+                legend: {display: false},
+                tooltip: {
+                    callbacks: {
+                        label: context => `Votes: ${context.raw}`
+                    }
+                }
             },
             scales: {
                 y: {
                     beginAtZero: true,
-                    max: 50,
+                    // ✅ 自动根据最大值生成 y 轴刻度
                     ticks: {
-                        callback: value => value + '%'
+                        precision: 0  // 显示整数
+                    },
+                    title: {
+                        display: true,
+                        text: 'Number of Ratings'
                     }
                 }
             }
@@ -66,7 +81,7 @@ export function renderCourseCharts() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: false },
+                    legend: {display: false},
                     tooltip: {
                         mode: 'index',
                         intersect: false,
@@ -78,15 +93,15 @@ export function renderCourseCharts() {
                 scales: {
                     y: {
                         beginAtZero: true,
-                        title: { display: true, text: 'Number of Reviews' },
-                        ticks: { stepSize: 10 }
+                        title: {display: true, text: 'Number of Reviews'},
+                        ticks: {stepSize: 10}
                     },
                     x: {
-                        grid: { display: false },
-                        title: { display: true, text: 'Month' }
+                        grid: {display: false},
+                        title: {display: true, text: 'Month'}
                     }
                 },
-                interaction: { intersect: false, mode: 'index' }
+                interaction: {intersect: false, mode: 'index'}
             }
         });
     }
@@ -107,7 +122,7 @@ export function renderCourseCharts() {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
+                plugins: {legend: {display: false}},
                 cutout: '70%'
             }
         });
@@ -131,7 +146,7 @@ export function renderCourseCharts() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: false },
+                    legend: {display: false},
                     tooltip: {
                         callbacks: {
                             label: context => context.raw + '%'
@@ -147,7 +162,7 @@ export function renderCourseCharts() {
                         }
                     },
                     y: {
-                        grid: { display: false }
+                        grid: {display: false}
                     }
                 },
                 barPercentage: 0.6,

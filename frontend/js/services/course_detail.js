@@ -7,9 +7,15 @@ const reviewsPerPage = 5;
 // Private message related functionality
 let currentRecipient = '';
 
-function getCourseCodeFromURL() {
+function getCourseCode() {
     const params = new URLSearchParams(window.location.search);
-    return params.get("code") || "";
+    const codeFromUrl = params.get("code");
+    if (codeFromUrl) return codeFromUrl;
+
+    const el = document.getElementById("courseCode");
+    if (el) return el.dataset.code || el.textContent.trim() || "";
+
+    return "";
 }
 
 async function loadReviews(code, page = 1, perPage = 5) {
@@ -103,7 +109,7 @@ async function loadReviews(code, page = 1, perPage = 5) {
 }
 
 async function loadCourseDetails() {
-    const code = getCourseCodeFromURL();
+    const code = getCourseCode();
     if (!code) {
         alert('No course code provided.');
         return;
@@ -115,9 +121,9 @@ async function loadCourseDetails() {
 
         if (result.success) {
             const course = result.data;
-            document.querySelector('h1.custom-heading').textContent = course.name;
-            document.querySelector('p.middle-heading').textContent = course.code;
-            document.querySelector('p.typography-default').textContent = course.description || 'No description available.';
+            document.getElementById("courseName").textContent = course.name;
+            document.getElementById("courseCode").textContent = course.code;
+            document.getElementById("courseDescription").textContent = course.description || "No description available.";
             document.body.dataset.courseId = course.id;
         } else {
             alert(result.message || 'Failed to load course details');
@@ -137,7 +143,7 @@ async function submitRating() {
     }
 
     try {
-        const courseCode = getCourseCodeFromURL();
+        const courseCode = getCourseCode();
         const response = await fetch(`/api/courses/${courseCode}/rate`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -147,8 +153,7 @@ async function submitRating() {
         const result = await response.json();
         if (result.success) {
             alert("Rating submitted!");
-            input.disabled = true;
-            document.getElementById("submitRatingBtn").disabled = true;
+            await loadRatingChart();
         } else {
             alert("Failed to submit rating: " + result.message);
         }
@@ -167,7 +172,7 @@ async function submitComment() {
     }
 
     try {
-        const courseCode = getCourseCodeFromURL();
+        const courseCode = getCourseCode();
         const response = await fetch(`/api/courses/${courseCode}/comment`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -193,7 +198,7 @@ async function submitComment() {
 let isFavorited = false;
 
 async function toggleFavorite() {
-    const code = getCourseCodeFromURL();
+    const code = getCourseCode();
     try {
         const res = await fetch(`/api/courses/${code}/favorite`, {
             method: "POST"
@@ -241,7 +246,7 @@ function updateFavoriteButton() {
 }
 
 async function checkFavoriteStatus() {
-    const code = getCourseCodeFromURL();
+    const code = getCourseCode();
     const res = await fetch('/api/user/profile');
     const data = await res.json();
     const favCodes = data.user.favourite_courses.map(c => c.code);
@@ -251,7 +256,7 @@ async function checkFavoriteStatus() {
 
 
 async function loadRatingChart() {
-    const code = getCourseCodeFromURL();
+    const code = getCourseCode();
     const ctx = document.getElementById("ratingChart")?.getContext("2d");
     if (!ctx || !code) return;
 
@@ -276,7 +281,7 @@ export async function initCourseDetailPage() {
     const loadMoreBtn = document.getElementById("loadMoreBtn");
     const favoriteBtn = document.getElementById("favoriteBtn");
 
-    const courseCode = getCourseCodeFromURL();
+    const courseCode = getCourseCode();
 
     if (ratingBtn) ratingBtn.addEventListener("click", submitRating);
     if (commentBtn) commentBtn.addEventListener("click", submitComment);

@@ -1,52 +1,75 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Form validation and file upload handling
-    const form = document.getElementById('createCourseForm');
-    const fileUpload = document.getElementById('fileUpload');
-    const fileList = document.getElementById('fileList');
-    const dropZone = document.querySelector('.border-dashed');
+export function initFileUpload({
+                                   fileInputId,
+                                   descInputId,
+                                   uploadBtnId = null,
+                                   formId = null,
+                                   fileListId,
+                                   uploadUrl,
+                                   onSuccess = null
+                               } = {}) {
+    const fileInput = document.getElementById(fileInputId);
+    const descInput = document.getElementById(descInputId);
+    const form = formId ? document.getElementById(formId) : null;
+    const uploadBtn = uploadBtnId ? document.getElementById(uploadBtnId) : null;
+    const fileList = fileListId ? document.getElementById(fileListId) : null;
+
+    if (!fileInput || !descInput || (!uploadBtn && !form)) {
+        console.error("Upload elements not found:", fileInputId, descInputId, uploadBtnId || formId);
+        return;
+    }
+
+    fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+        if (fileList) {
+            fileList.textContent = file ? file.name : "";
+        }
+    });
+
+    const handleSubmit = async (e) => {
+        if (e) e.preventDefault();
+
+        const file = fileInput.files[0];
+        const description = descInput.value.trim();
+
+        if (!file) {
+            alert("Please select a file to upload.");
+            return;
+        }
+
+        if (!description) {
+            alert("Please enter a description.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("description", description);
+
+        try {
+            const res = await fetch(uploadUrl, {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await res.json();
+            if (result.success) {
+                alert("✅ Upload successful!");
+                fileInput.value = "";
+                descInput.value = "";
+                if (fileList) fileList.textContent = "";
+                if (typeof onSuccess === "function") onSuccess(result.file);
+            } else {
+                alert("❌ Upload failed: " + result.message);
+            }
+        } catch (err) {
+            console.error("Upload error:", err);
+            alert("❌ Network error during file upload.");
+        }
+    };
 
     if (form) {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            // Add form submission logic here
-        });
+        form.addEventListener("submit", handleSubmit);
+    } else if (uploadBtn) {
+        uploadBtn.addEventListener("click", handleSubmit);
     }
-
-    if (fileUpload && fileList) {
-        fileUpload.addEventListener('change', function (e) {
-            fileList.innerHTML = '';
-            Array.from(this.files).forEach(file => {
-                const fileItem = document.createElement('div');
-                fileItem.className = 'flex items-center gap-2 mt-2';
-                fileItem.innerHTML = `
-                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                    </svg>
-                    <span>${file.name}</span>
-                `;
-                fileList.appendChild(fileItem);
-            });
-        });
-    }
-
-    if (dropZone && fileUpload) {
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('border-purple-blue-600');
-        });
-
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('border-purple-blue-600');
-        });
-
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('border-purple-blue-600');
-            const files = e.dataTransfer.files;
-            fileUpload.files = files;
-            const event = new Event('change');
-            fileUpload.dispatchEvent(event);
-        });
-    }
-});
+}

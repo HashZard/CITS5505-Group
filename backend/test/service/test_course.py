@@ -71,7 +71,7 @@ class CourseApiTest(unittest.TestCase):
 
         # Step 5: Verify the course in DB
         with self.app.app_context():
-            course = Course.query.get(course_code)
+            course = Course.query.filter_by(code=course_code).first()
             self.assertIsNotNone(course)
             self.assertEqual(course.code, unique_code)
             self.assertEqual(course.name, name)
