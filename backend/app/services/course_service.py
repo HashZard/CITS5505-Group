@@ -143,13 +143,31 @@ def get_course_comments(course_code, page=1, per_page=5):
 
 def get_course_files(course_code):
     files = File.query.filter_by(course_code=course_code).all()
-    return [
-        {"name": f.name, "url": f.url, "uploaded_at": f.uploaded_at.isoformat()}
-        for f in files
-    ]
+    return [{
+        "id": f.id,
+        "filename": f.filename,
+        "description": f.description,
+        "uploaded_at": f.updated_gmt.strftime("%Y-%m-%d %H:%M"),
+        "uploader": f.uploader.email,
+        "download_url": f"/uploads/{f.course_code}/{f.filename}"  # adjust if needed
+    } for f in files]
 
 
 UPLOAD_FOLDER = "backend/uploads"
+
+
+def get_course_file(course_code, filename):
+    safe_filename = secure_filename(filename)
+    course_folder = os.path.join(UPLOAD_FOLDER, course_code)
+    full_path = os.path.join(course_folder, safe_filename)
+
+    if not os.path.isfile(full_path):
+        return None
+
+    return {
+        "directory": course_folder,
+        "filename": safe_filename
+    }
 
 
 def upload_course_file(user_id, course_code, uploaded_file, descriptions):
@@ -164,7 +182,10 @@ def upload_course_file(user_id, course_code, uploaded_file, descriptions):
         return False, "Duplicate file content detected"
 
     filename = secure_filename(uploaded_file.filename)
-    save_path = os.path.join(UPLOAD_FOLDER, filename)
+    course_folder = os.path.join(UPLOAD_FOLDER, course_code)
+    os.makedirs(course_folder, exist_ok=True)
+
+    save_path = os.path.join(course_folder, filename)
     uploaded_file.save(save_path)
 
     file_record = File(

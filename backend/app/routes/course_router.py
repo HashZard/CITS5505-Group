@@ -1,4 +1,6 @@
-from flask import Blueprint, request, jsonify, session
+import os
+
+from flask import Blueprint, request, jsonify, session, abort, send_from_directory
 from backend.app.services.course_service import (
     create_course,
     upsert_course_rating,
@@ -6,7 +8,7 @@ from backend.app.services.course_service import (
     get_course_files,
     upload_course_file,
     get_course_instructors, search_courses, get_course_detail, get_course_comments, get_rating_distribution,
-    add_course_to_favorites
+    add_course_to_favorites, get_course_file
 )
 from backend.app.utils.auth_utils import login_required
 
@@ -92,11 +94,26 @@ def get_course_comments_route(course_code):
 
 @course_bp.route("/<string:course_code>/files", methods=["GET"])
 def get_course_files_route(course_code):
-    return jsonify({"files": get_course_files(course_code)})
+    return jsonify({"success": True, "files": get_course_files(course_code)})
+
+
+@course_bp.route("/<string:course_code>/files/download/<path:filename>", methods=["GET"])
+def download_course_file(course_code, filename):
+    file_info = get_course_file(course_code, filename)
+
+    if not file_info:
+        print("File not found in database")
+        abort(404, description="File not found")
+
+    return send_from_directory(
+        directory=os.path.abspath(file_info["directory"]),
+        path=file_info["filename"],
+        as_attachment=True
+    )
 
 
 @course_bp.route("/<string:course_code>/files/upload", methods=["POST"])
-@login_required
+# @login_required
 def course_file(course_code):
     user_id = session.get("user_id")
     uploaded_file = request.files.get("file")

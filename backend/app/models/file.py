@@ -15,6 +15,7 @@ class File(BaseModel):
     file_path = db.Column(db.String(255), nullable=False)
 
     course = db.relationship('Course', backref='files')
+    uploader = db.relationship("User", backref="uploaded_files")
 
     def to_dict(self):
         return {
