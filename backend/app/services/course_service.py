@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 from sqlalchemy import func
 
 from backend.app.models import db
-from backend.app.models.course import Course
+from backend.app.models.course import Course, CourseStatus
 from backend.app.models.instructor import Instructor
 from backend.app.models.course_rating import CourseRating
 from backend.app.models.course_instructor import CourseInstructor
@@ -28,16 +28,43 @@ def create_course(data):
     course = Course(
         code=data["code"],
         name=data["name"],
-        description=data["description"]
+        description=data["description"],
+        status=CourseStatus.PENDING
     )
     try:
         db.session.add(course)
         db.session.commit()
         return True, course.code
-
     except:
         print("Error while trying to insert data in course table")
 
+
+def vote_on_course(course_code, agree=True, threshold=5):
+    course = Course.query.filter_by(code=course_code).first()
+    if not course:
+        return False, "Course not found"
+
+    if course.status != CourseStatus.PENDING:
+        return False, f"Voting closed. Current status: {course.status.value}"
+
+    # update vote counts
+    if agree:
+        course.agree_votes += 1
+    else:
+        course.disagree_votes += 1
+
+    # check if the course should be activated or rejected
+    if course.agree_votes >= threshold:
+        course.status = CourseStatus.ACTIVE
+    elif course.disagree_votes >= threshold:
+        course.status = CourseStatus.REJECTED
+
+    db.session.commit()
+    return True, {
+        "status": course.status.value,
+        "agree_votes": course.agree_votes,
+        "disagree_votes": course.disagree_votes
+    }
 
 def search_courses(keyword, page=1, per_page=10):
     if not keyword:

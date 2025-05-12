@@ -56,25 +56,28 @@
                 card.innerHTML = `
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div class="flex-1">
-                            <h3 class="course-card-title mb-2">${course.name}</h3>
-                            <p class="typography-default mb-4">${course.description || "No description."}</p>
-                            <div class="flex items-center gap-4">
+                            <div class="flex items-center justify-between mb-1">
+                                <h3 class="course-card-title">${course.name}</h3>
+                                <span class="badge ${getStatusBadgeClass(course.status)}">${course.status}</span>
+                            </div>
+                            <p class="typography-default mb-2">${course.description || "No description."}</p>
+                            <div class="flex items-center gap-2 mb-2">
                                 <span class="tag">${course.code}</span>
-                                <span class="rating-stars">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                                    </svg>
-                                    <span class="ml-1">${course.rating || 'N/A'}</span>
-                                </span>
+                            </div>
+                            <div class="flex gap-2 mt-2">
+                                <a href="/pages/service/course_details_page.html?code=${course.code}" class="custom-small-btn hover-up">
+                                    View Details
+                                </a>
+                                ${course.status === "PENDING" ? `
+                                    <button class="custom-small-btn hover-up" onclick="vote('${course.code}', true)">
+                                        👍Agree (${course.agree_votes || 0})
+                                    </button>
+                                    <button class="custom-small-btn hover-up" onclick="vote('${course.code}', false)">
+                                        👎 Disagree (${course.disagree_votes || 0})
+                                    </button>
+                                ` : ""}
                             </div>
                         </div>
-                        <a href="/pages/service/course_details_page.html?code=${course.code}" 
-                           class="custom-small-btn hover-up">
-                            View Details
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                            </svg>
-                        </a>
                     </div>
                 `;
                 courseList.appendChild(card);
@@ -83,8 +86,42 @@
             renderPagination(result.pagination.page, result.pagination.pages, perPage);
         } catch (error) {
             console.error('Error loading courses:', error);
-            document.getElementById('course-list').innerHTML = 
+            document.getElementById('course-list').innerHTML =
                 '<div class="alert-card-yellow fade-in"><p class="text-red-500">Error loading search results.</p></div>';
+        }
+    }
+
+    async function vote(courseCode, agree) {
+        try {
+            const res = await fetch(`/api/courses/${courseCode}/vote`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({agree})
+            });
+            const result = await res.json();
+            if (result.success) {
+                alert(`Vote submitted. Status: ${result.result.status}`);
+                loadCourses();
+            } else {
+                alert(result.message || 'Vote failed');
+            }
+        } catch (err) {
+            console.error("Vote error:", err);
+            alert("Network error");
+        }
+    }
+    window.vote = vote;
+
+    function getStatusBadgeClass(status) {
+        switch (status) {
+            case "ACTIVE":
+                return "badge-green";
+            case "PENDING":
+                return "badge-yellow";
+            case "REJECTED":
+                return "badge-red";
+            default:
+                return "badge-gray";
         }
     }
 
@@ -112,4 +149,4 @@
     loadCourses();
 </script>
 </body>
-</html> 
+</html>

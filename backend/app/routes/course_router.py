@@ -8,7 +8,7 @@ from backend.app.services.course_service import (
     get_course_files,
     upload_course_file,
     get_course_instructors, search_courses, get_course_detail, get_course_comments, get_rating_distribution,
-    add_course_to_favorites, get_course_file
+    add_course_to_favorites, get_course_file, vote_on_course
 )
 from backend.app.utils.auth_utils import login_required
 
@@ -23,6 +23,21 @@ def create_course_route():
     if not success:
         return jsonify({"success": False, "message": result}), 400
     return jsonify({"success": True, "course_code": result})
+
+
+@course_bp.route("/<string:course_code>/vote", methods=["POST"])
+def vote_course_route(course_code):
+    data = request.get_json() or {}
+    agree = data.get("agree")
+
+    if agree is None:
+        return jsonify({"success": False, "message": "Missing 'agree' field"}), 400
+
+    success, result = vote_on_course(course_code, agree=bool(agree))
+    if not success:
+        return jsonify({"success": False, "message": result}), 400
+
+    return jsonify({"success": True, "result": result})
 
 
 @course_bp.route('/search', methods=['GET'])
