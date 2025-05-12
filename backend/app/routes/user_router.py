@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 
-from backend.app.services.user_service import get_user_profile, update_user_profile
+from backend.app.services.user_service import get_user_profile, update_user_profile, send_message, get_inbox_messages
 from backend.app.utils.auth_utils import login_required
 
 user_bp = Blueprint('user', __name__, url_prefix='/api/user')
@@ -42,3 +42,29 @@ def update_profile_route():
         return jsonify({"success": False, "message": result}), 500
 
     return jsonify({"success": True, "message": "Profile updated successfully"})
+
+
+@user_bp.route('/message/send', methods=['POST'])
+@login_required
+def send_message_route():
+    data = request.get_json() or {}
+    receiver_email = data.get("receiver_email")
+    content = data.get("content")
+    sender_id = session.get("user_id")
+
+    if not receiver_email or not content:
+        return jsonify({"success": False, "message": "Missing receiver email or content"}), 400
+
+    success, result = send_message(sender_id, receiver_email, content)
+    if success:
+        return jsonify({"success": True, "message_id": result})
+    else:
+        return jsonify({"success": False, "message": result}), 400
+
+
+@user_bp.route('/message/inbox', methods=['GET'])
+@login_required
+def inbox_route():
+    user_id = session.get("user_id")
+    messages = get_inbox_messages(user_id)
+    return jsonify({"success": True, "messages": messages})

@@ -352,20 +352,28 @@ function initMessageFeature() {
         }
 
         try {
-            // This should call the backend API to send the message
-            // Using mock data for now
-            console.log('Sending message:', {
-                recipient: currentRecipient,
-                content: messageContent
+            const res = await fetch('/api/user/message/send', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    receiver_email: currentRecipient,
+                    content: messageContent
+                })
             });
 
-            alert('Message sent successfully!');
-            closeMessageModal();
+            const result = await res.json();
+            if (result.success) {
+                alert('Message sent successfully!');
+                closeMessageModal();
+            } else {
+                alert(result.message || 'Failed to send message.');
+            }
         } catch (error) {
             console.error('Error sending message:', error);
-            alert('Failed to send message. Please try again later.');
+            alert('Network error. Please try again later.');
         }
     });
+
 }
 
 // Initialize private message functionality when page loads

@@ -155,54 +155,18 @@ async function loadMessages() {
 
     try {
         // This should call the backend API to get the message list
-        // Using mock data for now
-        const mockMessages = [
-            {
-                id: 1,
-                sender: 'alice.smith@student.uwa.edu.au',
-                content: 'Hi! I saw your experience sharing in the CITS5505 course review. I have some questions about project development. How did your team handle requirement changes?',
-                timestamp: '2024-03-15T14:30:00Z',
-                isRead: false
-            },
-            {
-                id: 2,
-                sender: 'prof.david@uwa.edu.au',
-                content: 'Thank you for your course feedback. We are adjusting the course content based on student suggestions, and your input is valuable. If you have any specific suggestions, feel free to continue the discussion.',
-                timestamp: '2024-03-14T09:15:00Z',
-                isRead: true
-            },
-            {
-                id: 3,
-                sender: 'john.doe@student.uwa.edu.au',
-                content: 'Hey! I noticed you\'re also taking CITS5502. Would you like to team up for the final project? I\'m familiar with frontend development and looking for a backend developer.',
-                timestamp: '2024-03-13T16:45:00Z',
-                isRead: false
-            },
-            {
-                id: 4,
-                sender: 'study.group@uwa.edu.au',
-                content: 'Reminder: CITS5505 study group discussion this Saturday at 2 PM in Library 3rd floor. Topic: "Software Testing Strategies". All are welcome!',
-                timestamp: '2024-03-12T11:20:00Z',
-                isRead: true
-            },
-            {
-                id: 5,
-                sender: 'course.admin@uwa.edu.au',
-                content: 'Your course review has been approved by the administrator. Thank you for your detailed feedback, it\'s very helpful for other students.',
-                timestamp: '2024-03-11T10:05:00Z',
-                isRead: true
-            },
-            {
-                id: 6,
-                sender: 'sarah.wilson@student.uwa.edu.au',
-                content: 'Hi! I saw your course notes, they\'re very detailed. May I reference your project report? I\'ll make sure to cite the source.',
-                timestamp: '2024-03-10T15:30:00Z',
-                isRead: false
-            }
-        ];
+        const res = await fetch('/api/user/message/inbox');
+        const result = await res.json();
+
+        if (!result.success || !Array.isArray(result.messages)) {
+            messagesContainer.innerHTML = '<p class="text-gray-500 text-center py-4">No messages</p>';
+            return;
+        }
+
+        const messages = result.messages;
 
         // Update unread indicator
-        const hasUnreadMessages = mockMessages.some(message => !message.isRead);
+        const hasUnreadMessages = messages.some(message => !message.isRead);
         const unreadDot = messageBtn.querySelector('.bg-red-500');
         if (unreadDot) {
             unreadDot.style.display = hasUnreadMessages ? 'block' : 'none';
@@ -212,7 +176,7 @@ async function loadMessages() {
         messagesContainer.innerHTML = '';
 
         // Add messages
-        mockMessages.forEach(message => {
+        messages.forEach(message => {
             const messageDiv = document.createElement('div');
             messageDiv.className = `custom-box-dashed hover:bg-gray-50 transition-colors duration-200 p-3 cursor-pointer ${!message.isRead ? 'bg-blue-50' : ''}`;
             messageDiv.innerHTML = `
@@ -256,7 +220,7 @@ async function loadMessages() {
                     }
 
                     // Update button unread indicator
-                    const hasRemainingUnread = mockMessages.some(m => !m.isRead);
+                    const hasRemainingUnread = messages.some(m => !m.isRead);
                     const buttonUnreadDot = messageBtn.querySelector('.bg-red-500');
                     if (buttonUnreadDot) {
                         buttonUnreadDot.style.display = hasRemainingUnread ? 'block' : 'none';
@@ -299,7 +263,7 @@ async function loadMessages() {
         });
 
         // If no messages, show prompt
-        if (mockMessages.length === 0) {
+        if (messages.length === 0) {
             messagesContainer.innerHTML = '<p class="text-gray-500 text-center py-4">No messages</p>';
         }
     } catch (error) {
