@@ -27,7 +27,7 @@ export function renderRatingChart(ctx, ratingData = {}) {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: {display: false},
+                legend: { display: false },
                 tooltip: {
                     callbacks: {
                         label: context => `Votes: ${context.raw}`
@@ -81,7 +81,7 @@ export function renderCourseCharts() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: {display: false},
+                    legend: { display: false },
                     tooltip: {
                         mode: 'index',
                         intersect: false,
@@ -93,83 +93,19 @@ export function renderCourseCharts() {
                 scales: {
                     y: {
                         beginAtZero: true,
-                        title: {display: true, text: 'Number of Reviews'},
-                        ticks: {stepSize: 10}
+                        title: { display: true, text: 'Number of Reviews' },
+                        ticks: { stepSize: 10 }
                     },
                     x: {
-                        grid: {display: false},
-                        title: {display: true, text: 'Month'}
+                        grid: { display: false },
+                        title: { display: true, text: 'Month' }
                     }
                 },
-                interaction: {intersect: false, mode: 'index'}
+                interaction: { intersect: false, mode: 'index' }
             }
         });
     }
 
-    // difficulty donut chart
-    const donutCtx = document.getElementById('difficultyDonutChart')?.getContext('2d');
-    if (donutCtx) {
-        new Chart(donutCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Easy (1-3)', 'Medium (4-7)', 'Hard (8-10)'],
-                datasets: [{
-                    data: [15, 60, 25],
-                    backgroundColor: ['rgb(34, 197, 94)', 'rgb(234, 179, 8)', 'rgb(239, 68, 68)'],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {legend: {display: false}},
-                cutout: '70%'
-            }
-        });
-    }
-
-    // difficulty bar chart
-    const barCtx = document.getElementById('difficultyBarChart')?.getContext('2d');
-    if (barCtx) {
-        new Chart(barCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Easy (1-3)', 'Medium (4-7)', 'Hard (8-10)'],
-                datasets: [{
-                    data: [15, 60, 25],
-                    backgroundColor: ['rgb(34, 197, 94)', 'rgb(234, 179, 8)', 'rgb(239, 68, 68)'],
-                    borderRadius: 5
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {display: false},
-                    tooltip: {
-                        callbacks: {
-                            label: context => context.raw + '%'
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: {
-                            callback: value => value + '%'
-                        }
-                    },
-                    y: {
-                        grid: {display: false}
-                    }
-                },
-                barPercentage: 0.6,
-                categoryPercentage: 0.8
-            }
-        });
-    }
 
     // rating chart
 
@@ -178,32 +114,79 @@ export function renderCourseCharts() {
     const assessmentCtx = document.getElementById('assessmentChart')?.getContext('2d');
     if (assessmentCtx) {
         new Chart(assessmentCtx, {
-            type: 'pie',
+            type: 'bar',
             data: {
-                labels: ['Project Work', 'Mid-semester Exam', 'Final Exam'],
+                labels: ['Final Exam', 'Mid-semester Exam', 'Project Work', 'Assignment', 'Attendance'],
                 datasets: [{
-                    data: [40, 20, 40],
-                    backgroundColor: ['rgb(59, 130, 246)', 'rgb(234, 179, 8)', 'rgb(239, 68, 68)'],
-                    borderWidth: 0
+                    data: [30, 20, 25, 15, 10],
+                    backgroundColor: [
+                        'rgb(239, 68, 68)',   // red - Final Exam
+                        'rgb(234, 179, 8)',   // yellow - Mid-semester
+                        'rgb(59, 130, 246)',  // blue - Project
+                        'rgb(16, 185, 129)',  // green - Assignment
+                        'rgb(139, 92, 246)'   // purple - Attendance
+                    ],
+                    borderRadius: 5
                 }]
             },
             options: {
+                indexAxis: 'y',
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        display: true,
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            usePointStyle: true,
-                            pointStyle: 'circle'
-                        }
+                        display: false
                     },
                     tooltip: {
                         callbacks: {
-                            label: context => `${context.label}: ${context.raw}%`
+                            label: context => `${context.raw}%`
                         }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            display: true,
+                            drawBorder: true,
+                            drawOnChartArea: true,
+                            drawTicks: true,
+                        },
+                        ticks: {
+                            callback: value => value + '%',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Percentage',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            padding: { top: 10, bottom: 10 }
+                        }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: {
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                barPercentage: 0.8,
+                categoryPercentage: 0.9,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 30,
+                        top: 20,
+                        bottom: 10
                     }
                 }
             }
