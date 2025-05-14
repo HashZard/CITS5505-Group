@@ -5,7 +5,7 @@ from backend.app.models import db
 from backend.app.models.user import User, UserType
 import bcrypt
 
-def main():
+def generate_admin():
     app = create_app()
     with app.app_context():
         email = "admin@example.com"
@@ -23,4 +23,4 @@ def main():
         print(f"✅ Admin account {email} created successfully")
 
 if __name__ == "__main__":
-    main()
+    generate_admin()

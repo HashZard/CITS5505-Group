@@ -24,7 +24,7 @@ class User(BaseModel):
     field = db.Column(db.String(255), nullable=True)
     favourite_courses = db.relationship(
         'Course',
-        secondary=FavouriteCourses,  # ← 这里用变量，不是字符串
+        secondary=FavouriteCourses,
         backref=db.backref('followers', lazy='dynamic'),
         lazy='dynamic'
     )
