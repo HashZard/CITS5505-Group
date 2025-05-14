@@ -8,7 +8,7 @@ from backend.app.services.course_service import (
     get_course_files,
     upload_course_file,
     get_course_instructors, search_courses, get_course_detail, get_course_comments, get_rating_distribution,
-    add_course_to_favorites, get_course_file, vote_on_course
+    add_course_to_favorites, get_course_file, vote_on_course, get_latest_courses, get_top_rated_courses
 )
 from backend.app.utils.auth_utils import login_required
 
@@ -51,6 +51,26 @@ def search_courses_route():
         return jsonify({"success": False, "message": result, "data": []}), 400
 
     return jsonify({"success": True, **result})
+
+
+@course_bp.route('/latest', methods=['GET'])
+def latest_courses_route():
+    limit = int(request.args.get('limit', 3))
+
+    success, result = get_latest_courses(limit)
+    if not success:
+        return jsonify({"success": False, "message": result}), 500
+
+    return jsonify({"success": True, "courses": result})
+
+
+@course_bp.route('/top-rated', methods=['GET'])
+def top_rated_courses_route():
+    limit = int(request.args.get('limit', 3))
+    success, result = get_top_rated_courses(limit)
+    if not success:
+        return jsonify({"success": False, "message": result}), 500
+    return jsonify({"success": True, "courses": result})
 
 
 @course_bp.route('/detail', methods=['GET'])

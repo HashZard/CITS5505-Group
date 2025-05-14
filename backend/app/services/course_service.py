@@ -66,6 +66,7 @@ def vote_on_course(course_code, agree=True, threshold=5):
         "disagree_votes": course.disagree_votes
     }
 
+
 def search_courses(keyword, page=1, per_page=10):
     if not keyword:
         return False, "Keyword is required", []
@@ -80,6 +81,53 @@ def search_courses(keyword, page=1, per_page=10):
 
     result = paginate_query(query, page, per_page)
     return True, result
+
+
+def get_latest_courses(limit=3):
+    try:
+        courses = Course.query.order_by(Course.created_gmt.desc()).limit(limit).all()
+        return True, [course.to_dict() for course in courses]
+    except Exception as e:
+        return False, str(e)
+
+
+def get_top_rated_courses(limit=3):
+    try:
+        subquery = (
+            db.session.query(
+                CourseRating.course_code,
+                func.count().label('rating_count'),
+                func.avg(CourseRating.rating).label('avg_rating')
+            )
+            .group_by(CourseRating.course_code)
+            # .having(func.count() >= 2)
+            .subquery()
+        )
+
+        results = (
+            db.session.query(
+                Course.code,
+                Course.name,
+                subquery.c.avg_rating,
+                subquery.c.rating_count
+            )
+            .join(subquery, Course.code == subquery.c.course_code)
+            .order_by(subquery.c.avg_rating.desc())
+            .limit(limit)
+            .all()
+        )
+
+        top_courses = [{
+            "code": row.code,
+            "name": row.name,
+            "avg_rating": round(row.avg_rating, 2),
+            "rating_count": row.rating_count
+        } for row in results]
+
+        return True, top_courses
+
+    except Exception as e:
+        return False, str(e)
 
 
 def get_course_detail(code):
