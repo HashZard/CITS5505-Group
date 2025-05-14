@@ -71,7 +71,15 @@ async function checkLoginRedirect() {
         if (!data.logged_in) {
             redirectToLogin();
         }
-
+        // ✅ hide login and signup buttons(if they exist)
+        const loginBtn = document.getElementById("loginBtn");
+        if (loginBtn) {
+            loginBtn.style.visibility = "hidden";
+        }
+        const signupBtn = document.getElementById("signupBtn");
+        if (signupBtn) {
+            signupBtn.style.visibility = "hidden";
+        }
         document.body.classList.remove('invisible');
         document.dispatchEvent(new CustomEvent('LayoutReady'));
     } catch (err) {

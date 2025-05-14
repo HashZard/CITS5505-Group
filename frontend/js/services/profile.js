@@ -109,13 +109,10 @@ function initEditProfileFeature() {
 
         try {
             const res = await fetch('/api/user/profile', {
-                method: 'POST',
-                headers: {
+                method: 'POST', headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: newName,
-                    department: newDepartment
+                }, body: JSON.stringify({
+                    name: newName, department: newDepartment
                 })
             });
 
@@ -246,18 +243,41 @@ async function loadMessages() {
                 replyBtn.classList.remove('hidden');
             });
 
-            sendBtn.addEventListener('click', (e) => {
+            sendBtn.addEventListener('click', async (e) => {
                 e.stopPropagation();
-                const replyContent = messageDiv.querySelector('textarea').value;
-                if (replyContent.trim()) {
-                    // This should call the backend API to send the reply
-                    console.log('Sending reply:', replyContent);
-                    // Clear input and hide reply section
-                    messageDiv.querySelector('textarea').value = '';
-                    replySection.classList.add('hidden');
-                    replyBtn.classList.remove('hidden');
+
+                const replyTextarea = messageDiv.querySelector('textarea');
+                const replyContent = replyTextarea.value.trim();
+
+                if (!replyContent) {
+                    alert("Please enter your reply.");
+                    return;
+                }
+
+                const receiverEmail = message.sender_email || message.sender; // 假设 message.sender 是 email
+
+                try {
+                    const res = await fetch('/api/user/message/send', {
+                        method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
+                            receiver_email: receiverEmail, content: replyContent
+                        })
+                    });
+
+                    const result = await res.json();
+                    if (result.success) {
+                        alert("Reply sent successfully!");
+                        replyTextarea.value = "";
+                        replySection.classList.add('hidden');
+                        replyBtn.classList.remove('hidden');
+                    } else {
+                        alert(result.message || "Failed to send reply.");
+                    }
+                } catch (err) {
+                    console.error("Reply error:", err);
+                    alert("Network error, please try again later.");
                 }
             });
+
 
             messagesContainer.appendChild(messageDiv);
         });

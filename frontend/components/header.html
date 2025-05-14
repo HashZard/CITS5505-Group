@@ -11,7 +11,8 @@
     <div class="relative">
         <input id="header-search-input" type="text" placeholder="Search a course"
                class="mr-2 px-4 pr-10 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300 focus:border-purple-blue-500 transition duration-300">
-        <button id="header-search-btn" type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
+        <button id="header-search-btn" type="button"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
@@ -19,10 +20,12 @@
             </svg>
         </button>
     </div>
-    <a class="custom-small-btn" href="/pages/auth/login.html">Log in</a>
-    <a class="custom-small-btn" href="/pages/auth/register.html">Sign Up</a>
+    <a id="loginBtn" class="custom-small-btn" href="/pages/auth/login.html">Log in</a>
+    <a id="signupBtn" class="custom-small-btn" href="/pages/auth/register.html">Sign Up</a>
     </button>
 </div>
+
+
 <!-- Under the small screen device, the page will render a "hamburger" button. -->
 <button onclick="(() => { this.closest('.group').classList.toggle('open')})()" class="flex  lg:hidden">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -35,7 +38,8 @@
     <div class="relative w-full">
         <input id="header-search-input-mobile" type="text" placeholder="Search..."
                class="w-full py-2 px-4 pr-10 text-sm border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-blue-300 focus:border-purple-blue-500 transition duration-300">
-        <button id="header-search-btn-mobile" type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
+        <button id="header-search-btn-mobile" type="button"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-purple-blue-600 transition duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
@@ -46,6 +50,8 @@
     <a class="nav-link" href="/index.html">Home</a>
     <a class="nav-link" href="/pages/service/profile.html">My profile</a>
     <a class="nav-link" href="/pages/service/create_course_page.html">Create a new course</a>
-    <button class="custom-small-btn" href="/pages/auth/login">Login in</button>
-    <button class="custom-small-btn" href="/pages/auth/register">Sign Up</button>
+    <button id="loginBtnMobile" class="custom-small-btn" onclick="location.href='/pages/auth/login.html'">Log in
+    </button>
+    <button id="signupBtnMobile" class="custom-small-btn" onclick="location.href='/pages/auth/register.html'">Sign Up
+    </button>
 </nav>
