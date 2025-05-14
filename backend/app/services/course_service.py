@@ -24,11 +24,27 @@ def create_course(data):
     if not all(field in data for field in required_fields):
         return False, "Missing course fields"
 
+    # handle structure field
+    raw_structure = data.get("scoreStructure", {})
+    structure = {}
+
+    for key, value in raw_structure.items():
+        try:
+            weight = int(value)
+        except ValueError:
+            return False, f"Invalid weight for {key}"
+
+        structure[key] = {
+            "enabled": weight > 0,
+            "weight": weight
+        }
+
     # Only required necessary fields for course creation
     course = Course(
         code=data["code"],
         name=data["name"],
         description=data["description"],
+        structure=structure,
         status=CourseStatus.PENDING
     )
     try:
@@ -135,13 +151,7 @@ def get_course_detail(code):
     if not course:
         return False, None
 
-    return True, {
-        "name": course.name,
-        "code": course.code,
-        "description": course.description,
-        "exam_type": course.exam_type,
-        # 其他字段后续可加
-    }
+    return True, course.to_dict()
 
 
 def upsert_course_rating(user_id, course_code, data):

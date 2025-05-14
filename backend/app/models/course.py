@@ -1,6 +1,6 @@
 from enum import Enum
 
-from sqlalchemy import Enum as SQLAlchemyEnum
+from sqlalchemy import Enum as SQLAlchemyEnum, JSON
 
 from backend.app.models import db
 from backend.app.models.basemodel import BaseModel
@@ -25,6 +25,8 @@ class Course(BaseModel):
     agree_votes = db.Column(db.Integer, default=0)
     disagree_votes = db.Column(db.Integer, default=0)
 
+    structure = db.Column(JSON, nullable=True)  # JSON structure for course content, e.g., {"weeks": [{"week": 1, "content": "Introduction"}]}
+
     def to_dict(self):
         return {
             "code": self.code,
@@ -33,5 +35,6 @@ class Course(BaseModel):
             "exam_type": self.exam_type,
             "status": self.status.value,
             "agree_votes": self.agree_votes,
-            "disagree_votes": self.disagree_votes
+            "disagree_votes": self.disagree_votes,
+            "structure": self.structure or {}
         }

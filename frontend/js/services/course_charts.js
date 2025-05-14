@@ -1,4 +1,6 @@
 let ratingChartInstance = null;
+let popularityChartInstance = null;
+let assessmentChartInstance = null;
 
 /**
  * Render the rating distribution chart with dynamic data.
@@ -8,7 +10,7 @@ let ratingChartInstance = null;
 export function renderRatingChart(ctx, ratingData = {}) {
     const orderedRatings = [5, 4, 3, 2, 1].map(star => ratingData[star] || 0);
 
-    // ✅ 如果已经有旧图表，先销毁
+    // ✅if the chart instance already exists, destroy it before creating a new one
     if (ratingChartInstance) {
         ratingChartInstance.destroy();
     }
@@ -27,7 +29,7 @@ export function renderRatingChart(ctx, ratingData = {}) {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { display: false },
+                legend: {display: false},
                 tooltip: {
                     callbacks: {
                         label: context => `Votes: ${context.raw}`
@@ -52,7 +54,7 @@ export function renderRatingChart(ctx, ratingData = {}) {
 }
 
 
-export function renderCourseCharts() {
+export function renderCourseCharts(structure = {}) {
     function getQueryParam(name) {
         const url = new URL(window.location.href);
         return url.searchParams.get(name) || '';
@@ -61,7 +63,12 @@ export function renderCourseCharts() {
     // popularity trend chart
     const popularityCtx = document.getElementById('popularityChart')?.getContext('2d');
     if (popularityCtx) {
-        new Chart(popularityCtx, {
+        // ✅ if the chart instance already exists, destroy it before creating a new one
+        if (popularityChartInstance) {
+            popularityChartInstance.destroy();
+        }
+
+        popularityChartInstance = new Chart(popularityCtx, {
             type: 'line',
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -81,7 +88,7 @@ export function renderCourseCharts() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: false },
+                    legend: {display: false},
                     tooltip: {
                         mode: 'index',
                         intersect: false,
@@ -93,103 +100,99 @@ export function renderCourseCharts() {
                 scales: {
                     y: {
                         beginAtZero: true,
-                        title: { display: true, text: 'Number of Reviews' },
-                        ticks: { stepSize: 10 }
+                        title: {display: true, text: 'Number of Reviews'},
+                        ticks: {stepSize: 10}
                     },
                     x: {
-                        grid: { display: false },
-                        title: { display: true, text: 'Month' }
+                        grid: {display: false},
+                        title: {display: true, text: 'Month'}
                     }
                 },
-                interaction: { intersect: false, mode: 'index' }
+                interaction: {intersect: false, mode: 'index'}
             }
         });
     }
-
-
-    // rating chart
-
 
     // assessment chart
     const assessmentCtx = document.getElementById('assessmentChart')?.getContext('2d');
-    if (assessmentCtx) {
-        new Chart(assessmentCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Final Exam', 'Mid-semester Exam', 'Project Work', 'Assignment', 'Attendance'],
-                datasets: [{
-                    data: [30, 20, 25, 15, 10],
-                    backgroundColor: [
-                        'rgb(239, 68, 68)',   // red - Final Exam
-                        'rgb(234, 179, 8)',   // yellow - Mid-semester
-                        'rgb(59, 130, 246)',  // blue - Project
-                        'rgb(16, 185, 129)',  // green - Assignment
-                        'rgb(139, 92, 246)'   // purple - Attendance
-                    ],
-                    borderRadius: 5
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: context => `${context.raw}%`
-                        }
-                    }
+    if (!assessmentCtx || !structure) return;
+
+    // 显示顺序和配色方案保持一致
+    const order = [
+        {key: "finalExam", label: "Final Exam", color: "rgb(239, 68, 68)"},
+        {key: "midSemesterExam", label: "Mid-semester Exam", color: "rgb(234, 179, 8)"},
+        {key: "projectWork", label: "Project Work", color: "rgb(59, 130, 246)"},
+        {key: "assignment", label: "Assignment", color: "rgb(16, 185, 129)"},
+        {key: "attendance", label: "Attendance", color: "rgb(139, 92, 246)"}
+    ];
+
+    const labels = [];
+    const data = [];
+    const colors = [];
+
+    order.forEach(item => {
+        const part = structure[item.key];
+        if (part && part.enabled) {
+            labels.push(item.label);
+            data.push(part.weight);
+            colors.push(item.color);
+        }
+    });
+
+    // ✅ 如果已经存在图表实例，销毁旧图表
+    if (assessmentChartInstance) {
+        assessmentChartInstance.destroy();
+    }
+
+    assessmentChartInstance = new Chart(assessmentCtx, {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+                data,
+                backgroundColor: colors,
+                borderRadius: 5
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
                 },
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        max: 100,
-                        grid: {
-                            display: true,
-                            drawBorder: true,
-                            drawOnChartArea: true,
-                            drawTicks: true,
-                        },
-                        ticks: {
-                            callback: value => value + '%',
-                            font: {
-                                size: 12
-                            }
-                        },
-                        title: {
-                            display: true,
-                            text: 'Percentage',
-                            font: {
-                                size: 14,
-                                weight: 'bold'
-                            },
-                            padding: { top: 10, bottom: 10 }
-                        }
-                    },
-                    y: {
-                        grid: { display: false },
-                        ticks: {
-                            font: {
-                                size: 14,
-                                weight: 'bold'
-                            }
-                        }
-                    }
-                },
-                barPercentage: 0.8,
-                categoryPercentage: 0.9,
-                layout: {
-                    padding: {
-                        left: 10,
-                        right: 30,
-                        top: 20,
-                        bottom: 10
+                tooltip: {
+                    callbacks: {
+                        label: context => `${context.raw}%`
                     }
                 }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: value => value + '%',
+                        font: {size: 12}
+                    },
+                    title: {
+                        display: true,
+                        text: 'Percentage',
+                        font: {size: 14, weight: 'bold'},
+                        padding: {top: 10, bottom: 10}
+                    }
+                },
+                y: {
+                    grid: {display: false},
+                    ticks: {font: {size: 14, weight: 'bold'}}
+                }
+            },
+            barPercentage: 0.8,
+            categoryPercentage: 0.9,
+            layout: {
+                padding: {left: 10, right: 30, top: 20, bottom: 10}
             }
-        });
-    }
+        }
+    });
 }

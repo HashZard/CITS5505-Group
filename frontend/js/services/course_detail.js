@@ -1,5 +1,7 @@
 import {fetchWithPagination} from '/js/components/common.js';
 import {renderRatingChart} from '/js/services/course_charts.js';
+import {renderCourseCharts} from '/js/services/course_charts.js';
+
 
 let currentReviewPage = 1;
 const reviewsPerPage = 5;
@@ -89,6 +91,9 @@ async function loadCourseDetails() {
             document.getElementById("courseCode").textContent = course.code;
             document.getElementById("courseDescription").textContent = course.description || "No description available.";
             document.body.dataset.courseId = course.id;
+
+            renderCourseCharts(course.structure);
+
         } else {
             alert(result.message || 'Failed to load course details');
         }
