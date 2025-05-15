@@ -6,6 +6,39 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 VENV_PATH="$PROJECT_ROOT/venv"
 NGINX_CONF="deploy/local_deploy/nginx.conf"
 
+# Parse arguments
+for arg in "$@"; do
+  case $arg in
+    --env=*)
+      ENVIRONMENT="${arg#*=}"
+      shift
+      ;;
+  esac
+done
+
+# Default environment if none specified
+if [ -z "$ENVIRONMENT" ]; then
+  ENVIRONMENT="development"
+fi
+
+# Determine the .env file path
+if [ "$ENVIRONMENT" = "test" ]; then
+  ENV_FILE="$PROJECT_ROOT/.env.test"
+else
+  ENV_FILE="$PROJECT_ROOT/.env"
+fi
+
+# Load corresponding .env file
+if [ -f "$ENV_FILE" ]; then
+    echo "🔄 Loading environment from $ENV_FILE"
+    set -a
+    source "$ENV_FILE"
+    set +a
+else
+    echo "❌ Environment file $ENV_FILE not found!"
+    exit 1
+fi
+
 # === Shutdown previous Flask and Nginx processes ===
 function shutdown_services() {
     echo "🧹 Stopping any existing services..."
@@ -74,15 +107,21 @@ function setup_db() {
     echo "🛠️ Setting up the database..."
 
     export FLASK_APP=backend/app/app.py
-    export FLASK_ENV=development
+    export FLASK_ENV="$ENVIRONMENT"
     export PYTHONPATH="$PROJECT_ROOT"
 
     cd "$PROJECT_ROOT" || exit
 
-    if [ -f "$PROJECT_ROOT/backend/app.db" ]; then
-        echo "📦 Existing database found: app.db"
+    if [ "$ENVIRONMENT" == "test" ]; then
+        echo "🧪 Using test database: backend/test_app.db"
+        rm -f "$PROJECT_ROOT/backend/test_app.db"
     else
-        echo "🆕 Creating new SQLite database..."
+        echo "📦 Using development database: backend/app.db"
+        if [ -f "$PROJECT_ROOT/backend/app.db" ]; then
+            echo "📦 Existing database found: app.db"
+        else
+            echo "🆕 Creating new SQLite database..."
+        fi
     fi
 
     if [ ! -d "migrations" ]; then
@@ -103,7 +142,7 @@ function start_flask() {
     echo "🚀 Starting Flask server on port 8000..."
     cd "$PROJECT_ROOT" || exit
     export FLASK_APP=backend/app/app.py
-    export FLASK_ENV=development
+    export FLASK_ENV="$ENVIRONMENT"
     export PYTHONPATH="$PROJECT_ROOT"
     flask run --port=8000 &
     sleep 2
@@ -138,12 +177,21 @@ function open_browser() {
     open "http://localhost:3000/"
 }
 
+function generate_demo_data() {
+    echo "📚 Generating demo data..."
+    cd "$PROJECT_ROOT/backend/test" || exit
+    python generate_demo_courses.py
+    cd "$PROJECT_ROOT" || exit
+    echo "✅ Demo data generated."
+}
+
 # === Execute all steps ===
 echo "🔧 Initializing local development environment"
 shutdown_services
 setup_venv
 setup_db
 start_flask
+generate_demo_data
 start_nginx
 check_services
 open_browser

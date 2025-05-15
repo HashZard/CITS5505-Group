@@ -1,4 +1,5 @@
 import unittest
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -9,7 +10,6 @@ from selenium.webdriver.chrome.options import Options
 class TestCourseSearch(unittest.TestCase):
     def setUp(self):
         options = Options()
-        options.add_argument("--headless")  # Enable headless mode
         self.driver = webdriver.Chrome(options=options)
         self.wait = WebDriverWait(self.driver, 10)
         
@@ -44,6 +44,7 @@ class TestCourseSearch(unittest.TestCase):
 
         # Verify search results list exists
         course_list = self.wait.until(EC.presence_of_element_located((By.ID, "course-list")))
+        time.sleep(2)
         self.assertIsNotNone(course_list, "Course list should be present")
 
         # Verify search results contain the keyword

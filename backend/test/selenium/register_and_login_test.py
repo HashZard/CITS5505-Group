@@ -11,7 +11,6 @@ class TestRegisterAndLogin(unittest.TestCase):
     def setUp(self):
         options = Options()
         options.add_argument("--start-maximized")
-        options.add_argument("--headless")  # 启用headless模式
         self.driver = webdriver.Chrome(options=options)
         self.wait = WebDriverWait(self.driver, 10)
         
@@ -33,7 +32,7 @@ class TestRegisterAndLogin(unittest.TestCase):
         
         # Wait for alert and accept it
         alert = self.wait.until(EC.alert_is_present())
-        print(f"Alert says: {alert.text}")  # Optional: log alert message
+        print(f"Alert says: {alert.text}")
         alert.accept()
 
         # Step 3: Go to login page
@@ -52,6 +51,7 @@ class TestRegisterAndLogin(unittest.TestCase):
 
         # Step 6: Go to profile page and check email
         self.driver.get("http://localhost:3000/pages/service/profile.html")
+        time.sleep(2)
         
         user_email_element = self.wait.until(EC.presence_of_element_located((By.ID, "userEmail")))
         self.assertEqual(user_email_element.text, self.test_email, 

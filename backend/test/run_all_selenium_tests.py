@@ -37,5 +37,6 @@ def discover_and_run_tests():
     # Return exit code
     return 0 if result.wasSuccessful() else 1
 
+
 if __name__ == "__main__":
     sys.exit(discover_and_run_tests())

@@ -1,4 +1,5 @@
 import unittest
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -31,6 +32,7 @@ class TestResponsiveDesign(unittest.TestCase):
 
             try:
                 self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+                time.sleep(2)
 
                 if mode != "Desktop":  # On small screens, hamburger menu button should be visible
                     hamburger = self.driver.find_element(By.CLASS_NAME, "flex")

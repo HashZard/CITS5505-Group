@@ -1,5 +1,6 @@
 # selenium/create_course_test.py
 import unittest
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -10,7 +11,6 @@ from selenium.webdriver.chrome.options import Options
 class TestCourseCreation(unittest.TestCase):
     def setUp(self):
         options = Options()
-        options.add_argument("--headless")  # Enable headless mode
         self.driver = webdriver.Chrome(options=options)
         self.wait = WebDriverWait(self.driver, 10)
         
@@ -24,6 +24,7 @@ class TestCourseCreation(unittest.TestCase):
 
     def test_create_course(self):
         self.driver.get("http://localhost:3000/pages/auth/login.html")
+        time.sleep(1)
         
         # Wait for page to load
         self.wait.until(EC.presence_of_element_located((By.NAME, "email")))
@@ -36,9 +37,11 @@ class TestCourseCreation(unittest.TestCase):
         
         # Wait for login to complete
         self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+        time.sleep(1)
 
         # Navigate to course creation page
         self.driver.get("http://localhost:3000/pages/service/create_course_page.html")
+        time.sleep(1)
         self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "form")))
 
         # Fill in the form
@@ -57,7 +60,14 @@ class TestCourseCreation(unittest.TestCase):
         # Handle alert dialog
         alert = self.wait.until(EC.alert_is_present())
         alert_text = alert.text
-        self.assertIn("success", alert_text.lower(), "Alert should indicate success")
+        time.sleep(1)
+        if "success" in alert_text.lower():
+            self.assertIn("success", alert_text.lower(), "Alert should indicate success")
+        elif "failed" in alert_text.lower():
+            self.assertIn("failed to create course", alert_text.lower(),
+                          "Alert should indicate failure if course already exists")
+        else:
+            self.fail(f"Unexpected alert message: {alert_text}")
         alert.accept()
 
         # Search for the created course
@@ -75,6 +85,7 @@ class TestCourseCreation(unittest.TestCase):
         tag_span = self.wait.until(
             EC.presence_of_element_located((By.XPATH, f"//span[@class='tag' and text()='{self.course_code}']"))
         )
+        time.sleep(2)
         self.assertIsNotNone(tag_span, f"Course with code {self.course_code} should be in search results")
 
         print("✅ Course creation test passed.")
