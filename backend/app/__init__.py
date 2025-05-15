@@ -2,10 +2,15 @@ import os
 import secrets
 
 from flask import Flask, request
+from dotenv import load_dotenv
 
 from backend.app.models import db, init_db
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+env = os.getenv("FLASK_ENV", "development")
+env_file = os.path.join(project_root, f".env.{env}" if env != "development" else ".env")
+load_dotenv(env_file)
 
 
 def create_app():
@@ -28,7 +33,10 @@ def create_app():
 
     # database config
     BACKEND_ROOT = os.path.dirname(os.path.dirname(__file__))
-    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(BACKEND_ROOT, 'app.db')}"
+    DATABASE_PATH = os.path.join(BACKEND_ROOT, os.getenv("DATABASE_NAME"))
+    app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DATABASE_PATH}"
+    app.config['TESTING'] = os.getenv("FLASK_ENV") == "test"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # initialize database
