@@ -1,26 +1,41 @@
-import subprocess
+import unittest
 import os
 import sys
-import time
 
-selenium_dir = os.path.join(os.path.dirname(__file__), "selenium")
+# Get test directory path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+selenium_dir = os.path.join(current_dir, "selenium")
 
+def discover_and_run_tests():
+    """Discover and run all tests"""
+    # Use unittest's TestLoader to automatically discover tests
+    loader = unittest.TestLoader()
+    suite = loader.discover(selenium_dir, pattern="*.py")
+    
+    # Run tests
+    print("Starting Selenium tests...")
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    
+    # Print test result summary
+    print("\nTEST RESULTS SUMMARY:")
+    print(f"✅ Tests Run: {result.testsRun}")
+    print(f"❌ Failures: {len(result.failures)}")
+    print(f"❌ Errors: {len(result.errors)}")
+    
+    # Show failed tests
+    if result.failures:
+        print("\nFailed tests:")
+        for test, traceback in result.failures:
+            print(f"- {test}")
+    
+    # Show tests with errors
+    if result.errors:
+        print("\nErrors in tests:")
+        for test, traceback in result.errors:
+            print(f"- {test}")
+    
+    # Return exit code
+    return 0 if result.wasSuccessful() else 1
 
-test_files = [
-    "register_and_login_test.py",
-    "search_course_test.py",
-    "create_course_test.py",
-    "course_rating_and_comment_test.py"
-
-]
-
-for test_file in test_files:
-    test_path = os.path.join(selenium_dir, test_file)
-    print(f"Running {test_file}...")
-    result = subprocess.run([sys.executable, test_path])
-    if result.returncode == 0:
-        print(f"{test_file} ✅ PASSED\n")
-        time.sleep(2)
-    else:
-        print(f"{test_file} ❌ FAILED\n")
-        time.sleep(2)
+if __name__ == "__main__":
+    sys.exit(discover_and_run_tests())

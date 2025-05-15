@@ -1,70 +1,87 @@
+import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
+from selenium.webdriver.chrome.options import Options
 
 
-def course_rating_and_comment_test():
-    test_email = "testuser1@student.uwa.edu.au"
-    test_password = "TestPassword123"
-    captcha_code = "1111"
+class TestCourseRatingAndComment(unittest.TestCase):
+    def setUp(self):
+        options = Options()
+        options.add_argument("--headless")  # Enable headless mode
+        self.driver = webdriver.Chrome(options=options)
+        self.wait = WebDriverWait(self.driver, 10)
+        
+        # Test data
+        self.test_email = "testuser1@student.uwa.edu.au"
+        self.test_password = "TestPassword123"
+        self.captcha_code = "1111"
+        self.course_code = "CITS9999"
+        self.test_rating = "4"
+        self.test_comment = "This is a test comment from Selenium."
 
-    course_code = "CITS9999"
-    test_rating = "4"
-    test_comment = "This is a test comment from Selenium."
+    def test_course_rating_and_comment(self):
+        # Login process
+        self.driver.get("http://localhost:3000/pages/auth/login.html")
+        self.wait.until(EC.presence_of_element_located((By.NAME, "email")))
+        
+        self.driver.find_element(By.NAME, "email").send_keys(self.test_email)
+        self.driver.find_element(By.NAME, "password").send_keys(self.test_password)
+        self.driver.find_element(By.NAME, "code").send_keys(self.captcha_code)
+        self.driver.find_element(By.CLASS_NAME, "custom-big-btn").click()
+        
+        # Wait for login to complete
+        self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
-    driver = webdriver.Chrome()
-    wait = WebDriverWait(driver, 10)
+        # Navigate to course details page
+        self.driver.get(f"http://localhost:3000/pages/service/course_details_page.html?code={self.course_code}")
 
-    # Log in
-    driver.get("http://localhost:3000/pages/auth/login.html")
-    driver.find_element(By.NAME, "email").send_keys(test_email)
-    driver.find_element(By.NAME, "password").send_keys(test_password)
-    driver.find_element(By.NAME, "code").send_keys(captcha_code)
-    driver.find_element(By.CLASS_NAME, "custom-big-btn").click()
-    time.sleep(2)
+        # Submit rating
+        rating_input = self.wait.until(EC.presence_of_element_located((By.ID, "ratingInput")))
+        rating_input.clear()
+        rating_input.send_keys(self.test_rating)
+        
+        submit_rating_btn = self.wait.until(EC.element_to_be_clickable((By.ID, "submitRatingBtn")))
+        submit_rating_btn.click()
 
-    # Navigate to course details page
-    driver.get(f"http://localhost:3000/pages/service/course_details_page.html?code={course_code}")
+        # Handle rating alert
+        alert = self.wait.until(EC.alert_is_present())
+        self.assertEqual(alert.text, "Rating submitted!", 
+                         f"Unexpected alert message: {alert.text}")
+        alert.accept()
 
-    # Submit rating
-    wait.until(EC.presence_of_element_located((By.ID, "ratingInput")))
-    driver.find_element(By.ID, "ratingInput").clear()
-    driver.find_element(By.ID, "ratingInput").send_keys(test_rating)
-    time.sleep(2)
-    driver.find_element(By.ID, "submitRatingBtn").click()
+        # Submit comment
+        review_input = self.wait.until(EC.presence_of_element_located((By.ID, "reviewContent")))
+        review_input.clear()
+        review_input.send_keys(self.test_comment)
+        
+        submit_review_btn = self.wait.until(EC.element_to_be_clickable((By.ID, "submitReviewBtn")))
+        submit_review_btn.click()
 
-    # Handle rating alert
-    alert = wait.until(EC.alert_is_present())
-    assert alert.text == "Rating submitted!", f"Unexpected alert message: {alert.text}"
-    time.sleep(1)
-    alert.accept()
+        # Handle comment alert
+        alert = self.wait.until(EC.alert_is_present())
+        self.assertEqual(alert.text, "Your comment was submitted!", 
+                         f"Unexpected alert message: {alert.text}")
+        alert.accept()
 
-    # Submit comment
-    driver.find_element(By.ID, "reviewContent").clear()
-    driver.find_element(By.ID, "reviewContent").send_keys(test_comment)
-    time.sleep(2)
-    driver.find_element(By.ID, "submitReviewBtn").click()
+        # Wait for review section to load
+        review_section = self.wait.until(EC.presence_of_element_located((By.ID, "reviewSection")))
+        
+        # Wait for new comment to appear
+        self.wait.until(EC.text_to_be_present_in_element((By.ID, "reviewSection"), self.test_comment))
+        
+        # Verify comment content
+        comment_paragraphs = review_section.find_elements(By.CLASS_NAME, "typography-default")
+        found = any(self.test_comment in p.text for p in comment_paragraphs)
+        self.assertTrue(found, "Comment not found in the review section.")
 
-    # Handle comment alert
-    alert = wait.until(EC.alert_is_present())
-    assert alert.text == "Your comment was submitted!", f"Unexpected alert message: {alert.text}"
-    time.sleep(1)
-    alert.accept()
+        print("✅ Course rating and comment test passed.")
 
-    # Wait for review section to load
-    review_section = wait.until(EC.presence_of_element_located((By.ID, "reviewSection")))
-    comment_paragraphs = review_section.find_elements(By.CLASS_NAME, "typography-default")
-
-    # Check if any of the paragraphs contain the test comment
-    found = any(test_comment in p.text for p in comment_paragraphs)
-    assert found, "Comment not found in the review section."
-    time.sleep(2)
-
-    print("✅ Course rating and comment test passed.")
-    driver.quit()
+    def tearDown(self):
+        if self.driver:
+            self.driver.quit()
 
 
 if __name__ == "__main__":
-    course_rating_and_comment_test()
+    unittest.main()
