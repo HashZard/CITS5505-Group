@@ -191,7 +191,11 @@ shutdown_services
 setup_venv
 setup_db
 start_flask
-generate_demo_data
+
+if [ "$ENVIRONMENT" == "test" ]; then
+    generate_demo_data
+fi
+
 start_nginx
 check_services
 open_browser
