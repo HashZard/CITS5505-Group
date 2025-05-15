@@ -1,6 +1,6 @@
 # backend/routes/auth.py
 import random
-
+import os
 from captcha.image import ImageCaptcha
 from flask import Blueprint, request, jsonify, session, send_file, make_response
 from backend.app.services.auth_service import register_user, verify_user
@@ -50,7 +50,10 @@ def logout():
 @auth_bp.route("/captcha", methods=["GET"])
 def get_captcha():
     image = ImageCaptcha()
-    code = str(random.randint(1000, 9999))
+    if os.environ.get("FLASK_ENV") == "development":
+        code = "1111"
+    else:
+        code = str(random.randint(1000, 9999))
     session["captcha_code"] = code
 
     image_data = image.generate(code)
