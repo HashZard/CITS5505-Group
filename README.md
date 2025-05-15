@@ -138,7 +138,7 @@ CITS5505 - Group13 - University of Western Australia
 - Xudong Zhao (24151881)
 - Xinghe Wang (24373601)
 - Xudong Chen (23778972)
-- Areeb Amie (24156417)
+- Areeb Amir (24156417)
 
 ## 🙏 Acknowledgments
 
