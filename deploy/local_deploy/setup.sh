@@ -185,6 +185,14 @@ function generate_demo_data() {
     echo "✅ Demo data generated."
 }
 
+function generate_admin_user() {
+    echo "📚 Generating admin user..."
+    cd "$PROJECT_ROOT/backend/test" || exit
+    python admin_user.py
+    cd "$PROJECT_ROOT" || exit
+    echo "✅ Demo data generated."
+}
+
 # === Execute all steps ===
 echo "🔧 Initializing local development environment"
 shutdown_services
@@ -194,6 +202,7 @@ start_flask
 
 if [ "$ENVIRONMENT" == "test" ]; then
     generate_demo_data
+    generate_admin_user
 fi
 
 start_nginx

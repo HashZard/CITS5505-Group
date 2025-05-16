@@ -15,33 +15,31 @@ class TestCourseCreation(unittest.TestCase):
         self.wait = WebDriverWait(self.driver, 10)
         
         # Test data
-        self.test_email = "testuser1@student.uwa.edu.au"
-        self.test_password = "TestPassword123"
+        self.test_email = "admin@example.com"
+        self.test_password = "admin2025"
         self.captcha_code = "1111"
         self.course_name = "Test Course Selenium"
-        self.course_code = "CITS9999"
+        self.course_code = "CITS11112"
         self.course_description = "This is a test course created via Selenium."
 
-    def test_create_course(self):
+        # Login
         self.driver.get("http://localhost:3000/pages/auth/login.html")
         time.sleep(1)
-        
-        # Wait for page to load
-        self.wait.until(EC.presence_of_element_located((By.NAME, "email")))
 
-        # Login
         self.driver.find_element(By.NAME, "email").send_keys(self.test_email)
         self.driver.find_element(By.NAME, "password").send_keys(self.test_password)
         self.driver.find_element(By.NAME, "code").send_keys(self.captcha_code)
         self.driver.find_element(By.CLASS_NAME, "custom-big-btn").click()
-        
+
         # Wait for login to complete
+        time.sleep(2)
         self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-        time.sleep(1)
+
+    def test_create_course(self):
 
         # Navigate to course creation page
         self.driver.get("http://localhost:3000/pages/service/create_course_page.html")
-        time.sleep(1)
+        time.sleep(2)
         self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "form")))
 
         # Fill in the form
@@ -58,6 +56,7 @@ class TestCourseCreation(unittest.TestCase):
         self.driver.find_element(By.CLASS_NAME, "custom-big-btn").click()
 
         # Handle alert dialog
+        time.sleep(2)
         alert = self.wait.until(EC.alert_is_present())
         alert_text = alert.text
         time.sleep(1)
@@ -69,6 +68,7 @@ class TestCourseCreation(unittest.TestCase):
         else:
             self.fail(f"Unexpected alert message: {alert_text}")
         alert.accept()
+        time.sleep(2)
 
         # Search for the created course
         self.wait.until(EC.presence_of_element_located((By.ID, "header-search-input")))
@@ -78,9 +78,11 @@ class TestCourseCreation(unittest.TestCase):
         self.driver.find_element(By.ID, "header-search-btn").click()
 
         # Verify search results page
+        time.sleep(2)
         self.wait.until(EC.url_contains(f"course_search_result.html?keyword={self.course_code}"))
 
         # Verify search results contain the created course
+        time.sleep(2)
         self.wait.until(EC.presence_of_element_located((By.ID, "course-list")))
         tag_span = self.wait.until(
             EC.presence_of_element_located((By.XPATH, f"//span[@class='tag' and text()='{self.course_code}']"))

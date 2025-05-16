@@ -31,6 +31,7 @@ class TestRegisterAndLogin(unittest.TestCase):
         self.driver.find_element(By.CLASS_NAME, "custom-big-btn").click()
         
         # Wait for alert and accept it
+        time.sleep(1)
         alert = self.wait.until(EC.alert_is_present())
         print(f"Alert says: {alert.text}")
         alert.accept()

@@ -14,31 +14,31 @@ class TestCourseRatingAndComment(unittest.TestCase):
         self.wait = WebDriverWait(self.driver, 10)
 
         # Test data
-        self.test_email = "testuser1@student.uwa.edu.au"
-        self.test_password = "TestPassword123"
+        self.test_email = "admin@example.com"
+        self.test_password = "admin2025"
         self.captcha_code = "1111"
         self.course_name = "Test Rating And Comment Selenium"
-        self.course_code = "CITS11119"
+        self.course_code = "CITS11111"
         self.course_description = "This is a test course created via Selenium."
         self.test_rating = "4"
         self.test_comment = "This is a test comment from Selenium."
 
-        self.driver.get("http://localhost:3000/pages/auth/login.html")
-
-        # Wait for page to load
-        self.wait.until(EC.presence_of_element_located((By.NAME, "email")))
-
         # Login
+        self.driver.get("http://localhost:3000/pages/auth/login.html")
+        time.sleep(1)
+
         self.driver.find_element(By.NAME, "email").send_keys(self.test_email)
         self.driver.find_element(By.NAME, "password").send_keys(self.test_password)
         self.driver.find_element(By.NAME, "code").send_keys(self.captcha_code)
         self.driver.find_element(By.CLASS_NAME, "custom-big-btn").click()
 
         # Wait for login to complete
+        time.sleep(2)
         self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
 
         # Navigate to course creation page
         self.driver.get("http://localhost:3000/pages/service/create_course_page.html")
+        time.sleep(2)
         self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "form")))
 
         # Fill in the form
@@ -66,7 +66,7 @@ class TestCourseRatingAndComment(unittest.TestCase):
         else:
             self.fail(f"Unexpected alert message: {alert_text}")
         alert.accept()
-
+        time.sleep(2)
 
     def test_course_rating_and_comment(self):
         # Navigate to course details page
@@ -96,6 +96,7 @@ class TestCourseRatingAndComment(unittest.TestCase):
         submit_rating_btn.click()
 
         # Handle rating alert
+        time.sleep(2)
         alert = self.wait.until(EC.alert_is_present())
         self.assertEqual(alert.text, "Rating submitted!",
                          f"Unexpected alert message: {alert.text}")
@@ -111,15 +112,18 @@ class TestCourseRatingAndComment(unittest.TestCase):
         submit_review_btn.click()
 
         # Handle comment alert
+        time.sleep(2)
         alert = self.wait.until(EC.alert_is_present())
         self.assertEqual(alert.text, "Your comment was submitted!",
                          f"Unexpected alert message: {alert.text}")
         alert.accept()
 
         # Wait for review section to load
+        time.sleep(2)
         review_section = self.wait.until(EC.presence_of_element_located((By.ID, "reviewSection")))
 
         # Wait for new comment to appear
+        time.sleep(2)
         self.wait.until(EC.text_to_be_present_in_element((By.ID, "reviewSection"), self.test_comment))
 
         # Verify comment content
@@ -129,7 +133,6 @@ class TestCourseRatingAndComment(unittest.TestCase):
         self.assertTrue(found, "Comment not found in the review section.")
 
         print("✅ Course rating and comment test passed.")
-
 
     def tearDown(self):
         if self.driver:
