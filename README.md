@@ -85,13 +85,7 @@ The application will be available at: [http://localhost:3000](http://localhost:3
    python3 ./backend/test/generate_demo_courses.py
    ```
 
-5. **Test the application with the admin account**
-   ```text
-   Email:    admin@example.com
-   Password: admin2025
-   ```
-
-## 🛠️ Troubleshooting
+    ## 🛠️ Troubleshooting
 
 If you encounter database errors (such as missing tables or schema mismatch), try resetting the database:
 
@@ -110,6 +104,14 @@ flask db upgrade
 # Regenerate demo data
 python backend/test/generate_demo_courses.py
 ```
+
+5. **Test the application with the admin account**
+   ```text
+   Email:    admin@example.com
+   Password: admin2025
+   ```
+
+
 
 ## 📊 Project Structure
 
