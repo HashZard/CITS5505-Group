@@ -111,7 +111,38 @@ python backend/test/generate_demo_courses.py
    Password: admin2025
    ```
 
+### 🧪 How to run Selenium Tests
 
+Follow these steps:
+
+1. **Navigate to the project directory**  
+   ```bash
+   cd CITS5505-Group
+   ```
+
+2. **Run the test setup script**  
+   ```bash
+   bash ./deploy/local_deploy/setup.sh --env=test
+   ```
+
+3. **Set the PYTHONPATH**  
+   ```bash
+   export PYTHONPATH=.
+   ```
+
+   ```cmd
+   set PYTHONPATH=.
+   ```
+
+4. **Run the python script to run all selenium tests**  
+   ```bash
+   python backend/test/run_all_selenium_tests.py
+   ```
+
+   To run a single selenium test, run the following script:
+   ```bash
+   python backend/test/selenium/<file-name>.py
+   ```
 
 ## 📊 Project Structure
 
