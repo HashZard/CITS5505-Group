@@ -54,7 +54,7 @@ informed decisions about their academic journey.
 - Pip (Python package manager)
 - Git
 
-### ### 🚀 Local Development Setup
+### 🚀 Local Development Setup
 
 To get started quickly, follow these steps:
 
@@ -80,9 +80,9 @@ To get started quickly, follow these steps:
 
 The application will be available at: [http://localhost:3000](http://localhost:3000)
 
-4. **Generate demo data**
+4. **Generate demo data (if not using test environment)**
    ```bash
-   python3 ./backend/test/generate_demo_data.py
+   python3 ./backend/test/generate_demo_courses.py
    ```
 
 5. **Test the application with the admin account**
@@ -90,6 +90,26 @@ The application will be available at: [http://localhost:3000](http://localhost:3
    Email:    admin@example.com
    Password: admin2025
    ```
+
+## 🛠️ Troubleshooting
+
+If you encounter database errors (such as missing tables or schema mismatch), try resetting the database:
+
+```bash
+# Delete existing database and migration files
+rm -f backend/app.db
+rm -rf migrations
+
+# Reinitialize the database
+export FLASK_APP=backend/app/app.py
+export PYTHONPATH=.
+flask db init
+flask db migrate -m "Initial migration"
+flask db upgrade
+
+# Regenerate demo data
+python backend/test/generate_demo_courses.py
+```
 
 ## 📊 Project Structure
 
@@ -105,7 +125,7 @@ CITS5505-Group/
 │   ├── test/               # Unit tests
 │   │   ├── selenction/     # Test cases for selection
 │   │   └── service/        # Test cases for services
-│   └── app.db/             # SQLite database
+│   └── app.db              # SQLite database
 ├── frontend/               # Frontend code
 │   ├── assets/             # Images and static assets
 │   ├── components/         # Reusable UI components
